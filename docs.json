@@ -111,5 +111,10 @@
     "socials": {
       "website": "https://getbonde.com"
     }
+  },
+  "integrations": {
+    "intercom": {
+      "appId": "rbbnskks"
+    }
   }
 }
