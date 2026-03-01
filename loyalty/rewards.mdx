@@ -1,0 +1,138 @@
+---
+title: "Rewards programs"
+description: "Create automated store credit reward programs for your customers."
+---
+
+Rewards programs automatically issue store credit to customers when they take specific actions.
+
+## Creating a reward program
+
+<Steps>
+  <Step title="Navigate to programs">
+    Go to **Rewards > Programs** in the Bonde app.
+  </Step>
+  <Step title="Create program">
+    Click **Create Program**.
+  </Step>
+  <Step title="Configure">
+    Enter a name for the program (e.g., "5% Back on Orders") and configure the trigger, reward amount, and options.
+  </Step>
+  <Step title="Save">
+    Click **Save**. New programs are created in **Draft** status. When you're ready, change the status to **Active** to start issuing rewards.
+  </Step>
+</Steps>
+
+---
+
+## Trigger events
+
+Choose what action triggers the reward:
+
+| Trigger | Description |
+|---------|-------------|
+| **Order processed** | Reward customers when they complete any order |
+| **Order contains product** | Reward when they purchase specific products |
+| **Order contains collection** | Reward when they purchase from specific collections |
+| **Subscription order processed** | Reward each time their subscription renews |
+| **Subscription created** | Reward when they start a new subscription |
+| **Subscription milestone** | Reward at subscription anniversaries (e.g., 6 months, 1 year) |
+| **Customer reactivated** | Reward customers who return after inactivity |
+
+---
+
+## Reward amount
+
+Configure how much store credit to issue:
+
+| Type | Description |
+|------|-------------|
+| **Fixed amount** | Issue a specific dollar amount (e.g., $5.00 credit per order) |
+| **Percentage** | Issue a percentage of the order value (e.g., 5% back on every order) |
+
+---
+
+## Expiration settings
+
+Control how long customers have to use their rewards:
+
+| Option | Description |
+|--------|-------------|
+| **Store default** | Uses your default expiration setting from Rewards > Settings |
+| **Custom period** | Set a specific number of days until expiration (e.g., 90 days) |
+| **Never expire** | Store credit never expires |
+
+<Tip>
+Setting an expiration encourages customers to return and use their credit.
+</Tip>
+
+---
+
+## Caps and limits
+
+Prevent excessive reward payouts with caps:
+
+**Per-program cap**: Limit how much credit a customer can earn from this specific program within a time period.
+
+Example: Cap of $50 per month means a customer can't earn more than $50 from this program in any calendar month.
+
+**Cap period options**:
+- Daily
+- Weekly
+- Monthly
+- Yearly
+- Lifetime
+
+**Global caps**: In addition to per-program caps, you can set a global cap in **Rewards > Settings** that applies across all programs.
+
+---
+
+## Program status
+
+| Status | Description |
+|--------|-------------|
+| **Draft** | Program is being configured. No rewards are issued |
+| **Active** | Program is live and issuing rewards |
+| **Paused** | Program is temporarily stopped. No new rewards issued |
+| **Archived** | Program is retired. Keeps history but won't issue rewards |
+
+---
+
+## Examples
+
+### Basic loyalty: 5% back on orders
+
+- **Trigger**: Order Processed
+- **Reward**: Percentage - 5%
+- **Expiration**: 90 days
+- **Cap**: $50 per month
+
+### New subscriber bonus
+
+- **Trigger**: Subscription Created
+- **Reward**: Fixed Amount - $10.00
+- **Expiration**: 60 days
+- **Cap**: Lifetime cap of $10 (one-time reward)
+
+### Collection promotion
+
+- **Trigger**: Order Contains Collection (select "New Arrivals")
+- **Reward**: Fixed Amount - $5.00
+- **Expiration**: 30 days
+- **Cap**: $20 per month
+
+### Subscription loyalty
+
+- **Trigger**: Subscription Milestone
+- **Reward**: Fixed Amount - $20.00
+- **Expiration**: Never Expire
+- **Cap**: None
+
+---
+
+## Global settings
+
+Configure shop-wide reward settings in **Rewards > Settings**:
+
+- **Default expiration**: How long rewards last if a program uses "Store Default"
+- **Global cap**: Maximum credit any customer can earn across all programs
+- **Expiration reminders**: Email customers before their credit expires

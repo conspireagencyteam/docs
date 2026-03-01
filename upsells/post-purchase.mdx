@@ -1,0 +1,61 @@
+---
+title: "Post-purchase upsells"
+description: "Configure one-click upsells that appear right after checkout."
+---
+
+Post-purchase upsells appear immediately after a customer completes checkout, before the order confirmation page. Customers can add products to their order with a single click without re-entering payment information.
+
+## How it works
+
+1. Customer completes checkout and payment
+2. Instead of going directly to the thank you page, they see your upsell offer
+3. Customer can accept (one-click add to order) or decline
+4. If accepted, the order is updated with the upsell product
+5. Customer proceeds to thank you page
+
+## Installation
+
+<Steps>
+  <Step title="Enable the post-purchase extension">
+    Navigate to **Settings > Checkout > Customize** in your Shopify admin.
+
+    In the checkout customizer, look for post-purchase extensions and enable the **Bonde: Post-Purchase Upsell** extension.
+  </Step>
+  <Step title="Create a post-purchase upsell">
+    In the Bonde app, go to **Upsells** and click **Create Upsell**.
+
+    Select **Post-Purchase** as the upsell type.
+  </Step>
+  <Step title="Configure trigger conditions">
+    Set when this upsell should appear:
+    - **Product in cart**: Show when specific products were purchased
+    - **Cart value minimum**: Show for orders over a certain amount
+    - **Cart value maximum**: Show for orders under a certain amount
+    - **Collection**: Show when products from a specific collection were purchased
+
+    Multiple conditions use AND logic—all must be met for the upsell to show.
+  </Step>
+  <Step title="Select the upsell product">
+    Choose the product you want to offer as an upsell.
+  </Step>
+  <Step title="Set a discount (optional)">
+    Configure a discount for the upsell:
+    - **Percentage off**: e.g., 20% off
+    - **Fixed amount off**: e.g., $10 off
+  </Step>
+  <Step title="Set priority">
+    If you have multiple post-purchase upsells, set the priority to determine which one shows. Higher priority upsells are shown first.
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+**Upsell not showing?**
+- Verify the post-purchase extension is enabled in checkout settings
+- Check that trigger conditions match the test order
+- Ensure the upsell is set to "Active"
+- Test on a real checkout (not preview mode)
+
+**Customer can't accept upsell?**
+- Check Shopify admin for payment errors
+- Ensure the upsell product is in stock

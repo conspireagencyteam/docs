@@ -1,68 +1,79 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Bonde",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3B5DFF",
+    "light": "#5B7AFF",
+    "dark": "#2A4BE0"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
             "group": "Getting started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "getting-started/bundles",
+              "getting-started/subscriptions",
+              "getting-started/upsells",
+              "getting-started/sidebar-cart",
+              "getting-started/loyalty"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Bundles",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "bundles/index",
+              "bundles/single-product",
+              "bundles/multi-product",
+              "bundles/build-a-box"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Subscriptions",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "subscriptions/index",
+              "subscriptions/configuration",
+              "subscriptions/product-widget",
+              "subscriptions/customer-portal",
+              "subscriptions/managing-contracts",
+              "subscriptions/bundle-subscriptions",
+              "subscriptions/order-consolidation"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Upsells",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "upsells/index",
+              "upsells/product-page",
+              "upsells/cart",
+              "upsells/checkout",
+              "upsells/post-purchase"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Sidebar cart",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "sidebar-cart/index"
+            ]
+          },
+          {
+            "group": "Loyalty",
+            "pages": [
+              "loyalty/index",
+              "loyalty/rewards",
+              "loyalty/referrals",
+              "loyalty/widgets"
+            ]
+          },
+          {
+            "group": "Emails",
+            "pages": [
+              "emails/notifications"
             ]
           }
         ]
@@ -71,14 +82,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Website",
+          "href": "https://getbonde.com",
+          "icon": "globe"
         }
       ]
     }
@@ -91,32 +97,18 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:hello@conspireagency.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Bonde",
+      "href": "https://getbonde.com"
     }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "website": "https://getbonde.com"
     }
   }
 }

@@ -1,0 +1,66 @@
+---
+title: "Build-a-box bundles"
+description: "Create customizable box bundles where customers choose products to fill a box with tiered discounts."
+---
+
+Build-a-box bundles let customers select products to fill a box up to a maximum capacity. You can offer tiered discounts that increase as they add more items.
+
+## How it works
+
+- Set a maximum number of items that can go in the box
+- Define which products customers can choose from
+- Create discount tiers (e.g., 10% off for 3 items, 15% off for 5 items, 20% off for filling the box)
+- Customers see their progress as they add items and the discount they'll receive
+
+## Setup
+
+<Steps>
+  <Step title="Create a parent product in Shopify">
+    In your Shopify admin, create a new product that will represent your Build-a-Box bundle:
+    - Add a product image that represents your box/bundle
+    - Set any price (it will be calculated by the app based on selected items)
+    - Don't worry about variants—the app handles the product selection
+  </Step>
+  <Step title="Create a product template">
+    Navigate to **Online Store > Themes > Customize** and create a new product template for your Build-a-Box bundles.
+  </Step>
+  <Step title="Add the app block">
+    On your new product template, add the **Bonde: Build a Box** app block. This replaces the standard add to cart functionality with the box builder interface.
+  </Step>
+  <Step title="Configure the bundle in Bonde">
+    Navigate to the Bonde app and select **Build a Box** from the bundles menu.
+
+    Click **Create New Bundle** and configure:
+    - **Parent product**: Select the product you created in step 1
+    - **Box capacity**: Set the maximum number of items (e.g., 6 items)
+    - **Available products**: Select which products customers can add to their box
+  </Step>
+  <Step title="Set up discount tiers">
+    Add discount tiers based on how many items are in the box:
+    - Tier 1: 3 items = 10% off
+    - Tier 2: 5 items = 15% off
+    - Tier 3: 6 items (full box) = 20% off
+
+    You can create as many tiers as you'd like, and use either percentage or fixed amount discounts.
+  </Step>
+  <Step title="Assign the template">
+    Back in Shopify, assign your new Build-a-Box product template to the parent product you created.
+  </Step>
+</Steps>
+
+## Subscriptions
+
+Build-a-box bundles support subscriptions. When you add subscription plans to the parent product, customers can choose to receive their custom box on a recurring schedule.
+
+See [Bundle subscriptions](/subscriptions/bundle-subscriptions) for setup instructions.
+
+## Troubleshooting
+
+**Bundle not showing on product page?**
+- Ensure the Bonde app embed is enabled in your theme
+- Check that the correct product template is assigned to your parent product
+- Verify the bundle is set to "Active" in the Bonde app
+
+**Discounts not applying?**
+- Make sure the discount function is deployed (contact support if unsure)
+- Check that discount tiers are configured correctly in the bundle settings

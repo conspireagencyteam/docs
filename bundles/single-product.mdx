@@ -1,0 +1,51 @@
+---
+title: "Single product packs"
+description: "Sell multipacks of the same product where customers select different variants for each item."
+---
+
+Single product packs let you sell multipacks of the same product where customers can select different variants for each item in the pack. For example, a 3-pack of shirts where the customer chooses the size for each shirt.
+
+## How it works
+
+- Set a quantity for the pack (e.g., 3-pack, 6-pack)
+- Customers select a variant for each item in the pack
+- Price is calculated as the sum of the individual variants
+- Optionally offer a bundle discount to incentivize buying the pack
+
+## Setup
+
+<Steps>
+  <Step title="Create a product template">
+    Navigate to **Online Store > Themes > Customize** and create a new product template for your bundle packs.
+  </Step>
+  <Step title="Add the app block">
+    On the new product template, replace the product form with the **Bonde: Single Product Bundle** app block. This replaces your variant selectors and add to cart button.
+  </Step>
+  <Step title="Create a parent product in Shopify">
+    Create a new product that will represent your bundle pack:
+    - Upload a product image that represents your bundle
+    - Assign the new product template to this product
+    - Don't worry about price—it will be calculated by the app as the sum of the individual variants selected
+  </Step>
+  <Step title="Configure the bundle in Bonde">
+    Navigate to the Bonde app, select **Single Product Bundle Pack**, and create a new bundle.
+
+    Configure:
+    - **Parent product**: Select the product you just created
+    - **Bundle product**: Select the product that lives within the bundle
+    - **Quantity**: Set the number of items in the pack
+  </Step>
+  <Step title="View your bundle">
+    Navigate to your new product in the theme to see your bundle pack setup.
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+**Bundle not showing on product page?**
+- Make sure the Bonde app embed is enabled in your theme
+- Check that the correct product template is assigned to your parent product
+- Verify the bundle is set to "Active" in the Bonde app
+
+**Price not calculating correctly?**
+- Check that the bundle product has variants with prices configured in Shopify

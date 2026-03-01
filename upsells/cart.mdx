@@ -1,0 +1,69 @@
+---
+title: "Cart upsells"
+description: "Display upsell offers in your sidebar cart or cart page."
+---
+
+Cart upsells appear when customers view their cart, whether in a sidebar/drawer cart or on the full cart page. Offers are triggered based on what's in the cart, and customers can add upsell products directly.
+
+## How cart upsells work
+
+- Upsell offers display within or near the cart
+- Triggered based on what's currently in the customer's cart
+- Customers can add upsell products directly to their cart
+- Discounts apply automatically when conditions are met
+
+## Installation
+
+<Steps>
+  <Step title="Enable the app embed">
+    Navigate to **Online Store > Themes > Customize**.
+
+    In the theme customizer, go to **App Embeds** and ensure the Bonde app embed is enabled.
+  </Step>
+  <Step title="Create a cart upsell">
+    In the Bonde app, go to **Upsells** and click **Create Upsell**.
+
+    Select **Cart** as the upsell type.
+  </Step>
+  <Step title="Configure trigger conditions">
+    Set when this upsell should appear:
+    - **Product in cart**: Show when specific products are in the cart
+    - **Cart value minimum**: Show when cart total exceeds an amount
+    - **Cart value maximum**: Show when cart total is below an amount
+    - **Collection**: Show when products from a specific collection are in cart
+
+    Multiple conditions use AND logic—all must be met for the upsell to display.
+  </Step>
+  <Step title="Select the upsell product">
+    Choose the product to offer as the upsell.
+  </Step>
+  <Step title="Configure discount (optional)">
+    Add a discount for the upsell:
+    - **Percentage off**: e.g., 15% off
+    - **Fixed amount off**: e.g., $5 off
+  </Step>
+  <Step title="Set priority">
+    If multiple cart upsells could apply, priority determines which shows first.
+  </Step>
+</Steps>
+
+## Widget configuration
+
+Navigate to **Upsells > Settings > Cart Widget** to customize appearance:
+
+- **Section title**: The heading above upsell offers
+- **Layout**: How products display
+- **Styling**: Colors and fonts to match your theme
+- **Max products**: Limit how many upsells show at once
+
+## Troubleshooting
+
+**Cart upsell not appearing?**
+- Check that app embed is enabled in theme settings
+- Verify trigger conditions match current cart
+- Ensure upsell is set to "Active"
+
+**Discount not applying?**
+- Make sure the discount function is deployed
+- Verify discount is configured on the upsell offer
+- Check that trigger product is still in cart at checkout

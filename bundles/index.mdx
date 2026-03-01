@@ -1,0 +1,47 @@
+---
+title: "Bundles overview"
+description: "Learn about Bonde's three bundle types and choose the right one for your products."
+---
+
+Bonde offers three types of bundles to help you sell more products together and increase average order value.
+
+## Bundle types
+
+<Columns cols={3}>
+  <Card title="Single product packs" href="/bundles/single-product">
+    Multipacks of the same product where customers select variants for each item.
+  </Card>
+  <Card title="Multi-product bundles" href="/bundles/multi-product">
+    Curated sets of different products sold together with variant selection.
+  </Card>
+  <Card title="Build-a-box" href="/bundles/build-a-box">
+    Customers fill a box with products of their choice and get tiered discounts.
+  </Card>
+</Columns>
+
+## Choosing the right bundle type
+
+| If you want to... | Use |
+|------------------|-----|
+| Sell multipacks of the same product (e.g., 3 shirts, each in a different size) | Single product pack |
+| Create a curated set of different products (e.g., starter kit) | Multi-product bundle |
+| Let customers build their own box with tiered discounts | Build-a-box |
+
+## How bundles work
+
+All bundle types share a common architecture:
+
+1. **Parent product**: A product in Shopify that represents the bundle
+2. **Bundle products**: The actual products that make up the bundle
+3. **App block**: A theme block that displays the bundle interface
+4. **Discount function**: Applies the bundle discount at checkout
+
+When customers add a bundle to their cart, Bonde groups the items under the parent product and applies any configured discounts automatically.
+
+## Prerequisites
+
+Before setting up any bundle type:
+
+1. Enable the **Bonde** app embed in your theme
+2. Create a product template for your bundles
+3. Create a parent product in Shopify to represent the bundle

@@ -1,0 +1,146 @@
+---
+title: "Referral program"
+description: "Set up customer referrals to drive word-of-mouth growth."
+---
+
+A referral program turns your customers into advocates by rewarding them for bringing in new customers.
+
+## How it works
+
+1. Each customer gets a unique referral code and link
+2. Customer shares their link via social media, email, or direct message
+3. Friend clicks the link and browses your store
+4. Friend adds products to cart (referral code is automatically attached)
+5. Friend completes purchase
+6. After a configurable delay, referrer receives store credit
+7. Optionally, friend receives a discount on their first order
+
+---
+
+## Configuration
+
+Go to **Rewards > Referrals** to configure your program.
+
+### Referrer (advocate) rewards
+
+Configure what the referring customer earns:
+
+| Option | Description |
+|--------|-------------|
+| **Reward type** | Fixed amount per referral or percentage of the friend's order |
+| **Expiration** | Store default, custom period, or never expire |
+| **Cap** | Maximum credit per period (daily, weekly, monthly, yearly, or lifetime) |
+
+### Friend (referee) rewards
+
+Optionally give the friend an incentive to complete their purchase:
+
+| Option | Description |
+|--------|-------------|
+| **Enable friend reward** | Toggle on to give friends a discount on their first order |
+| **Discount type** | Fixed amount off (e.g., $5 off) or percentage (e.g., 10% off) |
+
+<Note>
+Friend discounts may require additional setup with Shopify discount codes or automatic discounts.
+</Note>
+
+---
+
+## Fraud prevention
+
+The referral system includes protections against fraud:
+
+| Option | Description |
+|--------|-------------|
+| **Processing delay** | Wait time before referral rewards are issued (default: 60 minutes) |
+| **Require new customer** | Only first-time customers count as valid referrals |
+| **Minimum order value** | Minimum order amount for the referral to count |
+
+---
+
+## Program status
+
+| Status | Description |
+|--------|-------------|
+| **Draft** | Program is being configured. Referral tracking is disabled |
+| **Active** | Program is live. Customers can share and earn rewards |
+| **Paused** | Program is temporarily stopped. Existing referrals are honored |
+| **Archived** | Program is retired |
+
+---
+
+## Sharing options
+
+When you add the Referral Widget to your theme, customers can share their link via:
+
+- **Copy link**: Copies the referral URL to clipboard
+- **Native share**: Uses the device's share menu (mobile-friendly)
+- **Facebook**: Opens Facebook with a pre-filled share post
+- **Twitter**: Opens Twitter with a pre-filled tweet
+- **Email**: Opens email client with a pre-filled message
+
+The referral link looks like: `yourstore.com?ref=ABC123`
+
+---
+
+## Tracking
+
+The system tracks:
+
+- **Clicks**: How many times the referral link was clicked
+- **Conversions**: How many clicks resulted in purchases
+- **Earnings**: Total store credit earned from referrals
+
+Customers see their stats in the Referral Widget. You can view aggregate stats in the Bonde admin.
+
+---
+
+## Referral lifecycle
+
+<Steps>
+  <Step title="Click">
+    When someone clicks a referral link, the code is stored in their browser for 30 days.
+  </Step>
+  <Step title="Cart">
+    When they add items to cart, the referral code is automatically attached as a cart attribute.
+  </Step>
+  <Step title="Checkout">
+    The referral code travels through checkout with the order.
+  </Step>
+  <Step title="Order placed">
+    After purchase, the system detects the referral code and creates a pending referral.
+  </Step>
+  <Step title="Processing delay">
+    The system waits for the configured delay period.
+  </Step>
+  <Step title="Validation">
+    The system verifies: order meets minimum value, customer is new (if required), referrer hasn't exceeded caps.
+  </Step>
+  <Step title="Reward issued">
+    Store credit is added to the referrer's account.
+  </Step>
+</Steps>
+
+---
+
+## Example configurations
+
+### Generous referral program
+
+- **Referrer reward**: $15 fixed amount
+- **Expiration**: 90 days
+- **Cap**: $150 per month
+- **Friend reward**: 15% off first order
+- **Delay**: 60 minutes
+- **Require new customer**: Yes
+- **Minimum order**: $25
+
+### Conservative referral program
+
+- **Referrer reward**: 5% of order value
+- **Expiration**: 30 days
+- **Cap**: $50 per month
+- **Friend reward**: Disabled
+- **Delay**: 1440 minutes (24 hours)
+- **Require new customer**: Yes
+- **Minimum order**: $50

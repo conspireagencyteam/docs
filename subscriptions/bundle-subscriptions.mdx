@@ -1,0 +1,127 @@
+---
+title: "Bundle subscriptions"
+description: "Offer subscriptions for your Build-A-Box bundles."
+---
+
+You can offer subscriptions for your Build-A-Box bundles, letting customers build a custom box and receive it on a recurring schedule.
+
+## How it works
+
+When a customer adds a Build-A-Box bundle to their cart with a subscription:
+
+1. They select their products to fill the box
+2. They choose a subscription frequency (e.g., "Every 30 days")
+3. All items in the bundle are added to cart together
+4. At checkout, a subscription contract is created for the entire bundle
+5. Future orders automatically include the same bundle contents
+
+The bundle items are visually grouped in the cart and at checkout, showing the subscription frequency.
+
+## Setup
+
+<Steps>
+  <Step title="Create subscription plans">
+    First, create selling plans for your bundle's parent product:
+
+    1. Navigate to **Subscriptions > Products**
+    2. Find your Build-A-Box parent product
+    3. Click to configure subscription plans
+    4. Add your desired frequencies (e.g., Every 2 weeks, Every 30 days, Every 60 days)
+    5. Optionally add subscription discounts
+    6. Save the selling plan group
+  </Step>
+  <Step title="Verify widget display">
+    The Build-A-Box widget automatically detects when subscription plans are available and shows a subscription toggle.
+
+    When the parent product has selling plans:
+    - A "Subscribe & Save" toggle appears in the widget
+    - Customers can switch between one-time purchase and subscription
+    - Available frequencies are shown in a dropdown
+    - Any subscription discount is displayed
+
+    No additional configuration is required in the widget settings.
+  </Step>
+</Steps>
+
+---
+
+## Cart experience
+
+When a subscription bundle is added to cart:
+
+**Cart sidebar**
+
+Bundle items are grouped together with a header showing:
+- Bundle name
+- Delivery frequency (e.g., "Delivers every 30 days")
+- Total bundle price
+- Expand/collapse to see individual items
+
+**Removing bundle items**
+
+When viewing the expanded bundle, customers can remove the entire bundle. Individual items cannot be removed separately since they're part of the subscription bundle.
+
+---
+
+## Managing bundle subscriptions
+
+Bundle subscriptions appear in **Subscriptions > Contracts** like any other subscription.
+
+The contract shows:
+- All items from the bundle as separate line items
+- The subscription frequency
+- Next billing date
+- Order history
+
+All standard subscription management features work:
+- Pause/Resume/Cancel
+- Skip deliveries
+- Adjust billing date
+
+<Note>
+Product swapping is available for individual items in the bundle, allowing customers to change specific products while keeping the subscription active.
+</Note>
+
+---
+
+## Customer portal
+
+Customers can manage their bundle subscriptions from the customer account portal:
+
+- View all items in their subscription bundle
+- See delivery frequency and next billing date
+- Pause, resume, or cancel the subscription
+- Skip upcoming deliveries
+- Update payment method
+
+If Order Consolidation is enabled, customers with multiple subscriptions (including bundle subscriptions) can align billing dates to save on shipping.
+
+---
+
+## Order consolidation
+
+Bundle subscriptions work with Order Consolidation. If a customer has:
+- A Build-A-Box subscription billing on the 5th
+- A regular product subscription billing on the 8th
+
+They'll appear as a consolidation opportunity. Aligning these orders means:
+- Both the bundle and regular subscription ship together
+- Single shipping cost instead of two
+- Customer receives one delivery
+
+---
+
+## Troubleshooting
+
+**Subscription toggle not appearing?**
+- Verify selling plans are created for the parent product
+- Check that the selling plan group is active
+- Ensure the subscription widget is installed on your theme
+
+**Bundle items not grouped in cart?**
+- The cart sidebar widget must be installed and enabled
+- Items should show the subscription frequency in the group header
+
+**Subscription not created at checkout?**
+- Ensure the selling plan ID is being passed with cart items
+- Check browser console for any JavaScript errors

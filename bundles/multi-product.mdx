@@ -1,0 +1,56 @@
+---
+title: "Multi-product bundles"
+description: "Create bundles with multiple different products where customers can select variants for each item."
+---
+
+Multi-product bundles let you sell sets of different products together. Customers can select variants for each product (size, color, etc.), and all items are added to cart together under a single parent product.
+
+## How it works
+
+- Bundle multiple different products together
+- Customers can select variants for each product (size, color, etc.)
+- Offer a bundle discount (percentage or fixed amount)
+- All items are added to cart together under a single parent product
+
+## Setup
+
+<Steps>
+  <Step title="Create a parent product in Shopify">
+    In your Shopify admin, create a new product that represents your bundle:
+    - Add an image that represents the complete bundle
+    - Set any price (it will be calculated based on the included products)
+  </Step>
+  <Step title="Create a product template">
+    Navigate to **Online Store > Themes > Customize** and create a new product template for multi-product bundles.
+  </Step>
+  <Step title="Add the app block">
+    On your new template, add the **Bonde: Multi-Product Bundle** app block. This displays all the products in your bundle with variant selectors for each.
+  </Step>
+  <Step title="Configure the bundle in Bonde">
+    Navigate to the Bonde app and select **Multi-Product Bundle** from the bundles menu.
+
+    Click **Create New Bundle** and configure:
+    - **Parent product**: Select the bundle product you created
+    - **Bundle products**: Add each product that should be included
+    - **Quantities**: Set how many of each product is included
+  </Step>
+  <Step title="Set bundle discount">
+    Configure the discount customers receive:
+    - **Percentage discount**: e.g., 15% off the total
+    - **Fixed amount**: e.g., $20 off the bundle
+  </Step>
+  <Step title="Assign the template">
+    In Shopify, assign your multi-product bundle template to the parent product.
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+**Products not showing in bundle?**
+- Verify all products are published and in stock
+- Check that products are correctly added to the bundle configuration
+- Ensure the app embed is enabled in your theme
+
+**Variant selectors not appearing?**
+- Make sure each product has variants configured in Shopify
+- Check that the app block is properly added to your template

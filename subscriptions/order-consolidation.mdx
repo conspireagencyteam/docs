@@ -1,0 +1,114 @@
+---
+title: "Order consolidation"
+description: "Save on shipping costs by combining subscription orders into single shipments."
+---
+
+Order Consolidation helps you save on shipping by identifying customers with multiple subscriptions billing within days of each other, and aligning them to ship together.
+
+## How it works
+
+When a customer has multiple active subscriptions, their orders might bill on different days (e.g., one on the 5th and another on the 8th). This results in separate shipments and duplicate shipping costs.
+
+Order Consolidation:
+- Detects subscriptions billing within your configured window (e.g., 7 days apart)
+- Shows you the potential shipping savings
+- Lets you align billing dates with one click so orders ship together
+
+## Enabling order consolidation
+
+Order Consolidation is disabled by default. To enable it:
+
+<Steps>
+  <Step title="Open consolidation settings">
+    Navigate to **Subscriptions > Order Consolidation** and click **Settings** in the top right.
+  </Step>
+  <Step title="Set detection window">
+    Set the **Near-Miss Detection Window** to your preferred value (1-14 days).
+  </Step>
+  <Step title="Configure options">
+    Configure additional options as needed (see below).
+  </Step>
+  <Step title="Save">
+    Click **Save Settings**.
+  </Step>
+</Steps>
+
+### Configuration options
+
+| Option | Description |
+|--------|-------------|
+| **Near-miss detection window** | How close subscriptions need to be to show as consolidation opportunities |
+| **Auto-consolidate same-day orders** | Automatically group subscriptions that bill on the exact same day |
+| **Notify customers when aligning dates** | Send an email to customers when you align their billing dates |
+| **Allow customer self-service alignment** | Let customers align their own subscriptions from the customer portal |
+
+---
+
+## Finding consolidation opportunities
+
+Navigate to **Subscriptions > Order Consolidation** to see the dashboard.
+
+The stats banner shows:
+- **Near-miss orders**: Number of customers with alignable subscriptions
+- **Customers affected**: Unique customers who could benefit
+- **Potential monthly savings**: Estimated shipping cost savings
+- **Detection window**: Your current window setting
+
+Below the stats, you'll see a list of opportunities sorted by potential savings.
+
+Each opportunity shows:
+- Customer name
+- How many days apart their subscriptions bill
+- Each subscription's next billing date and value
+- Potential savings per order
+
+---
+
+## Aligning billing dates
+
+<Steps>
+  <Step title="Find the opportunity">
+    Locate the opportunity in the list.
+  </Step>
+  <Step title="Click align">
+    Click **Align Billing Dates**.
+  </Step>
+  <Step title="Select target date">
+    Select the target billing date (defaults to the earliest date).
+  </Step>
+  <Step title="Notify option">
+    Choose whether to notify the customer.
+  </Step>
+  <Step title="Confirm">
+    Click **Align Subscriptions**.
+  </Step>
+</Steps>
+
+All subscriptions will be moved to bill on the selected date. Future orders will ship together, saving on shipping costs.
+
+---
+
+## Customer self-service
+
+When **Allow customer self-service alignment** is enabled, customers with multiple subscriptions see a consolidation banner in the customer portal.
+
+The banner shows:
+- How many subscriptions they have billing close together
+- Potential savings per order
+- A one-click button to align their subscriptions
+
+This empowers customers to optimize their own orders without contacting support.
+
+---
+
+## Troubleshooting
+
+**No opportunities showing?**
+- Check that your detection window is greater than 0 (disabled when 0)
+- Ensure you have customers with 2+ active subscriptions
+- Subscriptions must have different billing dates within your window
+
+**Customer self-service not appearing?**
+- Enable "Allow customer self-service alignment" in settings
+- Customer must have 2+ active subscriptions with different billing dates
+- Customer account extension must be installed

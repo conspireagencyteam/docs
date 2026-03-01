@@ -1,0 +1,148 @@
+---
+title: "Managing subscription contracts"
+description: "Learn how to manage customer subscriptions including product swaps, skip deliveries, and billing adjustments."
+---
+
+Bonde provides tools for managing subscription contracts from the admin side.
+
+## Viewing contracts
+
+Navigate to **Subscriptions > Contracts** in the Bonde app to see all subscription contracts.
+
+The list view shows:
+- Customer name and email
+- Subscription status (Active, Paused, Cancelled)
+- Products subscribed to
+- Delivery frequency
+- Next billing date
+
+Use the search bar to find contracts by customer name, email, or contract ID.
+
+## Contract details
+
+Click on any contract to view full details:
+
+**Customer information**
+- Name and email
+- Shipping address
+- Payment method on file
+
+**Subscription details**
+- Products, variants, and quantities
+- Price per delivery
+- Billing/delivery frequency
+- Next billing date
+- Subscription start date
+
+**Order history**
+- Recent orders created from this subscription
+- Order status and fulfillment details
+
+**Activity log**
+- Timeline of all changes to the subscription
+- Shows who initiated each change (admin or customer)
+
+---
+
+## Admin actions
+
+### Swap products
+
+Replace a product in the subscription with a different variant or product. Useful when:
+- A product is discontinued
+- Customer requests a different flavor/size/color
+- Upgrading or downgrading a customer
+
+<Steps>
+  <Step title="Open the contract">
+    Go to **Subscriptions > Contracts** and click on the contract.
+  </Step>
+  <Step title="Swap the product">
+    Click **Swap Product** next to the item.
+  </Step>
+  <Step title="Select replacement">
+    Select the new product/variant and optionally adjust the price.
+  </Step>
+  <Step title="Confirm">
+    Confirm the swap. The change takes effect on the next billing cycle.
+  </Step>
+</Steps>
+
+### Adjust billing date
+
+Change when the next billing will occur to accommodate customer schedules or resolve timing issues.
+
+<Steps>
+  <Step title="Open the contract">
+    Go to **Subscriptions > Contracts** and click on the contract.
+  </Step>
+  <Step title="Adjust the date">
+    Click **Adjust Billing Date** and select the new date.
+  </Step>
+  <Step title="Confirm">
+    Confirm the change. The date must be in the future. After the adjusted date, billing continues on the regular schedule.
+  </Step>
+</Steps>
+
+### Change delivery frequency
+
+Modify how often the customer receives their subscription.
+
+<Steps>
+  <Step title="Open the contract">
+    Go to **Subscriptions > Contracts** and click on the contract.
+  </Step>
+  <Step title="Change frequency">
+    Click **Change Frequency** and select the new interval (weekly, monthly, etc.).
+  </Step>
+  <Step title="Confirm">
+    Confirm the change.
+  </Step>
+</Steps>
+
+### Pause a subscription
+
+Temporarily stop billing and deliveries without cancelling.
+
+When you pause a subscription:
+- Status changes from Active to Paused
+- Billing stops immediately
+- No orders are created while paused
+- The subscription can be resumed at any time
+
+### Resume a subscription
+
+Reactivate a paused subscription.
+
+When you resume:
+- Status changes from Paused to Active
+- Next billing date is recalculated from the resume date
+- Billing resumes on the regular schedule
+
+### Cancel a subscription
+
+Permanently end a subscription. **This cannot be undone.**
+
+When you cancel:
+- Status changes to Cancelled
+- Billing stops immediately
+- No future orders will be created
+- The contract is closed
+
+If a customer wants to subscribe again, they'll need to create a new subscription from the product page.
+
+---
+
+## Viewing customers
+
+Navigate to **Subscriptions > Customers** to see all customers with subscriptions. Click on a customer to see all their subscription contracts in one place.
+
+---
+
+## Skip options
+
+To configure which skip durations are available to customers:
+
+1. Go to **Subscriptions > Settings**
+2. Under "Skip Options", configure the available durations
+3. Skip options are matched to billing intervals (e.g., monthly subscriptions get monthly skip options)
