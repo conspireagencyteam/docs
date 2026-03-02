@@ -116,5 +116,9 @@
     "intercom": {
       "appId": "rbbnskks"
     }
-  }
+  },
+  "seo": {
+    "indexing": "all"
+  },
+  "description": "Bundles, Subscriptions, Loyalty & Upsells for Shopify"
 }
