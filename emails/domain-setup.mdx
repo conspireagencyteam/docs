@@ -1,0 +1,146 @@
+---
+title: "Domain verification"
+description: "Set up and verify your sending domain for reliable email delivery."
+---
+
+Verifying your sending domain ensures emails are delivered reliably and appear as coming from your brand — not a generic address. Without domain verification, emails are more likely to land in spam or be rejected entirely.
+
+## Why verify your domain?
+
+| Without verification | With verification |
+|---------------------|-------------------|
+| Sent from a shared/generic address | Sent from `you@yourdomain.com` |
+| Higher spam risk | Trusted by inbox providers |
+| No brand recognition in inbox | Your brand name in every email |
+| May be blocked by strict mail servers | Passes SPF, DKIM, and DMARC checks |
+
+## Adding your domain
+
+<Steps>
+  <Step title="Go to email settings">
+    In the Bonde app, navigate to **Emails > Settings**.
+  </Step>
+  <Step title="Add your domain">
+    Click **Add Domain** and enter your root domain (e.g., `yourdomain.com`).
+
+    Don't include `www` or a subdomain — use the root domain that matches your sending email address.
+  </Step>
+  <Step title="View DNS records">
+    After adding the domain, click **View DNS Records** to see the records you need to add. Bonde provides three types of records, each with a specific purpose.
+  </Step>
+</Steps>
+
+## DNS records explained
+
+Bonde will show you the exact record values to add. Here's what each record does:
+
+### DKIM record (domain verification)
+
+**Type**: CNAME
+
+DKIM (DomainKeys Identified Mail) cryptographically signs outgoing emails to prove they're authorized by your domain. This is the most important record for deliverability.
+
+- **Name**: Will look like `resend._domainkey` or similar
+- **Value**: A long string pointing to the signing service
+- **Purpose**: Lets inbox providers verify the email wasn't tampered with in transit
+
+### SPF record (sending authorization)
+
+**Type**: TXT
+
+SPF (Sender Policy Framework) tells inbox providers which mail servers are authorized to send email on behalf of your domain.
+
+- **Name**: Usually `@` (your root domain) or a subdomain
+- **Value**: Starts with `v=spf1 include:...`
+- **Purpose**: Prevents unauthorized servers from sending as your domain
+
+<Warning>
+If you already have an SPF record for your domain (e.g., from Google Workspace or another email provider), don't create a second one. Instead, add the `include:` value from Bonde to your existing SPF record. A domain should only have one SPF TXT record.
+</Warning>
+
+### MX record (optional, for replies)
+
+**Type**: MX
+
+If shown, the MX record enables receiving replies to your sending address. This is optional but recommended if you want customers to be able to reply to notification emails.
+
+- **Name**: Usually a subdomain like `send` or `bounces`
+- **Value**: A mail server address
+- **Priority**: A number (usually 10) — enter this in the priority field if your DNS provider has one
+
+## Adding records to your DNS provider
+
+The exact steps depend on your DNS provider. Here are tips for common providers:
+
+| Provider | Where to add records |
+|----------|---------------------|
+| **Cloudflare** | DNS > Records > Add record. For CNAME records, turn **off** the proxy (orange cloud) — it must be DNS only (gray cloud). |
+| **GoDaddy** | My Products > DNS > DNS Records > Add |
+| **Namecheap** | Domain List > Manage > Advanced DNS > Add new record |
+| **Shopify Domains** | Settings > Domains > your domain > DNS settings |
+| **Google Domains** | DNS > Custom records > Manage custom records |
+| **Route 53 (AWS)** | Hosted zones > your domain > Create record |
+
+### Common pitfalls
+
+- **Trailing dots**: Some providers automatically add a trailing dot to CNAME values. If verification fails, check whether your provider added an extra dot.
+- **CNAME flattening**: Some providers (like Cloudflare) flatten CNAME records at the root. This is usually fine, but if verification fails, try adding the record to a subdomain.
+- **TTL**: Use the default TTL or set it to 300 (5 minutes) for faster propagation during setup. You can increase it later.
+- **Existing SPF records**: Never add a second SPF TXT record. Merge the `include:` directives into your existing record.
+
+## Verifying your domain
+
+<Steps>
+  <Step title="Wait for DNS propagation">
+    After adding all records, wait at least 15-30 minutes. Most records propagate within an hour, but some providers can take up to 48 hours.
+  </Step>
+  <Step title="Click Verify">
+    Return to **Emails > Settings** in Bonde and click **Verify** next to your domain.
+
+    Each record will show its own status:
+    - **Verified** — Record is correct and detected
+    - **Pending** — Record not yet detected (may still be propagating)
+    - **Failed** — Record is incorrect or missing
+  </Step>
+  <Step title="Check individual record status">
+    If some records verify but others don't, click **View DNS Records** to see which specific record needs attention. Fix only the failing records — you don't need to redo records that already passed.
+  </Step>
+</Steps>
+
+<Note>
+You can start sending emails as soon as the DKIM record is verified. SPF and MX records improve deliverability and reply handling but aren't strictly required to begin sending.
+</Note>
+
+## DMARC (recommended)
+
+DMARC (Domain-based Message Authentication, Reporting & Conformance) ties SPF and DKIM together and tells inbox providers what to do with emails that fail authentication.
+
+Bonde checks your domain's DMARC status automatically. If you don't have a DMARC record, consider adding one:
+
+| Record | Type | Name | Value |
+|--------|------|------|-------|
+| DMARC | TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com` |
+
+Start with `p=none` (monitor only) to see reports without affecting delivery. Once you're confident all legitimate email passes, you can tighten to `p=quarantine` or `p=reject`.
+
+## Troubleshooting
+
+**Verification stuck on "Pending"?**
+- Double-check the record name and value for typos
+- Confirm you're adding records to the correct domain
+- Wait at least 1 hour — some DNS providers are slower
+- Use a DNS lookup tool (like `dig` or [dnschecker.org](https://dnschecker.org)) to confirm your records are visible
+
+**DKIM verification failing?**
+- Make sure the CNAME record is not proxied (Cloudflare users: gray cloud, not orange)
+- Check that the full value was copied — DKIM values are long and easy to truncate
+
+**SPF verification failing?**
+- Check if you already have an SPF record. If so, merge the `include:` value rather than adding a second TXT record
+- Verify the record is on the correct domain/subdomain (check the Name field exactly)
+
+**Emails still going to spam after verification?**
+- Add a DMARC record (see above)
+- Make sure your sending address matches your verified domain
+- Avoid spam-trigger words in subject lines
+- Include an unsubscribe link in your emails

@@ -1,0 +1,56 @@
+---
+title: "Email templates"
+description: "Customize the content and styling of your subscription notification emails."
+---
+
+Each email type has a customizable template with a subject line, body content, and dynamic variables that are filled in automatically for each recipient.
+
+## Editing templates
+
+<Steps>
+  <Step title="Navigate to email templates">
+    In the Bonde app, go to **Emails** to see all available templates.
+  </Step>
+  <Step title="Select a template">
+    Click on any template to open the editor.
+  </Step>
+  <Step title="Edit and save">
+    Update the subject line and body content, then click **Save**.
+  </Step>
+</Steps>
+
+## Template variables
+
+Use these variables in your subject lines and body content. Variables are replaced with real values when the email is sent.
+
+### Customer variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `{{ customer.first_name }}` | Customer's first name | "Sarah" |
+| `{{ customer.email }}` | Customer's email address | "sarah@example.com" |
+
+### Subscription variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `{{ subscription.next_billing_date }}` | Next charge date | "January 15, 2026" |
+| `{{ subscription.status }}` | Current status | "Active" |
+
+### Shop variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `{{ shop.name }}` | Your store name | "Acme Store" |
+| `{{ portal_url }}` | Link to subscription management portal | Full URL |
+
+## Sending test emails
+
+After editing a template, click **Send Test** to receive a preview at your store owner email address. Test emails use placeholder values for variables so you can check formatting and layout.
+
+## Tips
+
+- Keep subject lines short and clear — customers should know what the email is about at a glance
+- Include `{{ portal_url }}` in charge-related emails so customers can easily manage their subscription
+- Use `{{ customer.first_name }}` in the greeting for a personal touch
+- Test every template after editing to make sure variables render correctly

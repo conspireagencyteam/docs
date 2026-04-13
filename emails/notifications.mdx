@@ -1,120 +1,37 @@
 ---
 title: "Email notifications"
-description: "Configure automated email notifications for subscription events."
+description: "Automated transactional emails for subscription events."
 ---
 
-Bonde sends automated emails to keep subscribers informed about their subscriptions.
+Bonde sends automated emails to keep subscribers informed about their subscriptions. Emails are sent from your own domain when verified, ensuring consistent branding and reliable delivery.
 
 ## Email types
 
 | Email | When it's sent |
 |-------|----------------|
 | **Subscription activation** | When a customer first subscribes |
-| **Upcoming charge** | 5 days before a recurring charge |
+| **Upcoming charge** | Before a recurring charge (configurable lead time) |
 | **Charge confirmation** | After a successful recurring payment |
 | **Subscription cancelled** | When a subscription is cancelled |
 | **Card declined** | When a payment fails |
 | **Card expiring** | When a saved card is about to expire |
 
----
+## Setup
 
-## Setting up your sending domain
+<Columns cols={2}>
+  <Card title="Domain verification" icon="shield-check" href="/emails/domain-setup">
+    Verify your sending domain for reliable delivery and branded sender addresses.
+  </Card>
+  <Card title="Email templates" icon="file-lines" href="/emails/templates">
+    Customize email content, subject lines, and variables.
+  </Card>
+</Columns>
 
-For reliable email delivery, verify a sending domain.
+## Email settings
 
-### Add your domain
+Navigate to **Emails > Settings** to configure:
 
-<Steps>
-  <Step title="Open email settings">
-    Go to **Settings > Email** in the Bonde app.
-  </Step>
-  <Step title="Add domain">
-    Click **Add Domain** and enter your domain (e.g., `yourdomain.com`).
-  </Step>
-  <Step title="Click Add">
-    Click **Add** to save.
-  </Step>
-</Steps>
-
-### Configure DNS records
-
-After adding your domain, you'll see DNS records to add:
-
-**SPF Record**
-- Type: TXT
-- Name: @ (or your domain)
-- Value: Provided in the app
-
-**DKIM Records**
-- Type: CNAME
-- Name: Provided in the app
-- Value: Provided in the app
-
-Add these records in your domain registrar or DNS provider.
-
-### Verify domain
-
-<Steps>
-  <Step title="Wait for propagation">
-    After adding DNS records, wait 15-30 minutes for propagation.
-  </Step>
-  <Step title="Verify">
-    Return to **Settings > Email** in Bonde and click **Verify** next to your domain.
-  </Step>
-  <Step title="Confirm">
-    Once verified, status will show as "Verified".
-  </Step>
-</Steps>
-
-<Note>
-DNS propagation can take up to 48 hours. If verification fails, wait and try again.
-</Note>
-
----
-
-## Customizing email templates
-
-### Accessing templates
-
-1. Go to **Settings > Email**
-2. Scroll down to see all email templates
-3. Click on any template to edit it
-
-### Template editor
-
-Each template has:
-- **Subject line**: The email subject
-- **Body content**: HTML content of the email
-
-### Available variables
-
-Use these variables in templates:
-
-**Customer variables**
-- `{{ customer.first_name }}` - Customer's first name
-- `{{ customer.email }}` - Customer's email
-
-**Subscription variables**
-- `{{ subscription.next_billing_date }}` - Next charge date
-- `{{ subscription.status }}` - Current status
-
-**Shop variables**
-- `{{ shop.name }}` - Your store name
-- `{{ portal_url }}` - Link to customer subscription portal
-
----
-
-## Troubleshooting
-
-**Emails going to spam?**
-- Make sure your domain is verified
-- Check that SPF and DKIM records are correct
-
-**Emails not sending?**
-- Verify domain status in Settings > Email
-- Check that the template is enabled
-
-**Variables not replacing?**
-- Check spelling of variable names
-- Ensure you're using `{{ }}` syntax
-- Variables are case-sensitive
+- **From name**: The sender name shown in customer inboxes (e.g., "Acme Store")
+- **From email**: The sender address (requires a verified domain)
+- **BCC to store owner**: Receive a copy of every customer email
+- **CC to store owner**: Add the store owner as a visible recipient

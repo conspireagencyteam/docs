@@ -84,7 +84,9 @@
           {
             "group": "Emails",
             "pages": [
-              "emails/notifications"
+              "emails/notifications",
+              "emails/domain-setup",
+              "emails/templates"
             ]
           }
         ]
