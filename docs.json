@@ -21,6 +21,7 @@
               "getting-started/subscriptions",
               "getting-started/upsells",
               "getting-started/sidebar-cart",
+              "getting-started/tracking",
               "getting-started/loyalty"
             ]
           },
@@ -53,6 +54,16 @@
               "upsells/cart",
               "upsells/checkout",
               "upsells/post-purchase"
+            ]
+          },
+          {
+            "group": "Order tracking",
+            "pages": [
+              "tracking/index",
+              "tracking/page-builder",
+              "tracking/recommendations",
+              "tracking/discounts",
+              "tracking/analytics"
             ]
           },
           {

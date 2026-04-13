@@ -1,0 +1,81 @@
+---
+title: "Discount codes"
+description: "Offer time-limited discount codes on your tracking page to drive repeat purchases."
+---
+
+The Shop again block can automatically create unique Shopify discount codes for each order, giving customers a real incentive to buy again. Optionally set an expiry to create urgency with a live countdown timer.
+
+## How discount codes work
+
+When a customer visits their tracking page, Bonde automatically generates a unique Shopify discount code for their order. The code is applied when the customer clicks **Add** on any recommended product — no need to copy or paste anything.
+
+- Each order gets one unique code (shared across all fulfillments)
+- Codes have a usage limit of 1, so they can't be reused or shared
+- Discount parameters are locked in when the code is created, so changes to your settings don't affect existing codes
+
+## Setting up discount codes
+
+<Steps>
+  <Step title="Open your Shop again block settings">
+    In the tracking page builder, select your **Shop again** block and open its settings panel.
+  </Step>
+  <Step title="Enable the discount">
+    Toggle **Offer a discount code** to on.
+  </Step>
+  <Step title="Configure the discount">
+    Choose the discount type and value:
+    - **Percentage**: e.g., 15% off
+    - **Fixed amount**: e.g., $5 off
+  </Step>
+  <Step title="Set an expiry (optional)">
+    Enter the number of hours after order placement that the discount should expire. For example, enter **72** for a 3-day window.
+
+    Leave empty for a discount code that never expires.
+  </Step>
+  <Step title="Update your block title">
+    Consider updating the block title to mention the discount, e.g., "Shop again, get 15% off" so customers immediately see the value.
+  </Step>
+</Steps>
+
+## Discount modes
+
+| Mode | Block settings | Behavior |
+|------|---------------|----------|
+| **No discount** | Discount toggle off | Regular prices, standard add-to-cart links |
+| **Always-on discount** | Discount on, no expiry | Discount code with no time limit |
+| **Expiring discount** | Discount on, expiry set | Discount code with countdown timer |
+
+## Expiring discounts
+
+When you set an expiry, customers see a live countdown timer on the tracking page:
+
+> **Shop again, get 15% off**
+> Expires in 2d 19h 55m
+
+The countdown updates every minute. Once expired, the page shows "Offer expired" and products revert to regular prices with standard add-to-cart links.
+
+The expiry window is calculated from **when the order was placed** (not when the customer first visits the tracking page). This means every customer gets the same window regardless of when they check their tracking.
+
+## How the discount applies
+
+When a customer clicks **Add** on a recommended product, the link routes through Shopify's built-in discount URL (`/discount/{code}`) before adding the item to their cart. The discount is automatically applied to their session — no code entry required.
+
+The discount code:
+- Applies to all products (not just the recommended ones)
+- Cannot combine with other product discounts
+- Can combine with free shipping discounts
+- Is limited to a single use
+
+## Troubleshooting
+
+**Discount not applying at checkout?**
+- Verify the discount code exists in **Shopify Admin > Discounts**
+- Check that the code hasn't already been used (usage limit is 1)
+- Ensure the code hasn't expired
+
+**Countdown not showing?**
+- Make sure you've set an expiry in the block settings
+- The countdown only shows for orders within the expiry window
+
+**"Offer expired" showing for recent orders?**
+- The expiry is calculated from the order date, not the page visit. If the order was placed before the expiry window, it will show as expired.

@@ -1,0 +1,49 @@
+---
+title: "Product recommendations"
+description: "Display upsell offers on your tracking page to drive repeat purchases."
+---
+
+The **Shop again** block on your tracking page shows product recommendations to encourage repeat purchases. You can hand-pick products, use intelligent recommendations powered by purchase data, or combine both.
+
+## How recommendations work
+
+Product recommendations on the tracking page are powered by the same upsell system used across Bonde. Create **Order Tracking** upsells in the Upsells tab, then assign them to a Shop again block on your tracking page.
+
+Each product displays with an image, title, price, and an **Add** button that takes the customer directly to their cart.
+
+## Setting up recommendations
+
+<Steps>
+  <Step title="Create an Order Tracking upsell">
+    Go to **Upsells** and click **Create Upsell**. Select **Order Tracking** as the type.
+
+    Add trigger conditions (optional) and select the products you want to recommend.
+  </Step>
+  <Step title="Add a Shop again block">
+    In the tracking page builder, add a **Shop again** block to your page layout.
+  </Step>
+  <Step title="Select upsells for the block">
+    In the block settings, choose which Order Tracking upsells feed this block. Leave empty to show all active Order Tracking upsells.
+  </Step>
+  <Step title="Set max products">
+    Configure how many product recommendations to show (1-8). Defaults to 4.
+  </Step>
+</Steps>
+
+## Recommendation modes
+
+| Mode | Description |
+|------|-------------|
+| **Manual** | Hand-picked products from your upsell offers. Best when you know exactly what to recommend. |
+| **Intelligent** | Auto-selected based on co-purchase patterns. Products are A/B tested and optimized over time. |
+| **Hybrid** | Manual offers show first, intelligent fills remaining slots. Best of both worlds. |
+
+To use intelligent mode, mark your Order Tracking upsell as **Intelligent** when creating it. Bonde analyzes your order history to find products frequently bought together and continuously optimizes which products are shown.
+
+## Trigger conditions
+
+Order Tracking upsells support the same trigger conditions as other upsell types:
+
+- **Product in order**: Show when specific products were in the order
+- **Cart value minimum**: Show when the order total exceeds an amount
+- **Collection**: Show when products from a specific collection were in the order
