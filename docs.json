@@ -63,6 +63,7 @@
               "tracking/page-builder",
               "tracking/recommendations",
               "tracking/discounts",
+              "tracking/delivery-updates",
               "tracking/analytics"
             ]
           },

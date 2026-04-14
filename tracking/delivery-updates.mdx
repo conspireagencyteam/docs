@@ -1,0 +1,169 @@
+---
+title: "Delivery update emails"
+description: "Branded transactional emails that auto-send when a shipment transitions status — in transit, out for delivery, delivered, exception, or returned."
+---
+
+Bonde can send branded delivery-update emails to customers when their shipment transitions status. Customers opt in from the tracking page, and emails match your tracking page's branding automatically.
+
+## How it works
+
+When enabled, emails send automatically as the carrier reports each status change. Customers only receive emails for the specific order they opted in to — there's no marketing list.
+
+| Email | When it sends |
+|-------|----------------|
+| **In transit** | First real carrier scan (not just a shipping label) |
+| **Out for delivery** | Carrier is out for delivery |
+| **Delivered** | Package has been delivered |
+| **Exception** | Delivery failure, delay, or attempted delivery |
+| **Returned** | Package returned to sender |
+
+## Before you start
+
+Delivery update emails depend on three setup steps. The Bonde app shows warnings in the builder until all three are done.
+
+<Steps>
+  <Step title="Verify a sending domain">
+    Go to **Emails > Settings** and [verify your sending domain](/emails/domain-setup). If you've already set this up for subscription emails, you're done — the same domain is used for delivery update emails.
+  </Step>
+  <Step title="Configure a default sender">
+    In **Emails > Settings**, set a **From name** (e.g., "Acme Store") and **From email** (must use your verified domain).
+  </Step>
+  <Step title="Activate at least one template">
+    Open the builder at **Tracking > Email updates** and turn on the **Active** toggle for at least one status template.
+  </Step>
+</Steps>
+
+## Setting up templates
+
+<Steps>
+  <Step title="Open the builder">
+    In the Bonde app, go to **Tracking** and click **Email updates** in the top-right.
+
+    You'll see five tabs — one per delivery status. Each tab has its own template, so you can tailor the copy for "in transit" versus "delivered" separately.
+  </Step>
+  <Step title="Edit a template">
+    Click a status tab (e.g., **Out for delivery**). Edit the **Subject line** and **Preheader**, then use the **Add block...** menu to add blocks, or edit the existing blocks. Use the up/down arrows to reorder, or **Remove** to delete.
+  </Step>
+  <Step title="Activate the template">
+    Toggle **Active** on, then click **Save**. Customers who opt in will now receive this email when the status changes.
+  </Step>
+  <Step title="Send yourself a test">
+    Scroll to **Send test email**, enter your email address, and click **Send test**. Test emails use sample order data and arrive with `[TEST]` prefixed to the subject line.
+  </Step>
+</Steps>
+
+## Block types
+
+<Columns cols={2}>
+  <Card title="Status banner" icon="rectangle-list">
+    Headline + body copy with the order number, customer name, ETA, and tracking details. Usually the first block in every template.
+  </Card>
+  <Card title="Order items" icon="boxes-stacked">
+    List of items in this shipment with thumbnails, quantity, variant, and optional price.
+  </Card>
+  <Card title="Rich text" icon="paragraph">
+    A paragraph with variable substitution, bold, italic, and line breaks.
+  </Card>
+  <Card title="Button" icon="square-arrow-up-right">
+    A call-to-action button linking to the tracking page or a custom URL.
+  </Card>
+  <Card title="Marketing card" icon="image">
+    Image + title + subtitle + link, for banners and promotions.
+  </Card>
+  <Card title="Shop again" icon="basket-shopping">
+    Product recommendations drawn from active **Order tracking** upsells. Great for delivered emails.
+  </Card>
+  <Card title="Divider" icon="minus">
+    Horizontal line for visual separation.
+  </Card>
+  <Card title="Spacer" icon="arrows-up-down">
+    Empty vertical space.
+  </Card>
+</Columns>
+
+The email footer (your business address + unsubscribe link) is added automatically — you don't need to add a block for it.
+
+## Variables
+
+Use these in the subject line, preheader, or any text field. Wrap each variable in double curly braces, for example `{{ customer.first_name }}`.
+
+| Variable | What it shows |
+|----------|---------------|
+| `customer.first_name` | The customer's first name |
+| `customer.last_name` | The customer's last name |
+| `customer.full_name` | Full name, with a fallback of "there" |
+| `customer.email` | The customer's email |
+| `order.name` | Order number, e.g., `#1042` |
+| `order.processed_date` | When the order was placed |
+| `tracking.status` | Human-readable status, e.g., "On its way" |
+| `tracking.carrier` | Carrier name |
+| `tracking.number` | Tracking number |
+| `tracking.url` | Carrier tracking URL (falls back to your tracking page) |
+| `tracking.eta` | Estimated delivery date |
+| `shop.name` | Your store name |
+
+Missing variables render as empty strings — they never show as `undefined` or break the email.
+
+## Branding
+
+Delivery update emails inherit their logo, colors, and typography from your default tracking page. To change how emails look:
+
+<Steps>
+  <Step title="Open your default tracking page">
+    Go to **Tracking** and open the page marked as default.
+  </Step>
+  <Step title="Edit the theme">
+    Use the theme editor to set your logo, brand colors, and typography.
+  </Step>
+  <Step title="Save">
+    Your changes apply to every delivery update email. There's no separate email theme to configure.
+  </Step>
+</Steps>
+
+## Collecting opt-ins
+
+Customers opt in from the tracking page using the **Subscribe to updates** block.
+
+<Steps>
+  <Step title="Open your tracking page">
+    Go to **Tracking** and open the page you want to add email signup to.
+  </Step>
+  <Step title="Enable the email channel">
+    Select the **Subscribe to updates** block. Under **Channels**, tick **Email**.
+  </Step>
+  <Step title="Customize the input labels (optional)">
+    With both Email and SMS channels enabled, customers see a segmented Email/Text picker. You can set per-channel placeholder text and button labels.
+  </Step>
+  <Step title="Save the page">
+    Click **Save**. Customers visiting the tracking page will now see the email signup form.
+  </Step>
+</Steps>
+
+The email input pre-fills with the order's customer email so most customers only need to click **Sign up**. Each opt-in is scoped to one fulfillment — a customer signing up on Order #1042 won't get emails about their next order unless they opt in there too.
+
+## Unsubscribing
+
+Every email includes an unsubscribe link in the footer. Clicking it immediately stops further emails for that order. Customers can also resubscribe by submitting the form on the tracking page again.
+
+## Troubleshooting
+
+**Emails aren't sending**
+
+- Check that your domain is verified in **Emails > Settings**
+- Check that the template for that status has **Active** turned on
+- Make sure the customer submitted the **Subscribe to updates** form and picked the Email channel
+
+**A customer says they unsubscribed but still got an email**
+
+- Delivery update opt-ins are per-order. If the customer placed another order and opted in again, that's a new subscription.
+
+**Variables aren't replacing**
+
+- Variable names are case-sensitive — check spelling
+- Make sure you're using double curly braces: `{{ variable }}`
+
+**The email doesn't match my tracking page branding**
+
+- Emails inherit the theme from your **default** tracking page. If you have multiple tracking pages, the default one is the source of truth for email styling.
+
+If you need help, reach out via our chat widget or email us at hello@conspireagency.com.
