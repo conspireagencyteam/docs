@@ -61,6 +61,7 @@
             "pages": [
               "tracking/index",
               "tracking/page-builder",
+              "tracking/shopify-links",
               "tracking/recommendations",
               "tracking/discounts",
               "tracking/delivery-updates",

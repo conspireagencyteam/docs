@@ -1,0 +1,76 @@
+---
+title: "Add tracking links to Shopify"
+description: "Show a \"Track your order\" button in your Shopify notification emails and on the customer account order page."
+---
+
+Your Bonde tracking page lives on your store's domain, but customers need a way to reach it. Add a branded **Track your order** button to the emails Shopify already sends, and — optionally — to the order page in your customers' accounts.
+
+## Add a tracking button to your Shopify emails
+
+Shopify sends notification emails (like the shipping confirmation) when you fulfill an order. You can add a **Track your order** button to those emails that links to your branded Bonde tracking page.
+
+<Steps>
+  <Step title="Open the setup page">
+    In Bonde, go to **Tracking** and click **Add to Shopify emails**.
+  </Step>
+  <Step title="Approve order access">
+    The first time, Bonde asks for permission to add a hidden tracking tag to your orders. Approve the updated permissions when prompted. Until you do, the button won't appear.
+  </Step>
+  <Step title="Make sure you have an active tracking page">
+    The button links to your branded tracking page, so you need at least one active page. [Create one](/tracking/page-builder) if you haven't already.
+  </Step>
+  <Step title="Copy the snippet">
+    On the **Add to Shopify emails** page, click **Copy snippet**.
+  </Step>
+  <Step title="Paste it into your shipping confirmation email">
+    In Shopify admin, go to **Settings > Notifications > Customer notifications** and open **Shipping confirmation**. Click **Edit code**, paste the snippet into the email body where you want the button — just after the existing tracking button is a good spot — then click **Save**.
+  </Step>
+  <Step title="Repeat for other emails (optional)">
+    Add the same snippet to any other emails you'd like the button in, such as **Shipping update**, **Out for delivery**, and **Delivered**.
+  </Step>
+</Steps>
+
+<Note>
+The button only appears on orders placed **after** you set this up — older orders don't carry the tracking tag. The snippet is safe to leave in place permanently: it stays hidden whenever the tag isn't present, so it never shows a broken link.
+</Note>
+
+### Removing the button
+
+Open the same email template's code, delete the snippet you pasted earlier, and click **Save** — or use Shopify's **Revert to default** option to restore the original template. Nothing else changes.
+
+## Add a tracking button to customer accounts (optional)
+
+Signed-in customers can also reach your tracking page from the order page in their account. Bonde includes an optional **Track your order** block for the order status page.
+
+<Steps>
+  <Step title="Open the checkout and accounts editor">
+    In Shopify admin, go to **Settings > Checkout** and click **Customize**.
+  </Step>
+  <Step title="Switch to the Order status page">
+    Use the page dropdown at the top of the editor to select the **Order status** page.
+  </Step>
+  <Step title="Add the Bonde block">
+    Click **Add app block**, choose **Bonde: Track Your Order**, and drag it to where you'd like it to appear.
+  </Step>
+  <Step title="Save">
+    Click **Save**. Signed-in customers now see a **Track your order** button on the order page that links to that order's tracking page.
+  </Step>
+</Steps>
+
+The button appears automatically once an order has shipped — there's nothing for the customer to set up.
+
+## Troubleshooting
+
+**The button isn't showing in my emails**
+
+- Make sure you approved the order-access permission on the **Add to Shopify emails** page.
+- The button only appears on orders placed *after* you set this up. Place a fresh test order and fulfill it to check.
+- Confirm you pasted the snippet into the right template and clicked **Save**.
+- Make sure you have an active tracking page.
+
+**The button isn't showing in customer accounts**
+
+- Confirm you added the **Bonde: Track Your Order** block in the checkout and accounts editor and saved.
+- The button only appears after the order has shipped.
+
+If you need help, reach out via our chat widget or email us at hello@conspireagency.com.
