@@ -69,11 +69,9 @@ Setting an expiration encourages customers to return and use their credit.
 
 ## Caps and limits
 
-Prevent excessive reward payouts with caps:
+Prevent excessive reward payouts with a per-program cap that limits how much credit a customer can earn from this specific program within a time period.
 
-**Per-program cap**: Limit how much credit a customer can earn from this specific program within a time period.
-
-Example: Cap of $50 per month means a customer can't earn more than $50 from this program in any calendar month.
+Example: A cap of $50 per month means a customer can't earn more than $50 from this program in any calendar month.
 
 **Cap period options**:
 - Daily
@@ -82,7 +80,20 @@ Example: Cap of $50 per month means a customer can't earn more than $50 from thi
 - Yearly
 - Lifetime
 
-**Global caps**: In addition to per-program caps, you can set a global cap in **Rewards > Settings** that applies across all programs.
+Caps are partial, not all-or-nothing. If a customer has $3 left of a $10 monthly cap, their next reward from that program is $3 rather than being skipped.
+
+---
+
+## Combining rewards
+
+When more than one program applies to the same order, the **This rule stacks** option in each program's setup decides how they combine:
+
+- **Off (exclusive)**: The default. If several exclusive programs apply to one order, the customer earns only the single program worth the most to them. Use this for tiered rates—with "10% over $100" and "15% over $200" both off, a $200 order earns 15%, not both.
+- **On (stacks)**: The program's credit is always added on top of whatever else the customer earns. Use this for independent add-ons, like a product-specific bonus.
+
+<Tip>
+Leave tiered programs unstacked so customers get your best single rate. Turn on stacking only for extra bonuses you want to add on top.
+</Tip>
 
 ---
 
@@ -134,5 +145,4 @@ Example: Cap of $50 per month means a customer can't earn more than $50 from thi
 Configure shop-wide reward settings in **Rewards > Settings**:
 
 - **Default expiration**: How long rewards last if a program uses "Store Default"
-- **Global cap**: Maximum credit any customer can earn across all programs
 - **Expiration reminders**: Email customers before their credit expires
