@@ -39,6 +39,7 @@
             "pages": [
               "subscriptions/index",
               "subscriptions/configuration",
+              "subscriptions/free-shipping",
               "subscriptions/product-widget",
               "subscriptions/customer-portal",
               "subscriptions/managing-contracts",

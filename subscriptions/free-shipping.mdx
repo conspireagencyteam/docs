@@ -1,0 +1,51 @@
+---
+title: "Free shipping for subscriptions"
+description: "Offer free shipping as a subscription perk, on the first order and every renewal."
+---
+
+You can offer free shipping on individual subscription plans. When a customer subscribes on a plan with free shipping, their first order ships free at checkout and every renewal ships free automatically.
+
+Free shipping is configured per plan, so you can offer it selectively—for example, on a monthly plan but not a weekly one, or only on products with healthy margins.
+
+## How it works
+
+- **At checkout**, the cheapest shipping rate becomes free. Customers can still pay to upgrade to express or other premium rates.
+- **On renewals**, shipping is free automatically for the life of the subscription. No discount codes are needed.
+- **Local pickup** and other non-shipping delivery methods are not affected.
+
+The discount appears at checkout as **Free subscription shipping**.
+
+## Enabling free shipping on a plan
+
+<Steps>
+  <Step title="Open a product's subscription plans">
+    In the Bonde app, go to **Subscriptions** and click **Manage products**, then select a product.
+  </Step>
+  <Step title="Enable free shipping">
+    Check **Free shipping** on an existing plan, or check the **Free shipping** option when creating a new plan.
+  </Step>
+</Steps>
+
+That's it—no discount setup is required. Bonde creates and manages an automatic discount called **Subscription Free Shipping** in your Shopify admin the first time you enable the perk.
+
+<Warning>
+  Don't delete or deactivate the **Subscription Free Shipping** automatic discount in your Shopify admin (**Discounts**). Removing it stops free shipping from applying at checkout. Manage the perk from the plan settings in Bonde instead.
+</Warning>
+
+## Mixed carts
+
+Shipping is charged per order, not per item, so you choose what happens when a cart mixes free-shipping subscription items with items that don't qualify. Go to **Subscriptions > Settings** and find **Subscription Free Shipping**:
+
+| Mode | Behavior |
+|------|----------|
+| **All items must qualify** (default) | Free shipping applies only when every item in the cart is a subscription on a free-shipping plan. Adding a one-time item or a non-qualifying subscription removes the discount. |
+| **Any qualifying item** | The whole cart ships free as long as at least one item is a subscription on a free-shipping plan. |
+
+Free gift items added by a gift campaign never count against the "all items must qualify" rule.
+
+## Things to know
+
+- **Existing subscribers aren't affected.** Enabling free shipping on a plan applies to new subscriptions only. Disabling it doesn't add shipping charges to subscribers who already have the perk.
+- **Renewal preview at checkout.** The checkout's "Recurring shipments" summary may show your standard shipping rate. The actual renewal orders ship free—the perk is applied to the subscription when it's created.
+- **Works with order consolidation.** When [order consolidation](/subscriptions/order-consolidation) combines multiple subscriptions into one shipment, the combined order ships free if any of the included subscriptions has free shipping.
+- **Customers see the perk on your product page.** The subscription widget shows a "Free shipping" badge next to plans that include it.
