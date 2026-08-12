@@ -31,18 +31,15 @@ npm run type-check
 
 ## Deployment
 
-Deploys to Vercel; production tracks `main`. Old Mintlify URLs of the form
-`/<section>/index` are 308-redirected to `/<section>` in `next.config.mjs`.
+Vercel project `bonde-docs` (team `goat-apps`), git-connected to this repo —
+pushes to `main` deploy to production at docs.getbonde.com. DNS lives in the
+getbonde.com Cloudflare zone (CNAME → `cname.vercel-dns.com`, DNS-only). Old
+Mintlify URLs of the form `/<section>/index` are 308-redirected to
+`/<section>` in `next.config.mjs`.
 
-### Cutover checklist (one-time, from Mintlify)
-
-1. Create the Vercel project from this repo (framework: Next.js, no env vars
-   required; set `NEXT_PUBLIC_SITE_URL` only if the domain differs from
-   docs.getbonde.com).
-2. Add `docs.getbonde.com` as the project domain and switch its DNS CNAME from
-   `cname.mintlify-dns.com` to `cname.vercel-dns.com`.
-3. Uninstall the Mintlify GitHub app from the repo and cancel the Mintlify
-   subscription.
+Cutover from Mintlify happened 2026-08-12. Remaining Mintlify teardown:
+uninstall its GitHub app from the `conspireagencyteam` org (needs org-owner
+sudo) and cancel the Mintlify subscription in their dashboard.
 
 ## Writing style
 
