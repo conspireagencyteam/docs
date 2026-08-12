@@ -37,9 +37,8 @@ getbonde.com Cloudflare zone (CNAME → `cname.vercel-dns.com`, DNS-only). Old
 Mintlify URLs of the form `/<section>/index` are 308-redirected to
 `/<section>` in `next.config.mjs`.
 
-Cutover from Mintlify happened 2026-08-12. Remaining Mintlify teardown:
-uninstall its GitHub app from the `conspireagencyteam` org (needs org-owner
-sudo) and cancel the Mintlify subscription in their dashboard.
+Cutover from Mintlify happened 2026-08-12; Mintlify is fully disconnected
+(GitHub app removed via their admin; the plan was free, so nothing to cancel).
 
 ## Writing style
 
