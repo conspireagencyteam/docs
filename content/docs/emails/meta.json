@@ -1,0 +1,5 @@
+{
+  "title": "Emails",
+  "defaultOpen": true,
+  "pages": ["notifications", "domain-setup", "templates"]
+}

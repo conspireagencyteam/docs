@@ -1,0 +1,5 @@
+{
+  "title": "Bundles",
+  "defaultOpen": true,
+  "pages": ["index", "single-product", "multi-product", "build-a-box"]
+}

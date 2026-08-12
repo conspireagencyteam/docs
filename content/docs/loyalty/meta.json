@@ -1,0 +1,5 @@
+{
+  "title": "Loyalty",
+  "defaultOpen": true,
+  "pages": ["index", "rewards", "referrals", "widgets"]
+}

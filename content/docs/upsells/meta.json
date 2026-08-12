@@ -1,0 +1,5 @@
+{
+  "title": "Upsells",
+  "defaultOpen": true,
+  "pages": ["index", "product-page", "cart", "checkout", "post-purchase"]
+}

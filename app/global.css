@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+@source "../node_modules/fumadocs-ui/dist/**/*.js";
+
+/* Bonde brand blue (from the old Mintlify docs.json palette). */
+:root {
+  --color-fd-primary: #3b5dff;
+}
+
+.dark {
+  --color-fd-primary: #5b7aff;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans-app);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

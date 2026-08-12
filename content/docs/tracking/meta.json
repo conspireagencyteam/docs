@@ -1,0 +1,13 @@
+{
+  "title": "Order tracking",
+  "defaultOpen": true,
+  "pages": [
+    "index",
+    "page-builder",
+    "shopify-links",
+    "recommendations",
+    "discounts",
+    "delivery-updates",
+    "analytics"
+  ]
+}

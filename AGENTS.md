@@ -8,11 +8,11 @@ description: Documentation for Bonde, the all-in-one Shopify app for bundles, su
 ## About this project
 
 - This is the documentation site for [Bonde](https://getbonde.com), a Shopify app
-- Built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Run `mint dev` to preview locally
-- Run `mint broken-links` to check links
+- Built on Next.js (App Router) + [Fumadocs](https://fumadocs.dev); see `README.md` for layout and deployment
+- Pages are MDX files with YAML frontmatter (`title`, `description`) in `content/docs/`; page URLs mirror the folder path with docs mounted at the site root
+- Sidebar order and section titles live in `meta.json` files next to the pages
+- Use the Mintlify-style components from `components/mdx.tsx` in content: `Note`, `Warning`, `Tip`, `Steps`/`Step`, `Card`, `Columns` — they're registered globally, no imports needed in MDX
+- Run `npm run dev` to preview locally; `npm run build` catches broken internal links and invalid MDX
 
 ## Terminology
 

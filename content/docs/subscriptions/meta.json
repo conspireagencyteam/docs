@@ -1,0 +1,14 @@
+{
+  "title": "Subscriptions",
+  "defaultOpen": true,
+  "pages": [
+    "index",
+    "configuration",
+    "free-shipping",
+    "product-widget",
+    "customer-portal",
+    "managing-contracts",
+    "bundle-subscriptions",
+    "order-consolidation"
+  ]
+}
