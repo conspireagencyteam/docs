@@ -1,0 +1,50 @@
+/*
+ * Additions on top of the theme stylesheets: the two-card pricing grid,
+ * the contact form and the long-form legal pages (bx-* classes so they
+ * never collide with the imported .bonde-* rules).
+ */
+
+.bonde-bpricing__grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 960px; margin-inline: auto; }
+.bonde-bpricing__note { margin-top: 24px; text-align: center; font-size: 14px; color: rgba(var(--color-foreground-rgb, 34 34 34), 0.6); }
+@media (max-width: 800px) { .bonde-bpricing__grid--two { grid-template-columns: 1fr; } }
+
+/* Long-form pages (privacy, accessibility) */
+.bx-page { padding-block: 64px 96px; }
+.bx-prose { max-width: 760px; display: flex; flex-direction: column; gap: 16px; font-size: 16px; line-height: 1.6; color: rgba(34, 34, 34, 0.85); }
+.bx-prose .bonde-h1 { margin-bottom: 8px; }
+.bx-prose h2 { font-family: var(--font-heading--family); font-size: 24px; margin-top: 24px; font-weight: 600; color: #222; }
+.bx-prose h3 { font-family: var(--font-heading--family); font-size: 18px; margin-top: 8px; font-weight: 600; color: #222; }
+.bx-prose ul { list-style: disc; padding-left: 22px; display: grid; gap: 8px; }
+.bx-prose p { margin: 0; }
+.bx-prose a { color: #3800df; text-decoration: underline; }
+.bx-prose__meta { font-size: 14px; color: rgba(34, 34, 34, 0.6); }
+
+/* Contact */
+.bx-contact { padding-block: 64px 96px; }
+.bx-contact__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
+.bx-contact__intro { display: flex; flex-direction: column; gap: 24px; }
+.bx-contact__meta { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; font-size: 16px; margin: 8px 0 0; }
+.bx-contact__meta dt { font-weight: 600; color: #222; }
+.bx-contact__meta dd { margin: 0; }
+.bx-contact__meta a { text-decoration: underline; }
+.bx-form { display: flex; flex-direction: column; gap: 18px; background: #fff; border: 1px solid rgba(34, 34, 34, 0.12); border-radius: 16px; padding: 32px; }
+.bx-form__row { display: flex; flex-direction: column; gap: 6px; }
+.bx-form label { font-size: 14px; font-weight: 600; color: #222; font-family: var(--font-heading--family); }
+.bx-form label span { font-weight: 400; color: rgba(34, 34, 34, 0.55); }
+.bx-form input, .bx-form textarea {
+  font: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid rgba(34, 34, 34, 0.25); border-radius: 8px; background: #fff; color: #222;
+}
+.bx-form input:focus, .bx-form textarea:focus { outline: 2px solid #3800df; outline-offset: 1px; border-color: #3800df; }
+.bx-form__hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.bx-form__actions { display: flex; flex-direction: column; gap: 12px; }
+.bx-form__actions .bonde-btn { cursor: pointer; font: inherit; }
+.bx-form__actions .bonde-btn:disabled { opacity: 0.6; cursor: default; }
+.bx-form__error a { text-decoration: underline; }
+.bx-form__done { background: #fff; border: 1px solid rgba(34, 34, 34, 0.12); border-radius: 16px; padding: 32px; display: grid; gap: 8px; }
+.bx-form__done h2 { font-family: var(--font-heading--family); font-size: 24px; font-weight: 600; color: #222; }
+@media (max-width: 900px) { .bx-contact__grid { grid-template-columns: 1fr; gap: 32px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bonde-site * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  .bonde-stats__value--prep { opacity: 1; transform: none; }
+}

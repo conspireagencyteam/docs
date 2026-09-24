@@ -9,8 +9,9 @@ export const metadata: Metadata = {
 
 export default function AccessibilityPage() {
   return (
-    <section className="bonde-section scheme-cream bonde-page">
-      <div className="bonde-inner bonde-prose">
+    <div className="bonde-section-wrapper">
+      <section className="bonde-section color-scheme-1 bx-page">
+      <div className="bonde-inner bx-prose">
         <h1 className="bonde-h1">Accessibility statement</h1>
         <p>
           Bonde works to make our products usable by as many people as possible, including people who rely on assistive technologies. We use the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA as a guide when designing and testing the Bonde app, our storefront widgets, and this website.
@@ -39,6 +40,7 @@ export default function AccessibilityPage() {
           <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> and we will make reasonable efforts to address it.
         </p>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }

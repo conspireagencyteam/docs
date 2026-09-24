@@ -14,10 +14,11 @@ export const metadata: Metadata = {
  */
 export default function PrivacyPage() {
   return (
-    <section className="bonde-section scheme-cream bonde-page">
-      <div className="bonde-inner bonde-prose">
+    <div className="bonde-section-wrapper">
+      <section className="bonde-section color-scheme-1 bx-page">
+      <div className="bonde-inner bx-prose">
         <h1 className="bonde-h1">Bonde privacy policy</h1>
-        <p className="bonde-prose__meta">Effective date: September 24, 2026 (supersedes April 25, 2026)</p>
+        <p className="bx-prose__meta">Effective date: September 24, 2026 (supersedes April 25, 2026)</p>
         <h2>1. Introduction</h2>
         <p>This Privacy Policy explains how Conspire LLC (&quot;Conspire,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects, uses, shares, and protects information in connection with the Bonde Shopify application and related services (collectively, &quot;Bonde&quot; or the &quot;App&quot;). Bonde is installed by Shopify merchants (each a &quot;Merchant&quot;) on their Shopify stores to provide subscriptions, upsells, free gifts, bundling, merchandising, order tracking pages, transactional email, and analytics features.</p>
         <p>Bonde processes two broad categories of information: (a) information about Merchants and their personnel (the &quot;Merchant Data&quot;), for which Conspire is the data controller; and (b) information about Merchants&apos; end customers (the &quot;End-Customer Data&quot;), for which the Merchant is the data controller and Conspire acts as a data processor or service provider on the Merchant&apos;s behalf.</p>
@@ -118,6 +119,7 @@ export default function PrivacyPage() {
         <p>If you have questions, concerns, or requests regarding this Privacy Policy or our handling of personal data, please contact us at:</p>
         <p>Conspire LLC Attn: Privacy 7040 Weller St. San Diego, CA 92122 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }
