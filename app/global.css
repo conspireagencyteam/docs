@@ -39,7 +39,7 @@
   --bonde-radius: 16px;
   --bonde-page-max: 1440px;
   --bonde-page-pad: clamp(20px, 5vw, 64px);
-  --bonde-font: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --bonde-font: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
   font-family: var(--bonde-font);
   letter-spacing: -0.01em;
