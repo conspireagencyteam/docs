@@ -42,9 +42,9 @@ export async function generateMetadata(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
-  const isHome = !params.slug?.length;
+  const isDocsHome = !params.slug?.length;
   return {
-    title: isHome ? { absolute: site.homeTitle } : page.data.title,
+    title: isDocsHome ? { absolute: site.docsTitle } : page.data.title,
     description: page.data.description,
   };
 }

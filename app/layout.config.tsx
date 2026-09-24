@@ -19,11 +19,20 @@ export const baseOptions: BaseLayoutProps = {
         />
       </>
     ),
+    url: site.docsPath,
   },
   links: [
     {
       text: "Website",
-      url: site.websiteUrl,
+      url: "/",
+    },
+    {
+      text: "Pricing",
+      url: "/#pricing",
+    },
+    {
+      text: "Install on Shopify",
+      url: site.appStoreUrl,
       external: true,
     },
     {
