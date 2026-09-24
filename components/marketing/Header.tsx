@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { FEATURES } from "@/lib/features";
 import { site } from "@/lib/site";
 
@@ -24,6 +25,11 @@ function Arrow() {
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  // The drawer is position:fixed; #header-group animates with transform,
+  // which would turn that into absolute positioning inside the header. The
+  // theme's JS moved the drawer to <body> for the same reason — portal it.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const panelRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -64,6 +70,45 @@ export default function Header() {
   }, []);
 
   const close = () => setOpen(false);
+
+  const drawer = (
+          <div className="bonde-drawer" id="bonde-products-drawer" aria-hidden={!open} data-open={open ? "true" : undefined}>
+            <div className="bonde-drawer__backdrop" onClick={close} />
+            <aside ref={panelRef} className="bonde-drawer__panel" role="dialog" aria-modal="true" aria-label="Products" tabIndex={-1}>
+              <button type="button" className="bonde-drawer__close" aria-label="Close menu" onClick={close}>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </button>
+              <ul className="bonde-drawer__list">
+                {FEATURES.map((f) => (
+                  <li className="bonde-drawer__item" key={f.slug}>
+                    <Link href={`/${f.slug}`} className="bonde-drawer__link" onClick={close}>
+                      <span className="bonde-drawer__slash" aria-hidden="true">//</span>
+                      <span>{f.name}</span>
+                    </Link>
+                  </li>
+                ))}
+                <li className="bonde-drawer__item">
+                  <Link href="/#pricing" className="bonde-drawer__link" onClick={close}>
+                    <span className="bonde-drawer__slash" aria-hidden="true">//</span>
+                    <span>Pricing</span>
+                  </Link>
+                </li>
+              </ul>
+              <div className="bonde-drawer__ctas">
+                <Link href={site.docsPath} className="bonde-header__link" onClick={close}>
+                  <span>Documentation</span>
+                  <Arrow />
+                </Link>
+                <a href={site.appStoreUrl} className="bonde-header__install" target="_blank" rel="noopener">
+                  <span>Try Bonde For Free</span>
+                  <Arrow />
+                </a>
+              </div>
+            </aside>
+          </div>
+  );
 
   return (
     <div id="header-group" data-scroll-hidden={hidden ? "true" : undefined}>
@@ -106,42 +151,7 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="bonde-drawer" id="bonde-products-drawer" aria-hidden={!open} data-open={open ? "true" : undefined}>
-            <div className="bonde-drawer__backdrop" onClick={close} />
-            <aside ref={panelRef} className="bonde-drawer__panel" role="dialog" aria-modal="true" aria-label="Products" tabIndex={-1}>
-              <button type="button" className="bonde-drawer__close" aria-label="Close menu" onClick={close}>
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                </svg>
-              </button>
-              <ul className="bonde-drawer__list">
-                {FEATURES.map((f) => (
-                  <li className="bonde-drawer__item" key={f.slug}>
-                    <Link href={`/${f.slug}`} className="bonde-drawer__link" onClick={close}>
-                      <span className="bonde-drawer__slash" aria-hidden="true">//</span>
-                      <span>{f.name}</span>
-                    </Link>
-                  </li>
-                ))}
-                <li className="bonde-drawer__item">
-                  <Link href="/#pricing" className="bonde-drawer__link" onClick={close}>
-                    <span className="bonde-drawer__slash" aria-hidden="true">//</span>
-                    <span>Pricing</span>
-                  </Link>
-                </li>
-              </ul>
-              <div className="bonde-drawer__ctas">
-                <Link href={site.docsPath} className="bonde-header__link" onClick={close}>
-                  <span>Documentation</span>
-                  <Arrow />
-                </Link>
-                <a href={site.appStoreUrl} className="bonde-header__install" target="_blank" rel="noopener">
-                  <span>Try Bonde For Free</span>
-                  <Arrow />
-                </a>
-              </div>
-            </aside>
-          </div>
+          {mounted ? createPortal(drawer, document.body) : null}
         </section>
       </div>
     </div>
