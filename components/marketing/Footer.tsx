@@ -1,73 +1,77 @@
 import Link from "next/link";
 import { FEATURES } from "@/lib/features";
 import { site } from "@/lib/site";
-import { AppStoreBadge } from "./Cta";
 import NewsletterForm from "./NewsletterForm";
 
+function Arrow({ className }: { className: string }) {
+  return (
+    <span className={className} aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 6V8H14.59L5 17.59L6.41 19L16 9.41V18H18V6H6Z" fill="currentColor" />
+      </svg>
+    </span>
+  );
+}
+
+/** Footer ported from the live theme's `bonde-footer` section. */
 export default function Footer() {
   return (
-    <footer className="bonde-footer" role="contentinfo">
-      <div className="bonde-footer__top">
-        <Link href="/" className="bonde-footer__brand" aria-label="Bonde home">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo/bonde-white.svg" alt="Bonde" className="bonde-footer__brand-img" />
-        </Link>
-        <div className="bonde-footer__badges">
-          <a href={site.instagramUrl} aria-label="Instagram" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.8" />
-              <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
-              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
-            </svg>
+    <div className="bonde-section-wrapper">
+      <footer className="bonde-section color-scheme-2 bonde-footer" role="contentinfo" style={{ ["--bonde-logo-width" as string]: "140px" }}>
+        <div className="bonde-footer__top">
+          <div className="bonde-footer__brand">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/site/bonde-white.png" alt="Bonde" width={480} height={190} loading="lazy" className="bonde-footer__brand-img" />
+          </div>
+          <a href={site.appStoreUrl} className="bonde-footer__install" target="_blank" rel="noopener">
+            <span>INSTALL ON SHOPIFY</span>
+            <Arrow className="bonde-footer__install-arrow" />
           </a>
-          <AppStoreBadge href={site.appStoreUrl} light />
         </div>
-      </div>
 
-      <nav className="bonde-footer__links" aria-label="Footer">
-        <div>
-          <h4>Products</h4>
-          <ul>
+        <div className="bonde-footer__email">
+          <div className="bonde-footer__email-left">
+            <h3>Get Bonde product updates.</h3>
+            <p>One email per month at most. No spam. Unsubscribe anytime.</p>
+          </div>
+          <NewsletterForm />
+        </div>
+
+        <nav className="bonde-footer__nav" aria-label="Footer">
+          <div className="bonde-footer__nav-col">
+            <p className="bonde-footer__nav-title">Products</p>
             {FEATURES.map((f) => (
-              <li key={f.slug}>
-                <Link href={`/${f.slug}`}>{f.name}</Link>
-              </li>
+              <Link key={f.slug} href={`/${f.slug}`} className="bonde-footer__nav-link">
+                {f.name}
+              </Link>
             ))}
-          </ul>
-        </div>
-        <div>
-          <h4>Resources</h4>
-          <ul>
-            <li><Link href={site.docsPath}>Documentation</Link></li>
-            <li><Link href="/docs/getting-started/bundles">Getting started</Link></li>
-            <li><Link href="/#pricing">Pricing</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <ul>
-            <li><a href={site.agencyUrl} target="_blank" rel="noopener">Conspire</a></li>
-            <li><Link href="/privacy">Privacy policy</Link></li>
-            <li><Link href="/accessibility">Accessibility</Link></li>
-          </ul>
-        </div>
-      </nav>
+          </div>
+          <div className="bonde-footer__nav-col">
+            <p className="bonde-footer__nav-title">Resources</p>
+            <Link href={site.docsPath} className="bonde-footer__nav-link">Documentation</Link>
+            <Link href="/docs/getting-started/bundles" className="bonde-footer__nav-link">Getting started</Link>
+            <Link href="/#pricing" className="bonde-footer__nav-link">Pricing</Link>
+            <Link href="/contact" className="bonde-footer__nav-link">Contact</Link>
+          </div>
+          <div className="bonde-footer__nav-col">
+            <p className="bonde-footer__nav-title">Company</p>
+            <a href={site.agencyUrl} className="bonde-footer__nav-link" target="_blank" rel="noopener">Conspire</a>
+            <Link href="/privacy" className="bonde-footer__nav-link">Privacy policy</Link>
+            <Link href="/accessibility" className="bonde-footer__nav-link">Accessibility</Link>
+          </div>
+        </nav>
 
-      <div className="bonde-footer__email">
-        <div className="bonde-footer__email-left">
-          <h3>Join our email list</h3>
-          <p>Product updates and new features, a few times a year.</p>
-        </div>
-        <NewsletterForm />
-      </div>
-
-      <div className="bonde-footer__bottom">
-        <p>© {new Date().getFullYear()} Bonde™. Website by Conspire.</p>
-        <p>
-          <Link href="/privacy">Terms and policies</Link>
+        <div className="bonde-footer__divider" aria-hidden="true" />
+        <p className="bonde-footer__disclaimer">
+          Results are not guaranteed. Statistics shown reflect publicly available case studies and internal Bonde data; individual outcomes vary based on store, catalog, traffic, and execution.
         </p>
-      </div>
-    </footer>
+        <div className="bonde-footer__bottom">
+          <p>© {new Date().getFullYear()} Bonde™</p>
+          <p>
+            <Link href="/privacy">Terms &amp; Policies</Link>
+          </p>
+        </div>
+      </footer>
+    </div>
   );
 }

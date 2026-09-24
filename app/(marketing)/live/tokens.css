@@ -1,0 +1,92 @@
+/*
+ * Theme-level tokens the live getbonde.com stylesheets (landing.css,
+ * product.css — copied verbatim from the Shopify Horizon theme) expect
+ * from Shopify's base.css / compiled styles: the two colour schemes, the
+ * font-family variables and the self-hosted Manrope faces.
+ */
+
+@font-face { font-family: Manrope; font-weight: 500; font-style: normal; font-display: swap; src: url("/fonts/manrope_n5.woff2") format("woff2"); }
+@font-face { font-family: Manrope; font-weight: 600; font-style: normal; font-display: swap; src: url("/fonts/manrope_n6.woff2") format("woff2"); }
+@font-face { font-family: Manrope; font-weight: 700; font-style: normal; font-display: swap; src: url("/fonts/manrope_n7.woff2") format("woff2"); }
+@font-face { font-family: Manrope; font-weight: 800; font-style: normal; font-display: swap; src: url("/fonts/manrope_n8.woff2") format("woff2"); }
+
+.bonde-site {
+  --font-heading--family: Manrope, sans-serif;
+  --font-body--family: Manrope, sans-serif;
+  --font-subheading--family: Manrope, sans-serif;
+  --font-accent--family: Manrope, sans-serif;
+  --bonde-mono-font: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  font-family: var(--font-body--family);
+  background: #fffcf7;
+  color: rgb(34 34 34 / 0.8);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.bonde-site main { flex: 1; }
+
+/* Shopify colour schemes used by the live sections. */
+.color-scheme-1 {
+  --color-background: rgb(255 252 247 / 1);
+  --color-background-rgb: 255 252 247;
+  --color-foreground: rgb(34 34 34 / 0.8);
+  --color-foreground-rgb: 34 34 34;
+  --color-foreground-heading: rgb(34 34 34 / 1);
+  --color-foreground-heading-rgb: 34 34 34;
+  --color-primary: rgb(56 0 223 / 1);
+  --color-primary-rgb: 56 0 223;
+  --color-primary-hover: rgb(42 0 168 / 1);
+  --color-border: rgb(34 34 34 / 0.13);
+  --color-border-rgb: 34 34 34;
+  --color-shadow: rgb(34 34 34 / 1);
+  --color-primary-button-text: rgb(255 255 255 / 1);
+  --color-primary-button-background: rgb(56 0 223 / 1);
+  --color-primary-button-border: rgb(56 0 223 / 1);
+  --color-primary-button-hover-text: rgb(255 255 255 / 1);
+  --color-primary-button-hover-background: rgb(42 0 168 / 1);
+  --color-primary-button-hover-border: rgb(42 0 168 / 1);
+  --color-secondary-button-text: rgb(34 34 34 / 1);
+  --color-secondary-button-background: rgb(0 0 0 / 0);
+  --color-secondary-button-border: rgb(34 34 34 / 1);
+  --color-secondary-button-hover-text: rgb(255 255 255 / 1);
+  --color-secondary-button-hover-background: rgb(34 34 34 / 1);
+  --color-secondary-button-hover-border: rgb(34 34 34 / 1);
+  --color-input-background: rgb(255 255 255 / 1);
+  --color-input-text: rgb(34 34 34 / 1);
+  --color-input-border: rgb(34 34 34 / 0.25);
+}
+.color-scheme-2 {
+  --color-background: rgb(34 34 34 / 1);
+  --color-background-rgb: 34 34 34;
+  --color-foreground: rgb(255 255 255 / 0.8);
+  --color-foreground-rgb: 255 255 255;
+  --color-foreground-heading: rgb(255 255 255 / 1);
+  --color-foreground-heading-rgb: 255 255 255;
+  --color-primary: rgb(56 0 223 / 1);
+  --color-primary-rgb: 56 0 223;
+  --color-primary-hover: rgb(90 47 232 / 1);
+  --color-border: rgb(255 255 255 / 0.13);
+  --color-border-rgb: 255 255 255;
+  --color-shadow: rgb(0 0 0 / 1);
+  --color-primary-button-text: rgb(255 255 255 / 1);
+  --color-primary-button-background: rgb(56 0 223 / 1);
+  --color-primary-button-border: rgb(56 0 223 / 1);
+  --color-primary-button-hover-text: rgb(56 0 223 / 1);
+  --color-primary-button-hover-background: rgb(255 255 255 / 1);
+  --color-primary-button-hover-border: rgb(255 255 255 / 1);
+  --color-secondary-button-text: rgb(255 255 255 / 1);
+  --color-secondary-button-background: rgb(0 0 0 / 0);
+  --color-secondary-button-border: rgb(255 255 255 / 1);
+  --color-secondary-button-hover-text: rgb(34 34 34 / 1);
+  --color-secondary-button-hover-background: rgb(255 255 255 / 1);
+  --color-secondary-button-hover-border: rgb(255 255 255 / 1);
+  --color-input-background: rgb(255 255 255 / 1);
+  --color-input-text: rgb(34 34 34 / 1);
+  --color-input-border: rgb(255 255 255 / 0.25);
+}
+
+/* Skip link (not in the theme). */
+.bonde-skip { position: absolute; left: 16px; top: -100px; z-index: 200; background: #3800df; color: #fff; padding: 10px 14px; border-radius: 6px; font-family: var(--font-heading--family); }
+.bonde-skip:focus { top: 16px; }
