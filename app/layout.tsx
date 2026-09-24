@@ -1,17 +1,21 @@
 import "./global.css";
 import { RootProvider } from "fumadocs-ui/provider/next";
-import { DocsLayout } from "fumadocs-ui/layouts/docs";
-import { Inter } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { baseOptions } from "@/app/layout.config";
-import { source } from "@/lib/source";
 import { site } from "@/lib/site";
 import IntercomChat from "@/components/IntercomChat";
 
+// Inter for the docs (fumadocs default look), Manrope for the marketing pages
+// (the getbonde.com brand face, carried over from the Shopify theme).
 const sans = Inter({
   subsets: ["latin"],
   variable: "--font-sans-app",
+});
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -35,15 +39,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${sans.className}`}
+      className={`${sans.variable} ${manrope.variable} ${sans.className}`}
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col">
         <RootProvider>
-          <DocsLayout tree={source.pageTree} {...baseOptions}>
-            {children}
-            <IntercomChat />
-          </DocsLayout>
+          {children}
+          <IntercomChat />
         </RootProvider>
       </body>
     </html>
