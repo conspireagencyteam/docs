@@ -9,6 +9,7 @@
     "customer-portal",
     "managing-contracts",
     "bundle-subscriptions",
-    "order-consolidation"
+    "order-consolidation",
+    "migrations"
   ]
 }
