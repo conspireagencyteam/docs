@@ -1,0 +1,83 @@
+---
+title: "Migrate from another subscription app"
+description: "Move your subscribers from Recharge, Skio, Appstle or another app into Bonde without asking them to sign up again."
+---
+
+Bonde can import your existing subscribers so they keep their products, schedule and next charge date. Recharge, Skio and Appstle connect directly with an API key. Other apps import from a CSV file.
+
+<Note>
+Subscriptions are a Bonde Pro feature. You can run a migration during the 14-day free trial.
+</Note>
+
+## How it works
+
+Shopify doesn't let a subscription move from one app to another. Bonde creates a new subscription for each subscriber with the same products, prices, schedule, shipping address and next charge date. Your old app keeps its own copy, so **you need to stop billing in your old app** before Bonde's first charge.
+
+Nothing changes in your old app during the import. Bonde only reads from it.
+
+## What carries over
+
+| | Recharge | Skio | Appstle | CSV |
+|---|---|---|---|---|
+| Active subscriptions | Yes | Yes | Yes | Yes |
+| Paused subscriptions | Not in Recharge's API | Yes | Yes | Yes |
+| Products, quantities, prices | Yes | Yes (see below) | Yes | Yes |
+| Schedule and next charge date | Yes | Yes | Yes | Yes |
+| Shipping address | Yes | Yes | Yes | Yes |
+| Saved card | Yes, on Shopify Checkout. Stripe, Braintree and Authorize.net cards too, if that gateway is connected to Shopify | Yes | Yes | Stripe, Braintree, Authorize.net and PayPal, with processor tokens |
+
+Cancelled subscriptions are never imported.
+
+Subscribers whose card can't be carried over still get their subscription. After the migration you can send them an email asking them to add a payment method.
+
+## Before you start
+
+<Steps>
+  <Step title="Set up your subscription plans">
+    Create selling plans in Bonde for the products you sell on subscription so new customers can subscribe. See [Configuration](/docs/subscriptions/configuration).
+  </Step>
+  <Step title="Get an API key from your old app">
+    - **Recharge**: go to **Tools & apps > API tokens** and create an Admin token with read access to subscriptions, customers, addresses and payment methods. If you've already connected Recharge to Bonde, you can reuse that connection.
+    - **Skio**: go to **API & Integrations > API** and generate a key.
+    - **Appstle**: go to **Settings > API Key Management** and create a key. API access requires an Appstle plan that includes it.
+  </Step>
+</Steps>
+
+## Run the migration
+
+<Steps>
+  <Step title="Start a migration">
+    In Bonde, open **Subscriptions** and click **Import subscribers**, then **New Migration**. Choose your old app.
+  </Step>
+  <Step title="Connect your old app">
+    Paste the API key. Bonde uses it once to read your subscriptions and then deletes it.
+
+    - **Shipping price per renewal**: used only when your old app doesn't say what a subscription pays for shipping. Leave it blank for free shipping.
+    - **Skio only**: enter your subscribe-and-save discount. Skio's API reports product prices before that discount, and Bonde applies it so your subscribers' prices don't change.
+  </Step>
+  <Step title="Check products">
+    Bonde matches each product to your Shopify catalog. Map anything it can't match. A subscription with an unmatched product isn't imported, so no product is ever silently dropped.
+  </Step>
+  <Step title="Review">
+    The review screen shows the first renewal date Bonde will charge, how many subscribers keep their saved card, and how many would renew with free shipping.
+  </Step>
+  <Step title="Stop billing in your old app">
+    Do this before the first renewal date on the review screen:
+
+    - **Recharge**: cancel your Recharge account under **Settings > Billing & plan**. Uninstalling Recharge alone doesn't stop Recharge charges.
+    - **Skio or Appstle**: cancel or pause billing in the app, or uninstall it. Shopify cancels an uninstalled app's subscriptions 48 hours after uninstall.
+
+    Then tick the confirmation box and click **Start Migration**.
+  </Step>
+</Steps>
+
+<Warning>
+If both apps are billing at the same time, your subscribers get charged twice. Stop billing in the old app first.
+</Warning>
+
+## After the migration
+
+- Subscribers don't get a "welcome" email and don't earn sign-up rewards, because they aren't new.
+- Subscriptions due to renew within 24 hours of the import are held back so your old app can process that charge. Import them again afterwards.
+- To send subscribers without a saved card a request to add one, open the migration and click **Send Payment Notifications**.
+- You can roll a migration back, which cancels the subscriptions it created in Bonde.

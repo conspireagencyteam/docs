@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { source } from "@/lib/source";
 import { site } from "@/lib/site";
 import { FEATURES } from "@/lib/features";
+import { COMPETITORS } from "@/lib/compare";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const marketing: MetadataRoute.Sitemap = [
@@ -10,6 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${site.url}/${f.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.9,
+    })),
+    { url: `${site.url}/compare`, changeFrequency: "monthly", priority: 0.8 },
+    ...COMPETITORS.map((c) => ({
+      url: `${site.url}/compare/${c.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     })),
     { url: `${site.url}/contact`, changeFrequency: "yearly", priority: 0.4 },
     { url: `${site.url}/privacy`, changeFrequency: "yearly", priority: 0.2 },

@@ -51,6 +51,7 @@ export default function Footer() {
             <Link href={site.docsPath} className="bonde-footer__nav-link">Documentation</Link>
             <Link href="/docs/getting-started/bundles" className="bonde-footer__nav-link">Getting started</Link>
             <Link href="/#pricing" className="bonde-footer__nav-link">Pricing</Link>
+            <Link href="/compare" className="bonde-footer__nav-link">Compare</Link>
             <Link href="/contact" className="bonde-footer__nav-link">Contact</Link>
           </div>
           <div className="bonde-footer__nav-col">
