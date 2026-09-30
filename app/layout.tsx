@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { site } from "@/lib/site";
 import IntercomChat from "@/components/IntercomChat";
+import { MetaPixelConsent } from "@/components/MetaPixelConsent";
 
 // Inter for the docs (fumadocs default look). Manrope — the getbonde.com
 // brand face carried over from the Shopify theme — is loaded from Google
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <RootProvider>
           {children}
           <IntercomChat />
+          <MetaPixelConsent />
         </RootProvider>
       </body>
     </html>

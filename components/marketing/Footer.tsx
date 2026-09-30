@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookieSettingsLink } from "@/components/MetaPixelConsent";
 import { FEATURES } from "@/lib/features";
 import { site } from "@/lib/site";
 import NewsletterForm from "./NewsletterForm";
@@ -57,6 +58,7 @@ export default function Footer() {
             <p className="bonde-footer__nav-title">Company</p>
             <a href={site.agencyUrl} className="bonde-footer__nav-link" target="_blank" rel="noopener">Conspire</a>
             <Link href="/privacy" className="bonde-footer__nav-link">Privacy policy</Link>
+            <CookieSettingsLink className="bonde-footer__nav-link" />
             <Link href="/accessibility" className="bonde-footer__nav-link">Accessibility</Link>
           </div>
         </nav>
