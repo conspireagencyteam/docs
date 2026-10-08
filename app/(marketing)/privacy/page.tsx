@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <p>If you are an end customer of a Merchant who uses Bonde and have questions about how your personal information is used, please contact the Merchant directly. The Merchant&apos;s own privacy policy governs the collection and use of your personal information.</p>
         <h2>2. Who We Are</h2>
         <p>Bonde is operated by:</p>
-        <p>Conspire LLC 7040 Weller St. San Diego, CA 92122 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
+        <p>Conspire LLC 550 West B St, Floor 4 #0318, San Diego, CA 92101 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
         <h2>3. Information We Collect</h2>
         <h3>3.1 Merchant Data</h3>
         <p>When a Merchant installs and uses Bonde, we collect:</p>
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
         <p>We may update this Privacy Policy from time to time to reflect changes in our practices, the App, or applicable law. When we make material changes, we will update the &quot;Effective date&quot; at the top of this Policy and, where appropriate, provide additional notice to Merchants through the App or by email. Your continued use of the App after the updated Policy takes effect constitutes acceptance of the changes.</p>
         <h2>15. Contact Us</h2>
         <p>If you have questions, concerns, or requests regarding this Privacy Policy or our handling of personal data, please contact us at:</p>
-        <p>Conspire LLC Attn: Privacy 7040 Weller St. San Diego, CA 92122 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
+        <p>Conspire LLC Attn: Privacy 550 West B St, Floor 4 #0318, San Diego, CA 92101 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
       </div>
       </section>
     </div>
