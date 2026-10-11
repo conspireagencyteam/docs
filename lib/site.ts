@@ -18,7 +18,7 @@ export const site = {
   docsPath: "/docs",
   appStoreUrl: "https://apps.shopify.com/bonde-subscription-upsells",
   supportEmail: "support@conspireagency.com",
-  instagramUrl: "https://instagram.com/conspire.agency",
+  instagramUrl: "https://instagram.com/getbonde",
   agencyUrl: "https://conspireagency.com",
   /** Public Pro price, USD per 30 days. Keep in step with the App Store plan. */
   proPrice: 15,
