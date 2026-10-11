@@ -65,7 +65,7 @@ export default function Footer() {
 
         <div className="bonde-footer__divider" aria-hidden="true" />
         <p className="bonde-footer__disclaimer">
-          Results are not guaranteed. Statistics shown reflect publicly available case studies and internal Bonde data; individual outcomes vary based on store, catalog, traffic, and execution.
+          Results vary by store, catalog, traffic and execution. Pro is $15 per 30 days, billed through Shopify; no transaction fees, no revenue caps.
         </p>
         <div className="bonde-footer__bottom">
           <p>© {new Date().getFullYear()} Bonde™</p>
