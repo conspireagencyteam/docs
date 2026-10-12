@@ -3,6 +3,7 @@ import "./live/landing.css";
 import "./live/product.css";
 import "./live/extras.css";
 import "./live/demos.css";
+import "./live/demos-subs.css";
 import type { ReactNode } from "react";
 import Header from "@/components/marketing/Header";
 import Footer from "@/components/marketing/Footer";
