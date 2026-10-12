@@ -242,3 +242,12 @@ bonde-demo .bd-stage img { display: block; max-width: none; position: static; in
 @media (prefers-reduced-motion: reduce) {
   .bd-stage *, .bd-stage *::before, .bd-stage *::after { transition: none !important; animation: none !important; }
 }
+
+/* Cart demo's product page: the optimized box, static, with one-time purchase selected */
+.kp--cart .kp-info { gap: 7px; }
+.kp--cart .kp-title { font-size: 22px; }
+.sb--static .sb-opt { position: static; opacity: 1; transform: none; filter: none; }
+.sb--static .sb-flag { transform: none; opacity: 1; transition: none; }
+.kp--cart .sb-perks span, .kp--cart .sb-every, .kp--cart .sb-plan { animation: none !important; }
+.sb-card:not(.is-on) .sb-plan.is-on { background: #e4ddd2; color: inherit; }
+.sb-card:not(.is-on) { box-shadow: none; }

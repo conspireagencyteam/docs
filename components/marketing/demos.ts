@@ -133,6 +133,26 @@ const keptImage = `
     <span class="kp-dots">1 / 4</span>
   </div>`;
 
+const PLANS = [
+  { label: "1 month", off: 15, perks: "save 15% + free shipping" },
+  { label: "2 months", off: 10, perks: "save 10% + free shipping" },
+  { label: "3 months", off: 5, perks: "save 5%" },
+];
+const BASE = 15;
+
+/** The CRO-optimized subscribe box. With oneTime, the one-time card is the selected one. */
+const optBox = (oneTime: boolean) => `
+          <div class="sb-opt" data-opt>
+            <div class="sb-card${oneTime ? "" : " is-on"}">
+              <span class="sb-flag">Free shipping + save up to 15%</span>
+              <div class="sb-head"><span class="sb-radio"></span><span class="sb-h">Subscribe &amp; save</span><span class="sb-p"><s>$15.00</s> <b data-sub-price>$12.75</b></span></div>
+              <div class="sb-perks"><span>${CHECK}<i data-sub-save>Save 15%</i></span><span>${CHECK}Free shipping</span><span>${CHECK}Cancel anytime</span></div>
+              <p class="sb-every">Deliver every:</p>
+              ${PLANS.map((p, i) => `<div class="sb-plan${i === 0 ? " is-on" : ""}" data-plan="${i}"><b>${p.label}</b><span>${p.perks}</span></div>`).join("")}
+            </div>
+            <div class="sb-card sb-card--one${oneTime ? " is-on" : ""}"><div class="sb-head"><span class="sb-radio"></span><span class="sb-h">One-time purchase</span><span class="sb-p"><b>$15.00</b></span></div></div>
+          </div>`;
+
 /* ------------------------------------------------------------------ */
 /* 1. Sidebar cart: switch to subscribe-and-save, add a cross-sell     */
 /* ------------------------------------------------------------------ */
@@ -141,16 +161,14 @@ const FREE_SHIP = 30;
 
 const cart: Demo = {
   html: `
-  <div class="kp">
+  <div class="kp kp--cart is-opt">
     ${keptHeader}
     <div class="kp-pdp">
       ${keptImage}
       <div class="kp-info">
-        <p class="kp-eyebrow">Moisturizer</p>
         <h3 class="kp-title">Hydrate Face Cream</h3>
         <p class="kp-stars">${STAR.repeat(5)}<span>128 reviews</span></p>
-        <p class="kp-price">$15.00</p>
-        <p class="kp-desc">A rich daily cream with aloe vera and vitamin B5 for soft, healthy-looking skin.</p>
+        <div class="sb sb--static">${optBox(true)}</div>
         <div class="kp-qtyrow"><span class="kp-qty">− 1 +</span><button type="button" class="kp-btn" data-atc>Add to cart</button></div>
       </div>
     </div>
@@ -268,12 +286,6 @@ function setShip(root: HTMLElement, subtotal: number) {
 /* 2. Subscribe box: standard buy box morphs into the optimized one    */
 /* ------------------------------------------------------------------ */
 
-const PLANS = [
-  { label: "1 month", off: 15, perks: "save 15% + free shipping" },
-  { label: "2 months", off: 10, perks: "save 10% + free shipping" },
-  { label: "3 months", off: 5, perks: "save 5%" },
-];
-const BASE = 15;
 
 const subscribe: Demo = {
   html: `
@@ -299,16 +311,7 @@ const subscribe: Demo = {
               <div class="sb-col sb-col--end"><span class="sb-select">Ships every 30 days ${CHEVRON}</span><b>$12.75 USD</b></div>
             </div>
           </div>
-          <div class="sb-opt" data-opt>
-            <div class="sb-card is-on">
-              <span class="sb-flag">Free shipping + save up to 15%</span>
-              <div class="sb-head"><span class="sb-radio"></span><span class="sb-h">Subscribe &amp; save</span><span class="sb-p"><s>$15.00</s> <b data-sub-price>$12.75</b></span></div>
-              <div class="sb-perks"><span>${CHECK}<i data-sub-save>Save 15%</i></span><span>${CHECK}Free shipping</span><span>${CHECK}Cancel anytime</span></div>
-              <p class="sb-every">Deliver every:</p>
-              ${PLANS.map((p, i) => `<div class="sb-plan${i === 0 ? " is-on" : ""}" data-plan="${i}"><b>${p.label}</b><span>${p.perks}</span></div>`).join("")}
-            </div>
-            <div class="sb-card sb-card--one"><div class="sb-head"><span class="sb-radio"></span><span class="sb-h">One-time purchase</span><span class="sb-p"><b>$15.00</b></span></div></div>
-          </div>
+${optBox(false)}
         </div>
         <div class="kp-qtyrow"><span class="kp-qty">− 1 +</span><button type="button" class="kp-btn" data-atc><span class="a" data-atc-text>Add to cart</span><span class="b">${CHECK} Added</span></button></div>
       </div>
