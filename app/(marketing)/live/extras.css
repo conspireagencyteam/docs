@@ -65,3 +65,4 @@
 .bx-hero-list { list-style: none; margin: -8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; max-width: 416px; }
 .bx-hero-list li { display: flex; align-items: center; gap: 12px; font-size: 18px; line-height: 1.35; letter-spacing: -0.01em; color: var(--color-foreground-heading, #222); }
 .bx-hero-list svg { flex: 0 0 26px; width: 26px; height: 26px; padding: 5px; border-radius: 999px; background: var(--bonde-accent); color: #fff; }
+.bx-hero-copy { display: flex; flex-direction: column; gap: 16px; max-width: 416px; }
