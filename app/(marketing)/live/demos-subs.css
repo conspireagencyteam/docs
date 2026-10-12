@@ -142,18 +142,19 @@
 .bs-group { margin: 12px 14px 0; border: 1.5px solid var(--tc-yellow); border-radius: 8px; overflow: hidden; }
 .bs-gh { display: flex; align-items: center; gap: 9px; padding: 9px 10px; background: #fffaf0; font-size: 10.5px; }
 .bs-gh div { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.bs-gh small { display: flex; align-items: center; gap: 4px; font-size: 9.5px; color: #8a5a00; font-weight: 600; }
+.bs-gh small { display: flex; align-items: center; gap: 4px; font-size: 9.5px; color: #8a5a00; font-weight: 600; white-space: nowrap; }
+.bs-gh small span { display: inline; }
 .bs-gh small svg { width: 11px; height: 11px; }
-.bs-stack { position: relative; width: 44px; height: 34px; flex: none; }
-.bs-stack img { position: absolute; top: 2px; width: 26px; height: 30px; object-fit: contain; background: #fff; border: 1px solid #eee; border-radius: 4px; }
-.bs-stack img:nth-child(1) { left: 0; }
-.bs-stack img:nth-child(2) { left: 6px; }
-.bs-stack img:nth-child(3) { left: 12px; }
-.bs-stack img:nth-child(4) { left: 18px; }
+.bs-stack { position: relative; width: 64px; height: 36px; flex: none; }
+bonde-demo .bd-stage .bs-stack img { position: absolute; top: 2px; width: 28px; height: 32px; object-fit: contain; padding: 2px; background: #fff; border: 1px solid #e8e2d2; border-radius: 5px; box-shadow: 2px 0 4px rgba(0, 0, 0, 0.12); }
+bonde-demo .bd-stage .bs-stack img:nth-child(1) { left: 0; }
+bonde-demo .bd-stage .bs-stack img:nth-child(2) { left: 12px; }
+bonde-demo .bd-stage .bs-stack img:nth-child(3) { left: 24px; }
+bonde-demo .bd-stage .bs-stack img:nth-child(4) { left: 36px; }
 .bs-chev svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
 .bs.is-open .bs-chev svg { transform: rotate(180deg); }
 .bs-gitems { max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 4px; padding: 0 10px; transition: max-height 0.45s ease, padding 0.45s ease; }
-.bs.is-open .bs-gitems { max-height: 140px; padding: 8px 10px 10px; }
+.bs.is-open .bs-gitems { max-height: 180px; padding: 8px 10px 10px; }
 .bs-cart .kc-foot { border-color: var(--tc-line); }
 .bs-co { display: flex; align-items: center; justify-content: center; height: 32px; border-radius: 5px; background: #111; color: #fff; font-size: 10.5px; font-weight: 700; text-transform: uppercase; }
 
