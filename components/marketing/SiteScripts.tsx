@@ -10,10 +10,16 @@ import { usePathname } from "next/navigation";
  *  - steps: dashed connector line sizing + is-active on scroll-in
  *  - testimonials: prev/next arrows scroll the viewport
  *  - product "problems" cards: reveal on scroll-in (.bonde-bproblem)
+ *  - <bonde-demo> animated product demos (registered once, see ./demos.ts)
  *  - hero video: clicking the poster ([data-bx-video]) swaps in the YouTube player
  */
 export default function SiteScripts() {
   const pathname = usePathname();
+
+  // Browser-only: the module defines a class extending HTMLElement.
+  useEffect(() => {
+    import("./demos").then((m) => m.defineBondeDemos());
+  }, []);
 
   useEffect(() => {
     const cleanups: Array<() => void> = [];
