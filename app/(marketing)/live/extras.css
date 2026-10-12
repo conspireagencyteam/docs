@@ -66,3 +66,8 @@
 .bx-hero-list li { display: flex; align-items: center; gap: 12px; font-size: 18px; line-height: 1.35; letter-spacing: -0.01em; color: var(--color-foreground-heading, #222); }
 .bx-hero-list svg { flex: 0 0 26px; width: 26px; height: 26px; padding: 5px; border-radius: 999px; background: var(--bonde-accent); color: #fff; }
 .bx-hero-copy { display: flex; flex-direction: column; gap: 16px; max-width: 416px; }
+/* Hero primary CTA: filled like the header's "Try Bonde for free" */
+.bonde-section .bx-cta-primary { align-self: flex-start; background: var(--bonde-accent); color: #fff; padding: 12px 16px 12px 22px; line-height: 1.2; transition: background 0.15s ease; }
+.bonde-section .bx-cta-primary:hover { background: var(--bonde-accent-hover); color: #fff; opacity: 1; }
+.bonde-section .bx-cta-primary .bonde-cta__arrow { color: #fff; }
+.bonde-section .bx-cta-primary:focus-visible { outline: 2px solid var(--bonde-accent); outline-offset: 3px; }
