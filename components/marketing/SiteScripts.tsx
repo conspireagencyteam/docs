@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
  *  - steps: dashed connector line sizing + is-active on scroll-in
  *  - testimonials: prev/next arrows scroll the viewport
  *  - product "problems" cards: reveal on scroll-in (.bonde-bproblem)
- *  - hero video: [data-bx-video-open] opens the YouTube player dialog, closing stops it
+ *  - hero video: clicking the poster ([data-bx-video]) swaps in the YouTube player
  */
 export default function SiteScripts() {
   const pathname = usePathname();
@@ -153,40 +153,22 @@ export default function SiteScripts() {
       }
     }
 
-    // ---- hero video dialog ---------------------------------------------
-    const dialog = document.querySelector<HTMLDialogElement>("[data-bx-video-dialog]");
-    if (dialog && typeof dialog.showModal === "function") {
-      // YouTube iframe (the App Store listing video) is created on open and removed on close, so nothing loads until asked and closing stops playback
-      const frame = dialog.querySelector<HTMLElement>("[data-bx-video-src]");
-      const open = () => {
-        if (frame && !frame.firstChild) {
-          const iframe = document.createElement("iframe");
-          iframe.src = frame.dataset.bxVideoSrc || "";
-          iframe.title = "Bonde: Shopify subscription app with no transaction fees";
-          iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
-          iframe.allowFullscreen = true;
-          frame.appendChild(iframe);
-        }
-        dialog.showModal();
+    // ---- hero video: swap the poster for the YouTube player on click ----
+    document.querySelectorAll<HTMLElement>("[data-bx-video]").forEach((wrap) => {
+      const btn = wrap.querySelector<HTMLButtonElement>("[data-bx-video-play]");
+      if (!btn) return;
+      const play = () => {
+        const iframe = document.createElement("iframe");
+        iframe.src = wrap.dataset.bxVideoSrc || "";
+        iframe.title = "Bonde: Shopify subscription app with no transaction fees";
+        iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        iframe.allowFullscreen = true;
+        wrap.replaceChildren(iframe);
+        wrap.classList.add("is-playing");
       };
-      const close = () => dialog.close();
-      const onClose = () => frame?.replaceChildren();
-      const onBackdrop = (e: MouseEvent) => {
-        if (e.target === dialog) close();
-      };
-      const openers = Array.from(document.querySelectorAll<HTMLElement>("[data-bx-video-open]"));
-      const closer = dialog.querySelector<HTMLElement>("[data-bx-video-close]");
-      openers.forEach((el) => el.addEventListener("click", open));
-      closer?.addEventListener("click", close);
-      dialog.addEventListener("close", onClose);
-      dialog.addEventListener("click", onBackdrop);
-      cleanups.push(() => {
-        openers.forEach((el) => el.removeEventListener("click", open));
-        closer?.removeEventListener("click", close);
-        dialog.removeEventListener("close", onClose);
-        dialog.removeEventListener("click", onBackdrop);
-      });
-    }
+      btn.addEventListener("click", play);
+      cleanups.push(() => btn.removeEventListener("click", play));
+    });
 
     return () => cleanups.forEach((fn) => fn());
   }, [pathname]);
