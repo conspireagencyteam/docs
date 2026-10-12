@@ -1,5 +1,5 @@
 /**
- * Animated product demos: <bonde-demo kind="cart|subscribe|bundle|loyalty|tracking" label="…">.
+ * Animated product demos: <bonde-demo kind="cart|subscribe|bundle|loyalty|tracking|upsells" label="…">.
  *
  * Each demo is a recreated storefront surface (Kept skincare for the cart and
  * the subscribe box, Tillamook Country Smoker for build-a-box) drawn at a fixed
@@ -859,10 +859,173 @@ function setStep(root: HTMLElement, n: number) {
 }
 
 /* ------------------------------------------------------------------ */
+/* 6. Upsells: one order through all five surfaces                     */
+/* ------------------------------------------------------------------ */
+
+const FUNNEL = [
+  { tag: "Product page", url: "kept.com/products/hydrate-face-cream", add: 20.89 },
+  { tag: "Sidebar cart", url: "kept.com", add: 21.84 },
+  { tag: "Checkout", url: "checkout.kept.com", add: 9 },
+  { tag: "Post-purchase", url: "checkout.kept.com/thank-you", add: 14.4 },
+  { tag: "Tracking page", url: "kept.com/apps/track/165926", add: 18.69 },
+];
+const BASE_ORDER = 15;
+
+const offerRow = (img: string, name: string, price: string, note: string, attr: string) => `
+  <div class="up-offer"><span class="kc-thumb"><img src="${IMG}/${img}" alt=""></span>
+    <div class="kc-main"><p class="kc-name">${name}</p><p class="kc-deal">${price}</p><p class="kc-note">${note}</p></div>
+    <button type="button" class="kc-add" ${attr}><span class="a">Add</span><span class="b">${CHECK}</span></button></div>`;
+
+/** The five Kept surfaces the upsells demo walks through (defined before `upsells` uses them). */
+const SCREENS = [
+  // 0 product page: "Pairs well with" widget under the buy button
+  `<div class="us-pdp">
+     <div class="us-media"><img src="${IMG}/kept-jar.png" alt=""></div>
+     <div class="us-info">
+       <h3 class="us-title">Hydrate Face Cream</h3>
+       <p class="us-price">$15.00</p>
+       <span class="kp-btn us-atc">${CHECK} Added to cart</span>
+       <p class="us-label">Pairs well with</p>
+       ${offerRow("kept-oil.png", "Renew Skin Serum", "<b>$20.89</b> <s>$21.99</s>", "Save 5% when you bundle", "data-u0")}
+     </div>
+   </div>`,
+  // 1 sidebar cart
+  `<div class="us-cart">
+     <p class="us-h">Your cart <span class="us-count"></span></p>
+     <div class="us-line"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><span>Hydrate Face Cream</span><b>$15.00</b></div>
+     <div class="us-line"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span>Renew Skin Serum</span><b>$20.89</b></div>
+     <div class="us-line us-line--new"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span>Purify Face Oil</span><b>$21.84</b></div>
+     <div class="us-recs"><p class="kc-label">Customers also bought</p>
+       ${offerRow("kept-oil.png", "Purify Face Oil", "<b>$21.84</b> <s>$22.99</s>", "Save 5% with Hydrate", "data-u1")}
+     </div>
+     <div class="us-cart-foot"><p><span>Subtotal</span><b><i class="us-st-a">$35.89</i><i class="us-st-b">$57.73</i></b></p><span class="kp-btn kp-btn--block">Checkout</span></div>
+   </div>`,
+  // 2 checkout with an in-checkout offer
+  `<div class="us-co">
+     <div class="us-co-l">
+       <p class="us-h">Contact</p><span class="us-field">maya@example.com</span>
+       <p class="us-h">Delivery</p><span class="us-field">1420 Pine St, Spokane, WA</span>
+       <p class="us-h">Payment</p><span class="us-field">•••• 4242</span>
+       <span class="kp-btn us-pay" data-pay2>Pay now</span>
+     </div>
+     <div class="us-co-r">
+       <div class="us-sum"><span>Hydrate Face Cream</span><b>$15.00</b></div>
+       <div class="us-sum"><span>Renew Skin Serum</span><b>$20.89</b></div>
+       <div class="us-sum"><span>Purify Face Oil</span><b>$21.84</b></div>
+       <div class="us-sum us-sum--new"><span>Hydrate · Travel 1 oz</span><b>$9.00</b></div>
+       <p class="us-label">Add before you pay</p>
+       ${offerRow("kept-jar.png", "Hydrate · Travel 1 oz", "<b>$9.00</b>", "For your gym bag", "data-u2")}
+     </div>
+   </div>`,
+  // 3 post-purchase one-click
+  `<div class="us-pp">
+     <p class="us-pp-k">${CHECK} Order confirmed</p>
+     <h3 class="us-pp-h">Add this to your order with one click</h3>
+     <div class="us-pp-card">
+       <span class="us-pp-img"><img src="${IMG}/kept-oil.png" alt=""></span>
+       <div>
+         <p class="us-pp-name">Restore Eye Gel</p>
+         <p class="us-pp-price"><s>$18.00</s> <b>$14.40</b> <span>20% off, today only</span></p>
+         <p class="us-pp-note">No need to re-enter your payment details.</p>
+         <div class="us-pp-btns"><span class="kp-btn us-pp-pay" data-u3><span class="a">Pay now · $14.40</span><span class="b">${CHECK} Added to your order</span></span><span class="us-pp-no">No thanks</span></div>
+       </div>
+     </div>
+   </div>`,
+  // 4 tracking page shop-again
+  `<div class="us-tk">
+     <div class="us-tk-top"><div><p class="tk-eta-k">Estimated delivery</p><p class="tk-eta-v">Today, by 8 PM</p></div><span class="tk-pill">Out for delivery</span></div>
+     <p class="us-label">In this shipment</p>
+     <div class="us-tk-items"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><small>5 items · $81.13</small></div>
+     <p class="us-label">Shop again</p>
+     <div class="tk-code"><span>15% off with <b>THANKS15</b></span><span class="tk-clock">23:59:12</span></div>
+     ${offerRow("kept-oil.png", "Renew Skin Serum", "<b>$18.69</b> <s>$21.99</s>", "Code applied at checkout", "data-u4")}
+   </div>`,
+];
+
+const upsells: Demo = {
+  html: `
+  <div class="up" data-up>
+    <aside class="up-rail">
+      <p class="up-k">Order value</p>
+      <p class="up-total" data-up-total>$15.00</p>
+      <p class="up-base">Started at $15.00</p>
+      <ol class="up-steps">
+        ${FUNNEL.map((f, i) => `<li data-up-step="${i}"><span class="up-n"><b>${i + 1}</b>${CHECK}</span><span class="up-tag">${f.tag}</span><span class="up-plus">+${money(f.add)}</span></li>`).join("")}
+      </ol>
+      <p class="up-repeat" data-up-repeat>+ $18.69 repeat order from the tracking page</p>
+    </aside>
+    <div class="up-view">
+      ${FUNNEL.map((f, i) => `<div class="up-screen" data-up-screen="${i}"><div class="up-url"><i></i><i></i><i></i><span>${f.url}</span></div><div class="up-body up-body--${i}">${SCREENS[i]}</div></div>`).join("")}
+    </div>
+  </div>`,
+
+  reset(root) {
+    const up = q(root, "[data-up]");
+    up.className = "up";
+    up.removeAttribute("data-at");
+    qa(root, "[data-up-step]").forEach((el) => el.classList.remove("is-now", "is-done"));
+    qa(root, "[data-up-screen]").forEach((el) => el.classList.remove("is-on", "is-past"));
+    q(root, "[data-up-total]").textContent = money(BASE_ORDER);
+  },
+
+  async play(root, run) {
+    const up = q(root, "[data-up]");
+    let total = BASE_ORDER;
+    const show = async (i: number) => {
+      qa(root, "[data-up-screen]").forEach((el, j) => {
+        el.classList.toggle("is-on", j === i);
+        el.classList.toggle("is-past", j < i);
+      });
+      qa(root, "[data-up-step]").forEach((el, j) => el.classList.toggle("is-now", j === i));
+      await run.wait(750);
+    };
+    const accept = async (i: number, btn: string, flag: string) => {
+      const scr = q(root, `[data-up-screen="${i}"]`);
+      await run.click(q(scr, btn));
+      up.classList.add(flag);
+      const step = q(root, `[data-up-step="${i}"]`);
+      fly(run, q(scr, btn), i === 4 ? q(root, "[data-up-repeat]") : q(root, "[data-up-total]"), `+${money(FUNNEL[i].add)}`);
+      await run.wait(600);
+      step.classList.add("is-done");
+      if (i < 4) {
+        run.tween(q(root, "[data-up-total]"), total, total + FUNNEL[i].add, 500);
+        total += FUNNEL[i].add;
+      } else up.classList.add("is-repeat");
+      await run.wait(650);
+    };
+
+    run.hideCursor();
+    run.park(470, 470, 0);
+    await show(0);
+    await accept(0, "[data-u0]", "u0");
+    await show(1);
+    await accept(1, "[data-u1]", "u1");
+    await show(2);
+    await accept(2, "[data-u2]", "u2");
+    await run.click(q(root, "[data-pay2]"));
+    await run.wait(300);
+    await show(3);
+    await accept(3, "[data-u3]", "u3");
+    await show(4);
+    await accept(4, "[data-u4]", "u4");
+    run.hideCursor();
+    await run.wait(2300);
+  },
+
+  still(root) {
+    const up = q(root, "[data-up]");
+    up.classList.add("u0", "u1", "u2", "u3", "u4", "is-repeat");
+    qa(root, "[data-up-step]").forEach((el) => el.classList.add("is-done"));
+    q(root, '[data-up-screen="4"]').classList.add("is-on");
+    q(root, "[data-up-total]").textContent = money(81.13);
+  },
+};
+
+/* ------------------------------------------------------------------ */
 /* Custom element                                                      */
 /* ------------------------------------------------------------------ */
 
-const DEMOS: Record<string, Demo> = { cart, subscribe, bundle, loyalty, tracking };
+const DEMOS: Record<string, Demo> = { cart, subscribe, bundle, loyalty, tracking, upsells };
 
 class BondeDemo extends HTMLElement {
   private run?: Runner;
