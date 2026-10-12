@@ -1,10 +1,10 @@
 /**
- * Animated product demos: <bonde-demo kind="cart|subscribe|bundle" label="…">.
+ * Animated product demos: <bonde-demo kind="cart|subscribe|bundle|loyalty|tracking" label="…">.
  *
  * Each demo is a recreated storefront surface (Kept skincare for the cart and
  * the subscribe box, Tillamook Country Smoker for build-a-box) drawn at a fixed
  * design size and scaled to whatever box it sits in, with a fake cursor that
- * walks through the feature on a loop. It is a custom element so the imported
+ * walks through the feature on a loop (Kept for loyalty and tracking too). It is a custom element so the imported
  * HTML sections (content/site/**) can place it anywhere without React.
  *
  * The loop only advances while the demo is on screen and the tab is visible;
@@ -551,10 +551,318 @@ function renderBox(root: HTMLElement, box: { i: number; qty: number }[], run?: R
 }
 
 /* ------------------------------------------------------------------ */
+/* 4. Loyalty: every way to earn store credit, then spend it           */
+/* ------------------------------------------------------------------ */
+
+const ICONS = {
+  bag: `<path d="M6 8h12l-1 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/>`,
+  tag: `<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/>`,
+  repeat: `<path d="M4 12a7 7 0 0 1 12-5l2 2"/><path d="M18 4v5h-5"/><path d="M20 12a7 7 0 0 1-12 5l-2-2"/><path d="M6 20v-5h5"/>`,
+  gift: `<rect x="4" y="9" width="16" height="11" rx="1"/><path d="M12 9v11M4 13h16"/><path d="M12 9c-2-4-6-4-6-1.5S10 9 12 9c2 0 6 0 6-1.5S14 5 12 9z"/>`,
+  users: `<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 19"/>`,
+  heart: `<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>`,
+};
+const icon = (k: keyof typeof ICONS) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg>`;
+
+const EARN = [
+  { k: "bag", t: "5% back on every order", v: "Earn 5% back", d: "Paid as store credit when your order ships" },
+  { k: "tag", t: "Bonus products", v: "$3 back on Face Oil", d: "Extra credit on featured products" },
+  { k: "repeat", t: "Start a subscription", v: "$10 credit", d: "A thank-you for subscribing" },
+  { k: "gift", t: "3rd delivery bonus", v: "$5 on delivery #3", d: "Rewards for staying subscribed" },
+  { k: "users", t: "Refer a friend", v: "$10 when they order", d: "" },
+  { k: "heart", t: "Welcome back", v: "$5 after 90 days away", d: "Credit to come back and shop" },
+] as const;
+
+/** Earn events, in order: which "ways to earn" card fires, the credit, the history line. */
+const EARNED = [
+  { card: 0, amt: 2.55, line: "5% back · Order #1042" },
+  { card: 1, amt: 3, line: "Bonus · Purify Face Oil" },
+  { card: 2, amt: 10, line: "Subscription started" },
+  { card: 3, amt: 5, line: "3rd delivery bonus" },
+  { card: 4, amt: 10, line: "Referral · Sam's first order" },
+];
+const START_BALANCE = 8;
+const START_HISTORY = [
+  { line: "Welcome back bonus", amt: 5 },
+  { line: "5% back · Order #1031", amt: 3 },
+];
+const CHECKOUT = [
+  { name: "Hydrate Face Cream", price: 15, img: "kept-jar.png" },
+  { name: "Renew Skin Serum", price: 20.89, img: "kept-oil.png" },
+  { name: "Purify Face Oil", price: 21.84, img: "kept-oil.png" },
+];
+
+const loyalty: Demo = {
+  html: `
+  <div class="kp lp">
+    ${keptHeader.replace(/<div class="kp-bar">.*?<\/div>/, "")}
+    <div class="lp-sub"><span>Orders</span><span>Subscriptions</span><span class="is-on">Rewards</span><span>Profile</span></div>
+    <div class="lp-body">
+      <div class="lp-left">
+        <div class="lp-bal" data-bal-card>
+          <p class="lp-bal-k">Store credit</p>
+          <p class="lp-bal-v" data-bal>$8.00</p>
+          <p class="lp-bal-x">$5.00 expires in 12 days</p>
+          <span class="lp-bal-btn">Shop with credit</span>
+        </div>
+        <p class="lp-h">Recent rewards</p>
+        <div class="lp-hist" data-hist></div>
+      </div>
+      <div class="lp-right">
+        <p class="lp-h">Ways to earn</p>
+        <div class="lp-grid">
+          ${EARN.map(
+            (e, i) => `
+            <div class="lp-way" data-way="${i}">
+              <span class="lp-ic">${icon(e.k)}</span>
+              <div><p class="lp-t">${e.t}</p><p class="lp-v">${e.v}</p>${e.d ? `<p class="lp-d">${e.d}</p>` : ""}</div>
+              ${i === 4 ? `<button type="button" class="lp-copy" data-copy><span class="a">Copy link</span><span class="b">${CHECK} Copied</span></button>` : ""}
+            </div>`,
+          ).join("")}
+        </div>
+      </div>
+    </div>
+    <div class="kp-dim" data-dim></div>
+    <div class="lc" data-checkout>
+      <div class="lc-head"><span class="kp-logo">kept</span><span>Checkout</span></div>
+      <div class="lc-items">
+        ${CHECKOUT.map((c) => `<div class="lc-item"><span class="kc-thumb"><img src="${IMG}/${c.img}" alt=""></span><span>${c.name}</span><b>${money(c.price)}</b></div>`).join("")}
+      </div>
+      <div class="lc-credit">
+        <span class="lc-credit-ic">${icon("gift")}</span>
+        <div><p class="lc-credit-t">Store credit</p><p class="lc-credit-v" data-avail>$38.55 available</p></div>
+        <button type="button" class="lc-apply" data-apply><span class="a">Apply</span><span class="b">${CHECK} Applied</span></button>
+      </div>
+      <div class="lc-sum">
+        <p><span>Subtotal</span><b>$57.73</b></p>
+        <p><span>Shipping</span><b>Free</b></p>
+        <p class="lc-cr"><span>Store credit</span><b>−$38.55</b></p>
+        <p class="lc-total"><span>Total</span><b data-total>$57.73</b></p>
+      </div>
+      <button type="button" class="kp-btn kp-btn--block lc-pay" data-pay><span class="a">Pay now</span><span class="b">${CHECK} Order placed</span></button>
+    </div>
+  </div>`,
+
+  reset(root) {
+    root.querySelector(".kp")!.classList.remove("is-checkout", "is-applied", "is-added", "is-copied");
+    qa(root, "[data-way]").forEach((el) => el.classList.remove("is-hit", "is-done"));
+    q(root, "[data-bal]").textContent = money(START_BALANCE);
+    q(root, "[data-total]").textContent = "$57.73";
+    q(root, "[data-hist]").innerHTML = START_HISTORY.map((h) => histRow(h.line, h.amt)).join("");
+  },
+
+  async play(root, run) {
+    const kp = root.querySelector(".kp")!;
+    let bal = START_BALANCE;
+    const earn = async (n: number) => {
+      const e = EARNED[n];
+      const card = q(root, `[data-way="${e.card}"]`);
+      card.classList.add("is-hit");
+      fly(run, card, q(root, "[data-bal]"), `+${money(e.amt)}`);
+      await run.wait(650);
+      run.tween(q(root, "[data-bal]"), bal, bal + e.amt, 500);
+      bal += e.amt;
+      q(root, "[data-bal-card]").classList.remove("is-bump");
+      void q(root, "[data-bal-card]").offsetWidth;
+      q(root, "[data-bal-card]").classList.add("is-bump");
+      const hist = q(root, "[data-hist]");
+      hist.insertAdjacentHTML("afterbegin", histRow(e.line, e.amt, true));
+      card.classList.remove("is-hit");
+      card.classList.add("is-done");
+      await run.wait(450);
+    };
+
+    run.hideCursor();
+    run.park(600, 470, 0);
+    await run.wait(900);
+    for (const n of [0, 1, 2, 3]) await earn(n);
+    await run.click(q(root, "[data-copy]"));
+    kp.classList.add("is-copied");
+    await run.wait(700);
+    await earn(4);
+    await run.wait(900);
+
+    await run.click(q(root, ".lp-bal-btn"));
+    kp.classList.add("is-checkout");
+    await run.wait(900);
+    await run.click(q(root, "[data-apply]"));
+    kp.classList.add("is-applied");
+    q(root, "[data-avail]").textContent = "$0.00 remaining";
+    run.tween(q(root, "[data-total]"), 57.73, 19.18, 700);
+    await run.wait(1300);
+    await run.click(q(root, "[data-pay]"));
+    kp.classList.add("is-added");
+    q(root, "[data-bal]").textContent = money(0);
+    await run.wait(2000);
+    run.hideCursor();
+    kp.classList.remove("is-checkout");
+    await run.wait(800);
+    q(root, "[data-avail]").textContent = "$38.55 available";
+  },
+
+  still(root) {
+    root.querySelector(".kp")!.classList.add("is-copied");
+    q(root, "[data-bal]").textContent = money(38.55);
+    q(root, "[data-hist]").innerHTML = [...EARNED].reverse().map((e) => histRow(e.line, e.amt)).join("");
+    qa(root, "[data-way]").forEach((el) => el.classList.add("is-done"));
+  },
+};
+
+const histRow = (line: string, amt: number, fresh = false) =>
+  `<div class="lp-row${fresh ? " is-new" : ""}"><span>${line}</span><b>+${money(amt)}</b></div>`;
+
+/** A "+$x" chip that flies from one element to another on the stage. */
+function fly(run: Runner, from: Element, to: Element, text: string) {
+  const el = document.createElement("span");
+  el.className = "bd-fly";
+  el.textContent = text;
+  const a = run.point(from, 0.5, 0.45);
+  const b = run.point(to, 0.35, 0.5);
+  el.style.transform = `translate(${a.x}px, ${a.y}px)`;
+  run.stage.appendChild(el);
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
+      el.style.transform = `translate(${b.x}px, ${b.y}px) scale(0.85)`;
+      el.classList.add("is-go");
+    }),
+  );
+  setTimeout(() => el.remove(), 1200);
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. Branded tracking page                                            */
+/* ------------------------------------------------------------------ */
+
+const STEPS = ["Ordered", "Shipped", "Out for delivery", "Delivered"];
+
+const tracking: Demo = {
+  html: `
+  <div class="kp tk">
+    ${keptHeader.replace(/<div class="kp-bar">.*?<\/div>/, "")}
+    <div class="tk-body">
+      <div class="tk-left">
+        <h3 class="tk-title">Track your order</h3>
+        <p class="tk-order">Order #165926 · USPS 9400 1118 9922</p>
+        <div class="tk-eta">
+          <div><p class="tk-eta-k" data-eta-k>Estimated delivery</p><p class="tk-eta-v" data-eta>Monday, April 13</p></div>
+          <span class="tk-pill" data-pill>In transit</span>
+          <div class="tk-steps">${STEPS.map((s, i) => `<span class="tk-step" data-step="${i}"><i></i>${s}</span>`).join("")}</div>
+        </div>
+        <div class="tk-events" data-events>
+          <div class="tk-ev tk-ev--new" data-ev-new><i></i><div><b data-ev-when>Today, 8:02 AM</b><span data-ev-what>Out for delivery · Spokane, WA</span></div></div>
+          <div class="tk-ev"><i></i><div><b>Apr 11, 11:56 PM</b><span>Arrived at post office · Spokane, WA</span></div></div>
+          <div class="tk-ev"><i></i><div><b>Apr 11, 11:00 PM</b><span>Departed USPS facility · Seattle, WA</span></div></div>
+        </div>
+        <div class="tk-notify">
+          <p class="tk-n-t">Get delivery updates</p>
+          <div class="tk-n-row">
+            <span class="tk-seg"><span data-seg-email class="is-on">Email</span><span data-seg-text>Text</span></span>
+            <span class="tk-input" data-phone-wrap><span data-phone></span><i class="tk-caret"></i></span>
+            <button type="button" class="tk-btn" data-notify><span class="a">Notify me</span><span class="b">${CHECK} Subscribed</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="tk-right">
+        <div class="tk-card">
+          <p class="tk-k">In this shipment</p>
+          <div class="tk-item"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><div><p>Hydrate Face Cream</p><small>Subscribe &amp; save · Qty 1</small></div></div>
+        </div>
+        <div class="tk-card">
+          <p class="tk-k">Complete your routine</p>
+          <div class="tk-code"><span>15% off with <b>THANKS15</b></span><span class="tk-clock" data-clock>23:59:41</span></div>
+          <div class="tk-rec"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><div><p>Purify Face Oil</p><small><s>$22.99</s> <b>$19.54</b></small></div><button type="button" class="kc-add" data-rec-add><span class="a">Add</span><span class="b">${CHECK}</span></button></div>
+          <div class="tk-rec"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><div><p>Renew Skin Serum</p><small><s>$21.99</s> <b>$18.69</b></small></div><button type="button" class="kc-add"><span class="a">Add</span></button></div>
+        </div>
+      </div>
+    </div>
+    <div class="tk-sms" data-sms><span class="tk-sms-ic">${icon("bag")}</span><div><b>Kept</b><p>Your order is out for delivery and arrives today.</p></div></div>
+  </div>`,
+
+  reset(root) {
+    const tk = root.querySelector(".kp")!;
+    tk.classList.remove("is-out", "is-text", "is-sub", "is-sms", "is-added", "is-delivered");
+    q(root, "[data-pill]").textContent = "In transit";
+    q(root, "[data-eta-k]").textContent = "Estimated delivery";
+    q(root, "[data-eta]").textContent = "Monday, April 13";
+    q(root, "[data-phone]").textContent = "";
+    setStep(root, 1);
+  },
+
+  async play(root, run) {
+    const tk = root.querySelector(".kp")!;
+    let secs = 23 * 3600 + 59 * 60 + 41;
+    const clock = q(root, "[data-clock]");
+    const tick = setInterval(() => {
+      if (run.stopped) return clearInterval(tick);
+      if (!run.visible) return;
+      secs -= 1;
+      const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60), s = secs % 60;
+      clock.textContent = [h, m, s].map((n) => String(n).padStart(2, "0")).join(":");
+    }, 1000);
+    try {
+      run.hideCursor();
+      run.park(420, 470, 0);
+      await run.wait(1200);
+      tk.classList.add("is-out");
+      q(root, "[data-pill]").textContent = "Out for delivery";
+      q(root, "[data-eta]").textContent = "Today, by 8 PM";
+      setStep(root, 2);
+      await run.wait(1400);
+
+      await run.click(q(root, "[data-seg-text]"));
+      tk.classList.add("is-text");
+      await run.click(q(root, "[data-phone-wrap]"), 0.2);
+      const phone = q(root, "[data-phone]");
+      for (const ch of "(509) 555-0142") {
+        phone.textContent += ch;
+        await run.wait(55);
+      }
+      await run.click(q(root, "[data-notify]"));
+      tk.classList.add("is-sub");
+      await run.wait(700);
+      tk.classList.add("is-sms");
+      await run.wait(1500);
+
+      await run.click(q(root, "[data-rec-add]"));
+      tk.classList.add("is-added");
+      await run.wait(1200);
+      run.hideCursor();
+      tk.classList.remove("is-sms");
+      tk.classList.add("is-delivered");
+      q(root, "[data-pill]").textContent = "Delivered";
+      q(root, "[data-eta-k]").textContent = "Delivered";
+      q(root, "[data-eta]").textContent = "Today at 2:14 PM";
+      q(root, "[data-ev-when]").textContent = "Today, 2:14 PM";
+      q(root, "[data-ev-what]").textContent = "Delivered · Front porch";
+      setStep(root, 3);
+      await run.wait(2400);
+    } finally {
+      clearInterval(tick);
+    }
+  },
+
+  still(root) {
+    const tk = root.querySelector(".kp")!;
+    tk.classList.add("is-out", "is-text", "is-sub");
+    q(root, "[data-pill]").textContent = "Out for delivery";
+    q(root, "[data-eta]").textContent = "Today, by 8 PM";
+    q(root, "[data-phone]").textContent = "(509) 555-0142";
+    setStep(root, 2);
+  },
+};
+
+function setStep(root: HTMLElement, n: number) {
+  qa(root, "[data-step]").forEach((el, i) => {
+    el.classList.toggle("is-on", i <= n);
+    el.classList.toggle("is-now", i === n);
+  });
+}
+
+/* ------------------------------------------------------------------ */
 /* Custom element                                                      */
 /* ------------------------------------------------------------------ */
 
-const DEMOS: Record<string, Demo> = { cart, subscribe, bundle };
+const DEMOS: Record<string, Demo> = { cart, subscribe, bundle, loyalty, tracking };
 
 class BondeDemo extends HTMLElement {
   private run?: Runner;
