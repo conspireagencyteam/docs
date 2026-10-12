@@ -62,3 +62,6 @@
 .bx-hero-video__play svg { width: 20px; height: 20px; margin-left: 3px; }
 .bx-hero-video__time { font-weight: 500; opacity: 0.55; }
 @media (max-width: 700px) { .bx-hero-video { border-radius: 12px; } .bx-hero-video__label { left: 12px; bottom: 12px; gap: 8px; padding: 5px 14px 5px 5px; font-size: 13px; } .bx-hero-video__play { width: 32px; height: 32px; } .bx-hero-video__play svg { width: 14px; height: 14px; } }
+.bx-hero-list { list-style: none; margin: -8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; max-width: 416px; }
+.bx-hero-list li { display: flex; align-items: center; gap: 12px; font-size: 18px; line-height: 1.35; letter-spacing: -0.01em; color: var(--color-foreground-heading, #222); }
+.bx-hero-list svg { flex: 0 0 26px; width: 26px; height: 26px; padding: 5px; border-radius: 999px; background: var(--bonde-accent); color: #fff; }
