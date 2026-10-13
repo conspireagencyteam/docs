@@ -952,5 +952,260 @@ function saTab(root: HTMLElement, i: number) {
   qa(root, "[data-sa-panel]").forEach((el) => el.classList.toggle("is-on", Number(el.dataset.saPanel) === i));
 }
 
-export const SUB_DEMOS: Record<string, Demo> = { subcart, freeship, boxsub, portal, dunning, sublove, consolidate, subadmin };
+/* ------------------------------------------------------------------ */
+/* cancelflow: reason -> save offer -> saved (portal cancel flow)       */
+/* ------------------------------------------------------------------ */
+
+const CF_REASONS = ["I have too much product", "It's too expensive", "I didn't like the product", "I'm moving or travelling", "Other"];
+
+const cancelflow: Demo = {
+  html: `
+  <div class="kp pt cf" data-cf>
+    ${noBar}
+    ${acctTabs("Subscriptions")}
+    <div class="pt-body">
+      <div class="pt-card">
+        <div class="pt-head">
+          <span class="kc-thumb pt-thumb"><img src="${IMG}/kept-jar.png" alt="" class="pt-img-a"></span>
+          <div class="pt-who">
+            <p class="pt-name"><span class="pt-n-a">Hydrate Face Cream</span></p>
+            <p class="pt-meta">Qty 1 · Every month · Subscribe &amp; save</p>
+          </div>
+          <span class="pt-pill" data-pt-pill>Active</span>
+        </div>
+        <div class="pt-next">
+          <div class="pt-date"><span data-pt-mon>MAY</span><b data-pt-day>12</b></div>
+          <div><p class="pt-k" data-pt-k>Next order</p><p class="pt-v" data-pt-v>Tuesday, May 12</p></div>
+        </div>
+        <div class="pt-acts">
+          <button type="button" class="pt-act">${icon("skip")}<span>Skip</span></button>
+          <button type="button" class="pt-act">${icon("swap")}<span>Swap</span></button>
+          <button type="button" class="pt-act">${icon("cal")}<span>Frequency</span></button>
+          <button type="button" class="pt-act">${icon("pause")}<span>Pause</span></button>
+        </div>
+        <p class="pt-cancel cf-cancel" data-cf-cancel>Cancel subscription</p>
+      </div>
+      <div class="pt-side">
+        <div class="tk-card cf-stat"><p class="tk-k">Shopify admin · Bonde</p>
+          <p class="cf-stat-k">Cancel attempts this month</p>
+          <div class="cf-bars">
+            <div class="cf-bar"><span>Too much product</span><i style="--w:70%"></i><b>saved 9 of 14</b></div>
+            <div class="cf-bar"><span>Too expensive</span><i style="--w:40%"></i><b>saved 3 of 8</b></div>
+            <div class="cf-bar"><span>Didn't like it</span><i style="--w:25%"></i><b>saved 1 of 4</b></div>
+          </div>
+          <p class="cf-save" data-cf-save>Save rate <b>50%</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="kp-dim"></div>
+    <div class="pt-sheet cf-sheet">
+      <div class="pt-panel" data-panel="reason">
+        <p class="pt-ph">Before you go, why are you cancelling?</p>
+        ${sheetRows(CF_REASONS, -1, ["data-cf-r0"])}
+        <button type="button" class="kp-btn kp-btn--block" data-ok="reason">Continue</button>
+      </div>
+      <div class="pt-panel" data-panel="offer">
+        <p class="pt-ph">Skip your next order instead?</p>
+        <p class="cf-offer">Your May 12 order moves to <b>June 12</b>. Nothing ships and nothing is charged until then, and you keep your subscriber price.</p>
+        <button type="button" class="kp-btn kp-btn--block" data-ok="offer">Yes, skip my next order</button>
+        <p class="cf-no">No thanks, cancel my subscription</p>
+      </div>
+    </div>
+    <div class="pt-toast">${CHECK}<span data-toast></span></div>
+  </div>`,
+
+  reset(root) {
+    const pt = q(root, "[data-cf]");
+    pt.className = "kp pt cf";
+    pt.removeAttribute("data-sheet");
+    qa(root, ".pt-opt").forEach((o) => o.classList.remove("is-on"));
+    q(root, "[data-pt-pill]").textContent = "Active";
+    q(root, "[data-cf-save]").innerHTML = "Save rate <b>50%</b>";
+    setNext(root, "MAY", "12", "Next order", "Tuesday, May 12");
+  },
+
+  async play(root, run) {
+    const pt = q(root, "[data-cf]");
+    run.park(380, 470, 0);
+    await run.wait(1000);
+
+    await run.click(q(root, "[data-cf-cancel]"));
+    pt.dataset.sheet = "reason";
+    pt.classList.add("is-sheet");
+    await run.wait(900);
+
+    const reason = q(root, "[data-cf-r0]");
+    await run.click(reason, 0.3);
+    reason.classList.add("is-on");
+    await run.wait(500);
+    await run.click(q(root, '[data-ok="reason"]'));
+    pt.dataset.sheet = "offer";
+    await run.wait(1500);
+
+    await run.click(q(root, '[data-ok="offer"]'));
+    pt.classList.remove("is-sheet");
+    toast(root, "Your May order is skipped. See you in June");
+    setNext(root, "JUN", "12", "Next order", "Friday, June 12", true);
+    pt.classList.add("is-saved");
+    q(root, "[data-cf-save]").innerHTML = "Save rate <b>52%</b>";
+    await run.wait(1400);
+    run.hideCursor();
+    await run.wait(2200);
+  },
+
+  still(root) {
+    const pt = q(root, "[data-cf]");
+    pt.classList.add("is-saved");
+    setNext(root, "JUN", "12", "Next order", "Friday, June 12");
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* lifemail: the emails around a renewal                               */
+/* ------------------------------------------------------------------ */
+
+const LM_MAILS = [
+  { k: "3 days before", subj: "Your Hydrate Face Cream renews on May 12", body: "We'll charge your Visa ending 4242 $12.75 on Tuesday. Need a change? Skip, swap or move the date from your account.", cta: "Manage subscription", when: "May 9 · 9:00 AM" },
+  { k: "On the charge", subj: "Payment confirmed · order #1204", body: "Your renewal went through: $12.75 for Hydrate Face Cream. Your next order is June 12.", cta: "View your subscription", when: "May 12 · 9:02 AM" },
+  { k: "Card expiring", subj: "Your card ending 4242 expires soon", body: "The card on your subscription expires 06/26. Update it before your June renewal so nothing is interrupted.", cta: "Update payment method", when: "May 26 · 10:00 AM" },
+];
+
+const lifemail: Demo = {
+  html: `
+  <div class="lm" data-lm>
+    <aside class="dn-rail lm-rail">
+      <p class="up-k">Lifecycle emails</p>
+      <p class="lm-h">Sent from your own domain, in your template.</p>
+      <ol class="up-steps dn-steps lm-steps">
+        ${LM_MAILS.map((m, i) => `<li data-lm-step="${i}"><span class="up-n"><b>${i + 1}</b>${CHECK}</span><span class="up-tag">${m.k}</span></li>`).join("")}
+      </ol>
+      <div class="dn-sched lm-sched"><p>Also sent</p><div><span>Skip confirmed</span><span>Cancelled</span><span>Resuming soon</span><span>Paused: card failed</span></div></div>
+    </aside>
+    <div class="lm-inbox">
+      <div class="up-url"><i></i><i></i><i></i><span>Inbox</span></div>
+      <div class="lm-list">
+        ${LM_MAILS.map((m, i) => `
+        <div class="dn-mail lm-mail" data-lm-mail="${i}">
+          <div class="dn-from"><span class="dn-av">K</span><div><b>Kept</b><small>to maya@example.com</small></div><em>${m.when}</em></div>
+          <p class="dn-subj">${m.subj}</p>
+          <p>Hi Maya,</p>
+          <p>${m.body}</p>
+          <span class="kp-btn dn-cta">${m.cta}</span>
+        </div>`).join("")}
+      </div>
+    </div>
+  </div>`,
+
+  reset(root) {
+    qa(root, "[data-lm-mail]").forEach((el) => el.classList.remove("is-in", "is-top"));
+    qa(root, "[data-lm-step]").forEach((el) => el.classList.remove("is-now", "is-done"));
+  },
+
+  async play(root, run) {
+    run.hideCursor();
+    const mails = qa(root, "[data-lm-mail]");
+    const steps = qa(root, "[data-lm-step]");
+    await run.wait(700);
+    for (let i = 0; i < mails.length; i++) {
+      steps.forEach((el, j) => { el.classList.toggle("is-now", j === i); el.classList.toggle("is-done", j < i); });
+      mails.forEach((el, j) => el.classList.toggle("is-top", j === i));
+      mails[i].classList.add("is-in");
+      await run.wait(i === mails.length - 1 ? 2600 : 2100);
+    }
+    steps.forEach((el) => el.classList.add("is-done"));
+    await run.wait(1600);
+  },
+
+  still(root) {
+    qa(root, "[data-lm-mail]").forEach((el, i) => { el.classList.add("is-in"); el.classList.toggle("is-top", i === 0); });
+    qa(root, "[data-lm-step]").forEach((el) => el.classList.add("is-done"));
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* migrate: switch from another subscription app                       */
+/* ------------------------------------------------------------------ */
+
+const MG_SOURCES = ["Recharge", "Skio", "Bold", "Shopify Subscriptions", "WooCommerce", "CSV"];
+const MG_ROWS = [
+  ["maya@example.com", "Hydrate Face Cream", "Every month", "Visa 4242"],
+  ["jon@example.com", "Purify Face Oil", "Every 2 months", "Visa 0019"],
+  ["ana@example.com", "Hydrate Face Cream ×2", "Every month", "Add a card"],
+  ["leo@example.com", "Purify Face Oil", "Every 3 months", "Mastercard 7781"],
+];
+
+const migrate: Demo = {
+  html: `
+  <div class="mg" data-mg>
+    <div class="sa-top mg-top"><span class="mg-crumb">Shopify admin · Bonde · Subscriptions</span><b>Import subscriptions</b></div>
+    <div class="mg-stage">
+      <div class="mg-step" data-mg-step="0">
+        <p class="mg-h">Where are your subscribers today?</p>
+        <div class="mg-tiles">${MG_SOURCES.map((s, i) => `<button type="button" class="mg-tile" data-mg-src="${i}"><b>${s}</b><small>CSV export</small></button>`).join("")}</div>
+      </div>
+      <div class="mg-step" data-mg-step="1">
+        <p class="mg-h">Upload your Skio export</p>
+        <div class="mg-drop" data-mg-drop>${icon("card")}<span class="a">Drop your CSV here</span><span class="b">${CHECK} skio-subscriptions.csv · 214 rows</span></div>
+        <div class="mg-prog"><i data-mg-bar></i></div>
+        <p class="mg-prog-t" data-mg-prog>Mapping products…</p>
+      </div>
+      <div class="mg-step" data-mg-step="2">
+        <div class="mg-done"><span class="mg-big" data-mg-big>214</span><div><b>subscriptions imported</b><small>202 with a saved payment method · 12 asked to add a card by email</small></div></div>
+        <div class="mg-table">
+          ${MG_ROWS.map((r, i) => `<div class="mg-row" data-mg-row="${i}"><span>${r[0]}</span><span>${r[1]}</span><span>${r[2]}</span><b class="${r[3] === "Add a card" ? "is-warn" : ""}">${r[3]}</b></div>`).join("")}
+        </div>
+      </div>
+    </div>
+  </div>`,
+
+  reset(root) {
+    const mg = q(root, "[data-mg]");
+    mg.className = "mg";
+    mg.dataset.step = "0";
+    qa(root, "[data-mg-src]").forEach((el) => el.classList.remove("is-on"));
+    qa(root, "[data-mg-row]").forEach((el) => el.classList.remove("is-in"));
+    (q(root, "[data-mg-bar]") as HTMLElement).style.width = "0%";
+    q(root, "[data-mg-prog]").textContent = "Mapping products…";
+  },
+
+  async play(root, run) {
+    const mg = q(root, "[data-mg]");
+    run.park(380, 460, 0);
+    await run.wait(900);
+    const skio = q(root, '[data-mg-src="1"]');
+    await run.click(skio);
+    skio.classList.add("is-on");
+    await run.wait(500);
+    mg.dataset.step = "1";
+    await run.wait(700);
+    await run.click(q(root, "[data-mg-drop]"));
+    mg.classList.add("is-dropped");
+    run.hideCursor();
+    await run.wait(600);
+    const bar = q(root, "[data-mg-bar]") as HTMLElement;
+    const labels = ["Mapping products…", "Matching customers…", "Importing payment methods…", "Creating subscriptions…"];
+    for (let i = 0; i < labels.length; i++) {
+      q(root, "[data-mg-prog]").textContent = labels[i];
+      bar.style.width = `${Math.round(((i + 1) / labels.length) * 100)}%`;
+      await run.wait(650);
+    }
+    await run.wait(400);
+    mg.dataset.step = "2";
+    const rows = qa(root, "[data-mg-row]");
+    for (const r of rows) {
+      r.classList.add("is-in");
+      await run.wait(260);
+    }
+    await run.wait(2800);
+  },
+
+  still(root) {
+    const mg = q(root, "[data-mg]");
+    mg.dataset.step = "2";
+    mg.classList.add("is-dropped");
+    qa(root, "[data-mg-row]").forEach((el) => el.classList.add("is-in"));
+  },
+};
+
+export const SUB_DEMOS: Record<string, Demo> = { subcart, freeship, boxsub, portal, dunning, sublove, consolidate, subadmin, cancelflow, lifemail, migrate };
 

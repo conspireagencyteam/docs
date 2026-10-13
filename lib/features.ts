@@ -64,7 +64,7 @@ export const FEATURES: Feature[] = [
     pitch:
       "Subscriptions that never fail silently, a sleek customer portal, hassle-free management and upsells built in — without paying hundreds or thousands a month.",
     detail:
-      "Bonde owns the recurring billing on top of Shopify's native subscription contracts: retries with backoff, order consolidation for households with several plans, free shipping on the plans you choose, and a customer portal for skip, swap and pause.",
+      "Bonde owns the recurring billing on top of Shopify's native subscription contracts: dunning with a card-update email and a retry schedule you set, a cancel flow with save offers, order consolidation for households with several plans, free shipping on the plans you choose, lifecycle emails from your domain, and a customer portal for skip, swap, pause and more.",
     includes: [
       {
         title: "Selling plans",
@@ -85,6 +85,21 @@ export const FEATURES: Feature[] = [
         title: "Free shipping per plan",
         text: "Ship the first order and every renewal free on the plans you pick.",
         href: "/docs/subscriptions/free-shipping",
+      },
+      {
+        title: "Subscribe box",
+        text: "A conversion-optimized subscribe box for your product pages, set up in the theme editor.",
+        href: "/docs/subscriptions/product-widget",
+      },
+      {
+        title: "Retention tools",
+        text: "Cancel flow with save offers, pause with auto-resume, dunning that ends, lifecycle emails.",
+        href: "/docs/subscriptions/retention",
+      },
+      {
+        title: "Switching to Bonde",
+        text: "Import subscribers from Recharge, Skio, Bold, Shopify Subscriptions, WooCommerce or a CSV.",
+        href: "/docs/subscriptions/migrating",
       },
     ],
     docsHref: "/docs/subscriptions",

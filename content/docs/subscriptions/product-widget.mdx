@@ -22,19 +22,37 @@ The subscription widget displays on your product detail pages, allowing customer
   </Step>
 </Steps>
 
-## Customization
+## Layouts
 
-Click on the app block in the theme customizer to access configuration options:
+Click the app block in the theme customizer and choose a **Layout**:
 
-- **Colors**: Match your theme colors
-- **Text and labels**: Customize the subscription option text
-- **Display settings**: Configure how the widget appears
+- **Classic**: one-time purchase first, then Subscribe & save with a frequency dropdown and a short benefits line. Existing stores keep this layout until you switch.
+- **Optimized**: the conversion-focused box. Subscribe & save comes first and is pre-selected, with a corner ribbon, the one-time price struck through, a benefit checklist, and one button per frequency showing its saving. One-time purchase sits underneath.
+
+### Optimized layout settings
+
+- **Pre-select Subscribe & save**: start with the subscription chosen.
+- **Corner ribbon**: your text; `{discount}` becomes the best plan discount, for example 15%. Leave it empty to hide the ribbon.
+- **Show the one-time price struck through**.
+- **Benefits**: one line each; `{discount}` becomes the selected plan's discount.
+- **Learn more link**: text and URL, hidden when the URL is empty.
+- **Frequency label**: the heading above the frequency buttons.
+- **Quantity and add to cart**: most themes already show these under the block, so leave it on the theme's controls. Turn on the stepper, or the stepper and a button, only if your theme does not.
+- **Button text**: `{price}` becomes the price times the quantity.
+
+The customizer preview shows the layout with sample plans, so you can see your edits as you make them.
+
+## Colors
+
+Set the text, background, accent and border colors and the corner radius to match your theme.
 
 ## How it works
 
 When a product has subscription plans configured:
 
 1. The widget displays one-time purchase and subscription options
-2. Customers select their preferred frequency from a dropdown
-3. The subscription discount is shown next to the subscription option
+2. Customers choose a frequency, from a dropdown in Classic or buttons in Optimized
+3. Each option shows its discount, and free shipping where the plan has it
 4. When they add to cart, the subscription plan is attached to the cart item
+
+Prepaid plans show the price per delivery and the total per charge; see [Prepaid and commitment plans](/docs/subscriptions/prepaid-plans).

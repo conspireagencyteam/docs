@@ -6,9 +6,12 @@
     "configuration",
     "free-shipping",
     "product-widget",
+    "prepaid-plans",
     "customer-portal",
+    "retention",
     "managing-contracts",
     "bundle-subscriptions",
-    "order-consolidation"
+    "order-consolidation",
+    "migrating"
   ]
 }

@@ -10,7 +10,7 @@ const FREE = [
 
 const PRO = [
   "Everything in Free",
-  "Subscriptions with a customer portal, dunning, skip and swap",
+  "Subscriptions with a customer portal, cancel-save offers, dunning and bulk tools",
   "Loyalty and referrals paid in Shopify store credit",
   "Delivery-update emails from your tracking page",
   "Klaviyo sync and merchandising rules",

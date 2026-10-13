@@ -1,0 +1,40 @@
+---
+title: "Switching to Bonde"
+description: "Import subscriptions from Recharge, Skio, Bold, Shopify Subscriptions, WooCommerce or a CSV, including saved payment methods."
+---
+
+Bonde imports existing subscriptions from a CSV export so your subscribers keep their plans, prices and next order dates.
+
+## Before you import
+
+- Make sure every product in the export exists in Shopify with the same SKU or title, and that it has a Bonde subscription plan.
+- Set up a verified sending domain under **Emails > Settings** and activate the **Migrated subscription: add a payment method** template. Customers whose payment method cannot be imported receive this email to add a card.
+- If your current app exports payment method ids from Stripe, Braintree, Authorize.net or PayPal, include them; Bonde attaches the saved method so those renewals bill without any action from the customer.
+
+<Warning>
+Pause renewals in your old app before you import, so a subscriber is not billed twice.
+</Warning>
+
+## Import
+
+<Steps>
+  <Step title="Open the importer">
+    Go to **Subscriptions** and click **Import subscriptions**, then **New migration**.
+  </Step>
+  <Step title="Pick your source">
+    Choose Recharge, Skio, Bold, Shopify Subscriptions, WooCommerce or CSV. Every source uses the same Bonde columns; the choice sets the template and sample row you download.
+  </Step>
+  <Step title="Download the template and fill it">
+    Download the CSV template for your source and copy your export into its columns. Required: subscription id, customer email, status, next billing date, billing interval and count, currency, line item title, quantity and price. Optional: SKU, address, payment processor and ids, cancellation details.
+  </Step>
+  <Step title="Upload and map products">
+    Upload the CSV. Bonde matches each line to a Shopify product; map anything it could not match before you continue.
+  </Step>
+  <Step title="Review and start">
+    Review the summary and start the import. Progress, failed rows and the payment-method status of each subscription show on the migration page. You can retry failed rows, send the payment-method emails, or roll the import back.
+  </Step>
+</Steps>
+
+<Note>
+Prefer a hand? [Contact us](/contact) and we will run the move with you.
+</Note>

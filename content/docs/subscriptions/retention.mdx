@@ -1,0 +1,77 @@
+---
+title: "Keeping subscribers"
+description: "The cancel flow with save offers, pausing with an end date, what happens when a renewal payment fails, and the emails around each renewal."
+---
+
+Most cancellations have a reason you can do something about. Bonde gives customers an alternative at the moment they decide to leave, pauses instead of losing them when a card fails, and keeps them informed around every renewal.
+
+## Cancel flow with save offers
+
+When a customer taps **Cancel subscription** in their account, Bonde asks why and shows one save offer matched to the reason. You decide the reasons, the order of offers for each reason, and the discount.
+
+<Steps>
+  <Step title="Open the settings">
+    Go to **Subscriptions > Settings** and find **Cancellation flow**.
+  </Step>
+  <Step title="Turn it on">
+    Check **Ask for a reason and show a save offer before cancelling**.
+  </Step>
+  <Step title="Edit the reasons and offers">
+    Each reason has a label and an ordered list of offers: skip the next order, pause, swap the product, change the frequency, or a discount on the next order. The first offer the subscription qualifies for is shown. Check **Ask for details** on a reason to collect a comment.
+  </Step>
+  <Step title="Set the offer amounts">
+    Choose the discount (a percentage or a fixed amount off the next order, with the title shown on the order) and how long the pause offer pauses for.
+  </Step>
+  <Step title="Save">
+    Click **Save**. The flow is live in your customers' accounts straight away.
+  </Step>
+</Steps>
+
+<Note>
+The skip, pause and discount offers are applied the moment the customer accepts them. The swap and frequency offers open the customer's normal swap or frequency screen.
+</Note>
+
+### Reading the results
+
+Open **Subscriptions > Analytics > Churn**. The **Cancellation reasons and saves** section shows attempts, saves, the save rate and MRR saved, a breakdown by reason, how often each offer was accepted, and the most recent attempts with a link to each customer.
+
+## Pausing with an end date
+
+Customers can pause for one, two or three months (you choose the lengths offered under **Customer notifications and pauses**) or with no end date. A pause with an end date resumes on its own, and Bonde can email the customer a few days before.
+
+You can do the same from a contract page: pause until a date you pick.
+
+## When a renewal payment fails
+
+Bonde emails the customer a link to update their card and retries the charge on your schedule. Set it under **Subscriptions > Settings > Failed payments**:
+
+- **Charge attempts before the final action**: how many times to try, counting the first charge.
+- **Days between attempts**: the waits between tries, for example `3, 7, 14, 21`.
+- **After the last attempt**: pause the subscription (the customer updates their card and resumes) or cancel it.
+
+A paused subscription ships and charges nothing until it is resumed. The customer receives the **Subscription paused (payment failed)** email with a link to update their card.
+
+<Tip>
+Failures a retry cannot fix, such as a revoked card, are not retried. A daily check catches any renewal that did not run at all.
+</Tip>
+
+## Emails around a renewal
+
+Under **Emails** you can activate:
+
+| Email | When it sends |
+|-------|---------------|
+| Subscription upcoming charge | A few days before each renewal (set the lead time under **Customer notifications and pauses**) |
+| Subscription recurring charge confirmation | When a renewal payment goes through |
+| Skip confirmation | When a customer skips or moves their next order |
+| Subscription cancellation | When a subscription is cancelled |
+| Subscription resuming soon | Before a paused subscription resumes on its end date |
+| Card declined | When a renewal charge is declined |
+| Subscription paused (payment failed) | After the last retry, when the subscription is paused |
+| Card expiring | When the card on an active subscription is about to expire |
+
+Templates are off until you activate them, and sending needs a verified sending domain under **Emails > Settings**. Each template shows the variables you can use.
+
+## Store credit on renewals
+
+If you run Bonde Loyalty, customers can spend their store credit on renewals. Under **Subscriptions > Settings > Store credit on renewals**, choose whether customers opt in from their account or it is on for everyone, and cap how much of an order credit can cover. The credit is debited and the same amount is taken off that renewal; if the charge fails, the credit is returned.
