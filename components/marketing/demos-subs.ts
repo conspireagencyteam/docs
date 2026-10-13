@@ -7,7 +7,7 @@
  * Every demo shows a feature the app ships today (see bonde-app
  * docs/SUBSCRIPTIONS_GAPS.md for what doesn't exist yet, and keep it out).
  */
-import { IMG, money, CHECK, CHEVRON, q, qa, keptHeader, icon, fly, type Demo } from "./demo-kit";
+import { IMG, money, CHECK, CHEVRON, STAR, q, qa, keptHeader, icon, fly, type Demo } from "./demo-kit";
 
 const noBar = keptHeader.replace(/<div class="kp-bar">.*?<\/div>/, "");
 const acctTabs = (on: string) =>
@@ -1207,5 +1207,125 @@ const migrate: Demo = {
   },
 };
 
-export const SUB_DEMOS: Record<string, Demo> = { subcart, freeship, boxsub, portal, dunning, sublove, consolidate, subadmin, cancelflow, lifemail, migrate };
+/* ------------------------------------------------------------------ */
+/* journey: what each order unlocks, in the subscribe box and account   */
+/* ------------------------------------------------------------------ */
+
+const JY_ROWS = [
+  { order: "Order 1", label: "30% off + free travel tin", tag: "checkout" },
+  { order: "Order 2", label: "Free shipping", tag: "" },
+  { order: "Order 3", label: "15% off", tag: "" },
+  { order: "Order 6", label: "$10 store credit", tag: "loyalty" },
+];
+
+const journey: Demo = {
+  html: `
+  <div class="kp jy" data-jy>
+    ${noBar}
+    <div class="jy-body">
+      <div class="jy-pdp">
+        <div class="jy-prod">
+          <span class="kc-thumb jy-thumb"><img src="${IMG}/kept-jar.png" alt=""></span>
+          <div><p class="jy-name">Hydrate Face Cream</p><p class="jy-meta">50 ml · 4.9 ${STAR}</p></div>
+        </div>
+        <div class="jy-box">
+          <span class="jy-ribbon">Free shipping + save up to 30%</span>
+          <div class="jy-opt is-on">
+            <span class="jy-radio"></span>
+            <span class="jy-opt-t">Subscribe &amp; save</span>
+            <span class="jy-price"><s>$42.00</s> <b data-jy-price>$29.40</b><small data-jy-then>first order, then $35.70</small></span>
+          </div>
+          <ul class="jy-benefits">
+            <li>${CHECK} Save 15% on every order</li>
+            <li>${CHECK} Free shipping</li>
+            <li>${CHECK} Cancel anytime</li>
+          </ul>
+          <div class="jy-tl" data-jy-tl>
+            <p class="jy-tl-h">What you get</p>
+            ${JY_ROWS.map((r, i) => `<div class="jy-row" data-jy-row="${i}"><i></i><span class="jy-ord">${r.order}</span><span class="jy-lbl">${r.label}</span></div>`).join("")}
+          </div>
+          <div class="jy-plans">
+            <button type="button" class="jy-plan is-on">Every month<b>30% off first, then 15%</b></button>
+            <button type="button" class="jy-plan">Every 2 months<b>save 10%</b></button>
+          </div>
+          <button type="button" class="kp-btn kp-btn--block jy-add" data-jy-add>Subscribe · $29.40</button>
+        </div>
+      </div>
+      <div class="jy-side">
+        <div class="tk-card jy-acct" data-jy-acct>
+          <p class="tk-k">Your account · Hydrate Face Cream</p>
+          <p class="jy-acct-h">Your next order <span data-jy-acct-n>(order 2)</span></p>
+          <p class="jy-acct-inc" data-jy-acct-inc>${CHECK} Free shipping</p>
+          <p class="jy-acct-up" data-jy-acct-up>Order 3 unlocks 15% off · 1 more order</p>
+        </div>
+        <div class="tk-card jy-admin">
+          <p class="tk-k">Shopify admin · Bonde</p>
+          <p class="jy-admin-h">Journey: First three months</p>
+          <div class="jy-admin-rows">
+            <span><b>Order 1</b> Free gift <small>Plan pricing: 30% off first order</small></span>
+            <span><b>Order 2</b> Free shipping</span>
+            <span><b>Order 3</b> 15% off</span>
+            <span><b>Order 6</b> <small>Rewards: $10 store credit</small></span>
+          </div>
+          <p class="jy-admin-f" data-jy-reach>214 subscribers on this journey · 61 get a perk next order</p>
+        </div>
+      </div>
+    </div>
+    <div class="pt-toast">${CHECK}<span data-toast></span></div>
+  </div>`,
+
+  reset(root) {
+    const jy = q(root, "[data-jy]");
+    jy.className = "kp jy";
+    qa(root, "[data-jy-row]").forEach((r) => r.classList.remove("is-in", "is-now"));
+    q(root, "[data-jy-acct-n]").textContent = "(order 2)";
+    q(root, "[data-jy-acct-inc]").innerHTML = `${CHECK} Free shipping`;
+    q(root, "[data-jy-acct-up]").textContent = "Order 3 unlocks 15% off · 1 more order";
+  },
+
+  async play(root, run) {
+    const jy = q(root, "[data-jy]");
+    run.park(380, 470, 0);
+    await run.wait(700);
+
+    // The timeline fills in, one order at a time
+    for (let i = 0; i < JY_ROWS.length; i++) {
+      q(root, `[data-jy-row="${i}"]`).classList.add("is-in");
+      await run.wait(380);
+    }
+    q(root, '[data-jy-row="0"]').classList.add("is-now");
+    await run.wait(900);
+
+    // Subscribe: order 1 ships with the gift and the intro price
+    await run.click(q(root, "[data-jy-add]"));
+    jy.classList.add("is-added");
+    toast(root, "Added · free travel tin claimed in your cart");
+    await run.wait(1500);
+
+    // Months pass: the account shows what the next order includes and what comes next
+    qa(root, "[data-jy-row]").forEach((r) => r.classList.remove("is-now"));
+    q(root, '[data-jy-row="1"]').classList.add("is-now");
+    jy.classList.add("is-acct");
+    await run.wait(1400);
+
+    q(root, '[data-jy-row="1"]').classList.remove("is-now");
+    q(root, '[data-jy-row="2"]').classList.add("is-now");
+    q(root, "[data-jy-acct-n]").textContent = "(order 3)";
+    q(root, "[data-jy-acct-inc]").innerHTML = `${CHECK} 15% off`;
+    q(root, "[data-jy-acct-up]").textContent = "Order 6 unlocks $10 store credit · 3 more orders";
+    jy.classList.add("is-flash");
+    await run.wait(1600);
+    run.hideCursor();
+    await run.wait(1800);
+  },
+
+  still(root) {
+    const jy = q(root, "[data-jy]");
+    qa(root, "[data-jy-row]").forEach((r) => r.classList.add("is-in"));
+    q(root, '[data-jy-row="1"]').classList.add("is-now");
+    jy.classList.add("is-added", "is-acct");
+  },
+};
+
+export const SUB_DEMOS: Record<string, Demo> = { subcart, freeship, boxsub, portal, dunning, sublove, consolidate, subadmin, cancelflow, lifemail, migrate, journey };
 

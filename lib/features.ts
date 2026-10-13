@@ -72,6 +72,11 @@ export const FEATURES: Feature[] = [
         href: "/docs/subscriptions/configuration",
       },
       {
+        title: "Journeys and intro pricing",
+        text: "A lower price on the first order, a free gift at checkout, perks on the renewals you choose, shown to the customer in advance.",
+        href: "/docs/subscriptions/journeys",
+      },
+      {
         title: "Customer portal",
         text: "Customers manage, skip, swap and pause from their account without a ticket.",
         href: "/docs/subscriptions/customer-portal",

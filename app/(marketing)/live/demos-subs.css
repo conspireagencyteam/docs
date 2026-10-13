@@ -505,3 +505,55 @@ bonde-demo .bd-stage .bs-stack img:nth-child(4) { left: 36px; }
 .mg-row.is-in { opacity: 1; transform: none; }
 .mg-row b { font-weight: 600; color: #1f6b44; }
 .mg-row b.is-warn { color: #b26a00; }
+
+/* ---------- journey ---------- */
+.jy { height: 100%; display: flex; flex-direction: column; }
+.jy-body { flex: 1; display: grid; grid-template-columns: 1fr 236px; gap: 14px; padding: 12px 16px 14px; min-height: 0; }
+.jy-pdp { display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+.jy-prod { display: flex; align-items: center; gap: 10px; }
+.jy-thumb { width: 36px; height: 36px; }
+.jy-name { font-size: 13px; font-weight: 700; margin: 0 !important; }
+.jy-meta { font-size: 10px; color: #777; margin: 0 !important; display: flex; align-items: center; gap: 4px; }
+.jy-meta svg { width: 10px; height: 10px; color: #c4875a; }
+.jy-box { position: relative; display: flex; flex-direction: column; gap: 7px; padding: 12px 12px 10px; border: 2px solid var(--kp-green); border-radius: 12px; background: #fff; }
+.jy-ribbon { position: absolute; top: -9px; right: 12px; padding: 2px 8px; border-radius: 99px; background: var(--kp-green); color: #fff; font-size: 8.5px; font-weight: 700; letter-spacing: 0.02em; }
+.jy-opt { display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 8px; }
+.jy-radio { width: 14px; height: 14px; border-radius: 50%; border: 4.5px solid var(--kp-green); background: #fff; box-sizing: border-box; }
+.jy-opt-t { font-size: 12.5px; font-weight: 700; }
+.jy-price { display: flex; flex-direction: column; align-items: flex-end; font-size: 11px; color: #777; }
+.jy-price s { font-size: 10px; }
+.jy-price b { font-size: 14px; color: #111; }
+.jy-price small { font-size: 8.5px; color: #777; }
+.jy-benefits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; font-size: 10.5px; color: #333; }
+.jy-benefits li { display: flex; align-items: center; gap: 6px; }
+.jy-benefits svg { width: 11px; height: 11px; color: var(--kp-green); flex: none; }
+.jy-tl { padding: 7px 9px 8px; border-radius: 8px; background: #f0f4f1; }
+.jy-tl-h { font-size: 8.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #444; margin: 0 0 5px !important; }
+.jy-row { display: grid; grid-template-columns: 8px auto 1fr; gap: 7px; align-items: center; font-size: 10.5px; opacity: 0; transform: translateX(-6px); transition: opacity 0.35s ease, transform 0.35s ease, background 0.3s ease; padding: 2px 4px; margin: 0 -4px; border-radius: 5px; }
+.jy-row.is-in { opacity: 1; transform: none; }
+.jy-row i { width: 7px; height: 7px; border-radius: 50%; background: var(--kp-green); }
+.jy-ord { font-weight: 700; color: #555; white-space: nowrap; }
+.jy-lbl { color: #222; }
+.jy-row.is-now { background: #fff; box-shadow: 0 0 0 1.5px var(--kp-green) inset; }
+.jy-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.jy-plan { display: flex !important; flex-direction: column; align-items: flex-start; gap: 1px; padding: 6px 8px; border: 1px solid #ddd !important; border-radius: 8px; background: #fff; font-size: 10.5px; text-align: left; }
+.jy-plan b { font-size: 8.5px; color: var(--kp-green); font-weight: 600; }
+.jy-plan.is-on { border: 2px solid var(--kp-green) !important; background: #f0f4f1; }
+.jy-add { margin-top: 2px; }
+.jy.is-added .jy-add { background: #1f6b44; }
+.jy-side { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.jy-acct { opacity: 0.45; transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(6px); }
+.jy.is-acct .jy-acct { opacity: 1; transform: none; }
+.jy-acct-h { font-size: 11.5px; font-weight: 700; margin: 6px 0 4px !important; }
+.jy-acct-h span { color: #777; font-weight: 500; font-size: 10px; }
+.jy-acct-inc { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #1f6b44; margin: 0 0 4px !important; }
+.jy-acct-inc svg { width: 12px; height: 12px; }
+.jy-acct-up { font-size: 10px; color: #666; margin: 0 !important; }
+.jy.is-flash .jy-acct-inc { animation: jy-pop 0.5s ease; }
+@keyframes jy-pop { 0% { transform: scale(0.96); opacity: 0.4; } 100% { transform: none; opacity: 1; } }
+.jy-admin-h { font-size: 11px; font-weight: 700; margin: 6px 0 6px !important; }
+.jy-admin-rows { display: flex; flex-direction: column; gap: 4px; }
+.jy-admin-rows span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 6px; font-size: 10px; color: #333; padding: 4px 6px; border-radius: 6px; background: #f6f6f7; }
+.jy-admin-rows b { font-weight: 700; color: #555; }
+.jy-admin-rows small { font-size: 8.5px; color: #777; }
+.jy-admin-f { font-size: 9.5px; color: #777; margin: 8px 0 0 !important; }
