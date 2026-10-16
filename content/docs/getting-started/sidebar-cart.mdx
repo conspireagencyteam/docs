@@ -19,19 +19,39 @@ Bonde's sidebar cart (also called a cart drawer) replaces your theme's default c
   <Step title="Enable the app embed">
     Go to **Online Store > Themes > Customize**, click **App Embeds**, and enable the **Bonde** app embed.
   </Step>
-  <Step title="Enable the sidebar cart">
-    In the Bonde app, go to **Settings > Upsells > Sidebar Cart** and toggle on the sidebar cart.
+  <Step title="Turn on the sidebar cart">
+    In the Bonde app, go to **Upsells > Settings > Cart sidebar** and turn on **Enable the sidebar cart**. This is the app setting: it applies to every theme whose Bonde app embed is set to **Use app setting**.
   </Step>
   <Step title="Configure settings">
     Customize the sidebar cart appearance and behavior in the settings panel.
   </Step>
 </Steps>
 
+## Test it on an unpublished theme first
+
+Each theme can decide on its own whether the sidebar cart shows, so you don't have to change your live store to try it.
+
+<Steps>
+  <Step title="Open the theme's editor">
+    Go to **Online Store > Themes**, find the unpublished theme you want to test on, and click **Customize**.
+  </Step>
+  <Step title="Set the sidebar cart for that theme">
+    Click **App embeds**, open **Bonde**, and set **Sidebar cart on this theme** to **On**. Make sure the Bonde app embed itself is switched on, then save.
+  </Step>
+  <Step title="Preview and publish">
+    Preview the theme and add something to the cart to see the drawer. When you're happy, publish the theme: the setting travels with it, so the sidebar cart goes live at the same moment.
+  </Step>
+</Steps>
+
+<Note>
+  **Sidebar cart on this theme** has three values. **Use app setting** (the default) follows the switch in the Bonde app. **On** and **Off** override it for that theme only. The **Where the sidebar cart shows** table in **Upsells > Settings > Cart sidebar** lists every theme with its current setting and a link to its editor.
+</Note>
+
 ## Configuration options
 
-In **Settings > Upsells > Sidebar Cart**, you can configure:
+In **Upsells > Settings > Cart sidebar**, you can configure:
 
-- **Enable/disable**: Turn the sidebar cart on or off
+- **Enable/disable**: Turn the sidebar cart on or off for every theme that uses the app setting
 - **Styling**: Colors, fonts, and spacing to match your theme
 - **Upsell display**: Whether to show upsells in the cart and how many
 - **Bundle display**: How bundle items are grouped and displayed
@@ -44,7 +64,7 @@ When you create cart upsells in Bonde, they automatically appear in the sidebar 
 
 **Sidebar cart not appearing?**
 - Make sure the Bonde app embed is enabled in your theme
-- Check that the sidebar cart is enabled in Settings > Upsells > Sidebar Cart
+- Check that the sidebar cart is enabled in **Upsells > Settings > Cart sidebar**, and that the theme's Bonde app embed isn't set to **Off** under **Sidebar cart on this theme**
 - Some themes have their own cart drawers that may conflict - you may need to disable the theme's cart drawer
 
 **Cart upsells not showing?**
