@@ -1,0 +1,158 @@
+---
+title: "Connect API reference"
+description: "The HTTP interface behind the Gorgias integration, for connecting another helpdesk or an internal tool to Bonde subscriptions."
+---
+
+The Bonde Connect API is the interface the Gorgias integration runs on. Any helpdesk, automation or internal tool that can send an HTTP request can use it to look up a shopper's subscriptions by email and run the same actions your agents have in Gorgias. Permissions, plan rules and the subscription timeline in Bonde apply the same way.
+
+It is available on Bonde Pro.
+
+## Base URL
+
+```
+https://bundles.conspireagency.com/api/connect/v1
+```
+
+## Authentication
+
+Every request carries your Bonde Connect secret as a bearer token:
+
+```
+Authorization: Bearer bonde_ck_...
+```
+
+Get the secret from **Settings > Gorgias** in Bonde; it is shown once when you connect and again each time you click **Rotate**. Rotating revokes the previous secret at once. The secret identifies your store, so no store or shop parameter is sent.
+
+## Headers
+
+| Header | Purpose |
+|---|---|
+| `X-Bonde-Actor` | `agent` when a person is acting, `ai` when an automation is. Missing means `ai`, which is the stricter permission set. |
+| `X-Bonde-Performer` | The agent's name or id, or a label for the automation. Shown on the subscription timeline in Bonde. |
+| `X-Bonde-Ticket` | Your ticket or conversation id. Shown on the subscription timeline in Bonde. |
+| `Idempotency-Key` | Any string up to 128 characters. Repeating a request with the same key within 24 hours returns the first response again, with `Idempotent-Replayed: true`, instead of running the action twice. |
+
+The actor, performer and ticket can also be sent in the request body as `actor`, `performer` and `ticket_id`.
+
+## Reads
+
+Reads are allowed for every secret, regardless of the permissions table.
+
+### Look up a shopper
+
+```
+GET /customers/lookup?email=jane@example.com
+```
+
+Or `?shopify_customer_id=7234...`. Returns `200` for any well-formed request. An unknown email returns `customer: null` and an empty `subscriptions` list, never an error.
+
+```json
+{
+  "ok": true,
+  "customer": { "id": "7234...", "email": "jane@example.com", "first_name": "Jane", "last_name": "Doe", "name": "Jane Doe", "admin_url": "https://your-store.myshopify.com/admin/customers/7234..." },
+  "subscriptions": [ { "...": "one subscription view per contract" } ],
+  "counts": { "active": 1, "paused": 0, "cancelled": 0, "total": 1 },
+  "summary": "Jane Doe has 1 active and 0 paused subscription. 1. [31559...] Active: 2 x Bicarb Plus (Lemon), every month, $58.00 per order, next order November 12, 2026.",
+  "actions_allowed": ["skip", "pause", "resume", "..."]
+}
+```
+
+### One subscription
+
+```
+GET /contracts/{id}
+```
+
+`{id}` is the numeric subscription id or its GID. Returns the subscription view, refreshed from Shopify.
+
+### Frequency options
+
+```
+GET /contracts/{id}/frequency-options
+```
+
+Returns `options[]`, each with `option_id` (for example `month-2`), `label`, `price`, `is_current` and a one-line `summary`. Pass an `option_id` to `change-frequency`.
+
+### Swap options
+
+```
+GET /contracts/{id}/swap-options?line_id=...
+```
+
+Returns the variants a line may be swapped to on its plan, each with the discounted `price`. `line_id` defaults to the first line.
+
+### Health
+
+```
+GET /health
+```
+
+Proves the secret works and lists the actions it allows for the calling actor.
+
+## The subscription view
+
+Every read, and every action result, returns subscriptions in this shape.
+
+| Field | Meaning |
+|---|---|
+| `id`, `gid` | The subscription's numeric id and GID |
+| `status`, `status_label` | `ACTIVE`, `PAUSED`, `CANCELLED`, `EXPIRED` or `FAILED`, and a readable label |
+| `summary` | One readable line: status, products, frequency, total, next date, and a failing payment if there is one |
+| `next_order_date`, `next_order_date_label` | ISO date and a readable form such as "November 12, 2026" |
+| `resume_at` | ISO date when paused with a resume date |
+| `frequency` | `interval`, `interval_count` and a `label` |
+| `lines[]` | `id`, `product_title`, `variant_title`, `quantity`, `price`, `currency`, `image_url`, product and variant ids |
+| `total` | `amount` and `currency` per order, before shipping and discounts |
+| `orders_completed` | Orders billed so far |
+| `delivery_address` | The shipping address, or null |
+| `payment_method` | `id`, `status` (`ok` or `missing`) and a `label` such as "Visa ending 4242 (expires 4/2028)" |
+| `last_billing` | `status`, `date`, `error_code` and `error_message` of the last billing attempt, or null |
+| `cancellation_reason` | The reason, when the subscription has ended |
+| `admin_url` | Opens the subscription in Bonde inside Shopify admin |
+| `actions_allowed` | The actions your secret allows that apply to this subscription's status |
+
+## Actions
+
+All actions are `POST /contracts/{id}/{action}` with a JSON body. Each returns `{ "ok": true, "message": "...", "subscription": { ... } }` with the refreshed view, plus any extras noted below. Hyphens and underscores in the action name are both accepted.
+
+| Action | Body | What it does |
+|---|---|---|
+| `skip` | `days` (optional, 1 to 365; default one billing interval) | Moves the next order forward. The shopper gets the skip confirmation email. |
+| `pause` | `resume_at` (optional date), `reason` (optional) | Pauses the subscription. A resume date sets the next order to that date. |
+| `resume` | none | Resumes a paused subscription. A past due date is advanced first. |
+| `cancel` | `reason` (optional text), `reason_code` (optional: `customer_requested` default, `merchant_action`, `payment_failed`, `other`) | Cancels the subscription permanently and records the reason. |
+| `reschedule` | `date` (`YYYY-MM-DD` keeps the billing hour, or an ISO datetime), between one hour and a year ahead | Moves the next order to that date. The shopper gets the skip confirmation email. |
+| `change-frequency` | `option_id` from frequency options, or `interval` and `interval_count` | Changes how often the subscription bills and ships, repricing lines from the matching plan. |
+| `swap` | `line_id`, `new_variant_id`, `allow_any_variant` (optional, default false: the variant must be a swap option) | Replaces one line with another variant, keeping the plan discount. |
+| `update-address` | `address1`, `city`, `country_code`, `zip` (required unless already set); `address2`, `province_code`, `first_name`, `last_name`, `phone` optional. Fields left out keep their value. | Changes the shipping address for future orders. |
+| `apply-discount` | `type` (`percentage` or `fixed`), `value`, `cycles` (optional, 1 to 12), `title` (optional) | Adds a discount to the next order, or to that many orders. A fixed amount is capped at the order total. |
+| `retry-billing` | none. The subscription must be active with a failed last attempt and a valid payment method. | Charges the current cycle again. |
+| `send-payment-update` | none | Sends the shopper a secure link to update their payment method, or Shopify's update email. Returns `method` and `update_url`. |
+
+Each action is checked against the permissions table on **Settings > Gorgias** for the actor you send. Every action is written to the subscription's timeline in Bonde with the performer and ticket id you sent.
+
+## Errors
+
+Every error has the same shape:
+
+```json
+{ "ok": false, "error": { "code": "action_failed", "message": "Only an active subscription can be paused. This one is cancelled" } }
+```
+
+| Code | Status | Meaning |
+|---|---|---|
+| `invalid_request` | 400 | A required field is missing or malformed |
+| `action_failed` | 400 | The subscription is not in a state that allows the action; the message says why |
+| `unauthorized` | 401 | Missing, wrong or revoked secret |
+| `plan_required` | 402 | The store is not on Bonde Pro |
+| `forbidden_action` | 403 | The action is turned off for this actor in the permissions table. The message asks for a hand-over to a person |
+| `not_found` | 404 | No subscription with that id on this store |
+| `conflict` | 409 | The same change is already in progress |
+| `rate_limited` | 429 | Too many requests; see `Retry-After` |
+| `internal_error` | 500 | Something failed on Bonde's side |
+
+The messages are written to be shown to a person or read by an AI as they are.
+
+## Rate limit
+
+240 requests per minute per secret. Beyond that, requests return `429` with a `Retry-After` header.
