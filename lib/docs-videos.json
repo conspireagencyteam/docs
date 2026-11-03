@@ -26,5 +26,12 @@
     "description": "Install the subscription widget on your product pages. Read the step by step guide: https://getbonde.com/docs/subscriptions/product-widget Bonde Subscriptions & Bundles on the Shopify App Store: https://apps.shopify.com/bonde-subscription-upsells",
     "uploadDate": "2026-10-15T16:20:02.895Z",
     "durationSeconds": 63
+  },
+  "https://getbonde.com/docs/subscriptions/retention": {
+    "id": "kG1Ecg6_Kc4",
+    "title": "How to add save offers when Shopify subscribers cancel | Bonde Subscriptions & Bundles",
+    "description": "Learn how to add save offers when Shopify subscribers cancel with Bonde Subscriptions & Bundles. The cancel flow with save offers, pausing with an end date, what happens when a renewal payment fails, and the emails around each renewal.",
+    "uploadDate": "2026-11-03T17:09:00.910Z",
+    "durationSeconds": 60
   }
 }
