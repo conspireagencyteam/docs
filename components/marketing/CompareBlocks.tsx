@@ -129,7 +129,7 @@ export function FinalCta({ title, text }: { title: string; text: string }) {
                   START FREE TRIAL
                   <Arrow />
                 </a>
-                <Link href="/docs/subscriptions/migrations" className="bonde-btn bonde-btn--ghost bonde-btn--oninvert">
+                <Link href="/docs/subscriptions/migrating" className="bonde-btn bonde-btn--ghost bonde-btn--oninvert">
                   MIGRATION GUIDE
                   <Arrow />
                 </Link>

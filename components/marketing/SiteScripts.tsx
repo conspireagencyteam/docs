@@ -10,9 +10,16 @@ import { usePathname } from "next/navigation";
  *  - steps: dashed connector line sizing + is-active on scroll-in
  *  - testimonials: prev/next arrows scroll the viewport
  *  - product "problems" cards: reveal on scroll-in (.bonde-bproblem)
+ *  - <bonde-demo> animated product demos (registered once, see ./demos.ts)
+ *  - hero video: clicking the poster ([data-bx-video]) swaps in the YouTube player
  */
 export default function SiteScripts() {
   const pathname = usePathname();
+
+  // Browser-only: the module defines a class extending HTMLElement.
+  useEffect(() => {
+    import("./demos").then((m) => m.defineBondeDemos());
+  }, []);
 
   useEffect(() => {
     const cleanups: Array<() => void> = [];
@@ -151,6 +158,23 @@ export default function SiteScripts() {
         cleanups.push(() => io.disconnect());
       }
     }
+
+    // ---- hero video: swap the poster for the YouTube player on click ----
+    document.querySelectorAll<HTMLElement>("[data-bx-video]").forEach((wrap) => {
+      const btn = wrap.querySelector<HTMLButtonElement>("[data-bx-video-play]");
+      if (!btn) return;
+      const play = () => {
+        const iframe = document.createElement("iframe");
+        iframe.src = wrap.dataset.bxVideoSrc || "";
+        iframe.title = "Bonde: Shopify subscription app with no transaction fees";
+        iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        iframe.allowFullscreen = true;
+        wrap.replaceChildren(iframe);
+        wrap.classList.add("is-playing");
+      };
+      btn.addEventListener("click", play);
+      cleanups.push(() => btn.removeEventListener("click", play));
+    });
 
     return () => cleanups.forEach((fn) => fn());
   }, [pathname]);

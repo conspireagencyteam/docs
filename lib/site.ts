@@ -10,15 +10,15 @@ export const site = {
   name: "Bonde",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://getbonde.com",
   description:
-    "Bundles, subscriptions, upsells, loyalty and branded order tracking for Shopify — free to start, one flat price for everything else.",
+    "Subscriptions for Shopify with no transaction fees, $15 a month flat, plus free bundles, upsells, loyalty and branded order tracking in the same app.",
   // SEO title for the marketing home page.
-  homeTitle: "Bonde: Shopify Bundles, Subscriptions, Upsells & Loyalty App",
+  homeTitle: "Bonde: Shopify Subscriptions App, $15/month, No Transaction Fees",
   // SEO title for the docs home page (the visible H1 stays short).
   docsTitle: "Bonde Docs: Bundles, Subscriptions, Upsells & Loyalty for Shopify",
   docsPath: "/docs",
   appStoreUrl: "https://apps.shopify.com/bonde-subscription-upsells",
   supportEmail: "support@conspireagency.com",
-  instagramUrl: "https://instagram.com/conspire.agency",
+  instagramUrl: "https://instagram.com/getbonde",
   agencyUrl: "https://conspireagency.com",
   /** Public Pro price, USD per 30 days. Keep in step with the App Store plan. */
   proPrice: 15,

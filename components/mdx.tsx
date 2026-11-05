@@ -34,6 +34,7 @@ import {
   User,
   type LucideIcon,
 } from "lucide-react";
+import { YouTube } from "./YouTube";
 
 /**
  * Mintlify-compatible MDX components implemented on fumadocs-ui primitives,
@@ -143,4 +144,5 @@ export const mdxComponents = {
   Steps,
   Step,
   Callout,
+  YouTube,
 };

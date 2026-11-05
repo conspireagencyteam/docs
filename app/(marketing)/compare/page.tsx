@@ -7,7 +7,7 @@ import { Arrow, Eyebrow, FinalCta, Section } from "@/components/marketing/Compar
 
 export const metadata: Metadata = {
   title: "Subscription app pricing compared",
-  description: `What Recharge, Skio and Appstle cost at your size compared with Bonde's flat $${site.proPrice} a month, from their current App Store listings.`,
+  description: `What Recharge, Skio and Appstle cost at your size compared with Bonde at $${site.proPrice} a month with no transaction fees, from their current App Store listings.`,
   alternates: { canonical: "/compare" },
 };
 
@@ -20,7 +20,7 @@ export default function CompareIndex() {
           <Eyebrow>COMPARE</Eyebrow>
           <h1 className="bonde-h1">What your subscription app really costs.</h1>
           <p className="bonde-body bx-compare__lead">
-            {`Most subscription apps take a percentage of every renewal. Bonde is $${site.proPrice} a month flat. Enter your numbers to see the difference.`}
+            {`Recharge and Skio take a percentage of every renewal. Appstle prices by subscription revenue. Bonde is $${site.proPrice} a month with no transaction fees. Enter your numbers to see the difference.`}
           </p>
         </div>
       </Section>
@@ -46,7 +46,7 @@ export default function CompareIndex() {
       </Section>
 
       <FinalCta
-        title="Flat pricing that doesn't grow with your success."
+        title="One price, however many subscribers you have."
         text={`Bonde Pro is $${site.proPrice} a month with no transaction fees and a 14-day free trial. Bring your subscribers over from Recharge, Skio or Appstle.`}
       />
     </>

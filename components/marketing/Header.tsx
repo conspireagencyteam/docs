@@ -33,11 +33,15 @@ export default function Header() {
   const panelRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // Body scroll lock + focus management for the drawer.
+  // Body scroll lock + focus management for the drawer. Focus returns to the
+  // trigger only after the drawer was open; on first render it would land on
+  // the Products button and draw its focus ring as soon as the page loads.
+  const wasOpen = useRef(false);
   useEffect(() => {
     document.body.classList.toggle("bonde-drawer-open", open);
     if (open) requestAnimationFrame(() => panelRef.current?.focus());
-    else triggerRef.current?.focus({ preventScroll: true });
+    else if (wasOpen.current) triggerRef.current?.focus({ preventScroll: true });
+    wasOpen.current = open;
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);

@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <p>If you are an end customer of a Merchant who uses Bonde and have questions about how your personal information is used, please contact the Merchant directly. The Merchant&apos;s own privacy policy governs the collection and use of your personal information.</p>
         <h2>2. Who We Are</h2>
         <p>Bonde is operated by:</p>
-        <p>Conspire LLC 7040 Weller St. San Diego, CA 92122 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
+        <p>Conspire LLC 550 West B St, Floor 4 #0318, San Diego, CA 92101 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
         <h2>3. Information We Collect</h2>
         <h3>3.1 Merchant Data</h3>
         <p>When a Merchant installs and uses Bonde, we collect:</p>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
         <p>We do not knowingly collect government-issued identification numbers, payment card numbers, precise geolocation, biometric data, or special categories of personal data from end customers.</p>
         <h3>3.3 Information Collected Automatically</h3>
         <p>Log and device data: IP address, browser type, operating system, referring URL, pages viewed, and timestamps, collected when Merchants use the embedded admin or when end customers load Merchant-hosted Bonde surfaces such as tracking pages.</p>
-        <p>Cookies and similar technologies: Session cookies used by Shopify App Bridge to authenticate Merchants in the embedded admin, and first-party identifiers used to measure tracking page views and engagement events. Bonde does not set advertising cookies and does not sell personal information.</p>
+        <p>Cookies and similar technologies: Session cookies used by Shopify App Bridge to authenticate Merchants in the embedded admin, and first-party identifiers used to measure tracking page views and engagement events. Bonde does not set advertising cookies inside the App and does not sell personal information. On getbonde.com, with your consent (the cookie banner; change it any time via &ldquo;Cookie settings&rdquo; in the footer) we load the Meta Pixel, which sets advertising cookies so we can measure our ads and show relevant ads on Facebook and Instagram; nothing loads if you decline or your browser sends a Global Privacy Control signal.</p>
         <p>Error and performance data: Diagnostic information collected through our error monitoring provider (Sentry) when the App encounters errors, including stack traces, request metadata, and a redacted snapshot of the application state.</p>
         <h2>4. How We Use Information</h2>
         <p>We use the information described above to:</p>
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
         <p>We may update this Privacy Policy from time to time to reflect changes in our practices, the App, or applicable law. When we make material changes, we will update the &quot;Effective date&quot; at the top of this Policy and, where appropriate, provide additional notice to Merchants through the App or by email. Your continued use of the App after the updated Policy takes effect constitutes acceptance of the changes.</p>
         <h2>15. Contact Us</h2>
         <p>If you have questions, concerns, or requests regarding this Privacy Policy or our handling of personal data, please contact us at:</p>
-        <p>Conspire LLC Attn: Privacy 7040 Weller St. San Diego, CA 92122 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
+        <p>Conspire LLC Attn: Privacy 550 West B St, Floor 4 #0318, San Diego, CA 92101 United States Email: <a href="mailto:support@conspireagency.com">support@conspireagency.com</a></p>
       </div>
       </section>
     </div>

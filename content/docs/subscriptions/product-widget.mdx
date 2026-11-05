@@ -1,11 +1,17 @@
 ---
 title: "Product page widget"
-description: "Install the subscription widget on your product pages."
+description: "Add the subscription widget to your product page and customize it."
 ---
 
 The subscription widget displays on your product detail pages, allowing customers to choose between one-time purchase and subscription options. By default, the widget only shows for products that have subscription plans configured.
 
-## Installation
+## Add the subscription widget to your product page
+
+<YouTube
+  id="_8_5msuk6v8"
+  title="How to add the subscription box to Shopify product pages | Bonde Subscriptions & Bundles"
+  caption="Step by step: Add the subscription box to Shopify product pages."
+/>
 
 <Steps>
   <Step title="Open the theme customizer">
@@ -15,26 +21,67 @@ The subscription widget displays on your product detail pages, allowing customer
     Select the product template where you want to add the subscription widget.
   </Step>
   <Step title="Add the app block">
-    Add the **Bonde: Subscription PDP** app block to your product form.
+    Click **Add block** in the product information section, open the **Apps** tab and choose **Subscription Widget** (Bonde Subscriptions & Bundles). Place it above the Buy buttons.
   </Step>
   <Step title="Save your changes">
     Click **Save** to publish your changes.
   </Step>
 </Steps>
 
-## Customization
+## Customize the subscription widget
 
-Click on the app block in the theme customizer to access configuration options:
+Select the **Subscription Widget** block in the theme customizer to change its layout, text, colors and fonts.
 
-- **Colors**: Match your theme colors
-- **Text and labels**: Customize the subscription option text
-- **Display settings**: Configure how the widget appears
+<YouTube
+  id="3mkSD-rhnzw"
+  title="How to customize the subscription box on Shopify product pages | Bonde Subscriptions & Bundles"
+  caption="Step by step: Customize the subscription widget."
+/>
+
+### Layouts
+
+The block's **Layout** setting is **Auto** by default: it follows the layout chosen in the Bonde app under **Subscriptions > Settings > Subscribe box layout**. Stores that installed Bonde before October 2026 are set to Classic there, so nothing changed on their product pages; a prompt on the Subscriptions page lets you switch to Optimized with one click, without touching the theme. New stores start on Optimized.
+
+You can also pin a block to a layout in the theme customizer:
+
+- **Classic**: one-time purchase first, then Subscribe & save with a frequency dropdown and a short benefits line.
+- **Optimized**: the conversion-focused box. Subscribe & save comes first and is pre-selected, with a corner ribbon, the one-time price struck through, a benefit checklist, the journey timeline, and one button per frequency showing its saving. One-time purchase sits underneath.
+
+Both layouts show a plan's [introductory offer](/docs/subscriptions/configuration#introductory-offer) as the first-order price with the ongoing price after it.
+
+#### Optimized layout settings
+
+- **Pre-select Subscribe & save**: start with the subscription chosen.
+- **Corner ribbon**: your text; `{discount}` becomes the best plan discount, for example 15%. Leave it empty to hide the ribbon.
+- **Show the one-time price struck through**.
+- **Benefits**: one line each; `{discount}` becomes the selected plan's discount.
+- **Learn more link**: text and URL, hidden when the URL is empty.
+- **Show the journey timeline** and its title: the "What you get" list under the benefits, built from the plan's introductory offer, your [subscription journey](/docs/subscriptions/journeys) and milestone rewards. It only appears when something changes from order to order.
+- **Frequency label**: the heading above the frequency buttons.
+- **Quantity and add to cart**: most themes already show these under the block, so leave it on the theme's controls. Turn on the stepper, or the stepper and a button, only if your theme does not.
+- **Button text**: `{price}` becomes the price times the quantity.
+
+The customizer preview shows the layout with sample plans, so you can see your edits as you make them.
+
+#### Different text per product
+
+Text settings with the dynamic source icon next to them, such as **Corner ribbon** and the button text, can be connected to a product metafield, including a metafield that points to a metaobject. Click the icon and choose the metafield, and each product page shows its own text instead of one value for every product.
+
+### Colors
+
+Set the text, background, accent and border colors and the corner radius to match your theme.
+
+### Typography
+
+**Typography** is **Bonde default** unless you change it. Choose **Theme fonts** to use your theme's body and heading fonts with lighter weights, so the widget blends into your store.
 
 ## How it works
 
 When a product has subscription plans configured:
 
 1. The widget displays one-time purchase and subscription options
-2. Customers select their preferred frequency from a dropdown
-3. The subscription discount is shown next to the subscription option
+2. Customers choose a frequency, from a dropdown in Classic or buttons in Optimized
+3. Each option shows its discount, and free shipping where the plan has it
 4. When they add to cart, the subscription plan is attached to the cart item
+
+Prepaid plans show the price per delivery and the total per charge; see [Prepaid and commitment plans](/docs/subscriptions/prepaid-plans).

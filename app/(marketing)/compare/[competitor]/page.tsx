@@ -81,7 +81,7 @@ export default async function ComparePage(props: { params: Promise<{ competitor:
 
       <Faq items={c.faqs} />
       <FinalCta
-        title={`Keep your subscribers. Drop the ${c.name} bill.`}
+        title={`Bring your ${c.name} subscribers with you.`}
         text={`Bonde Pro is $${site.proPrice} a month with no transaction fees, a 14-day free trial, and loyalty, bundles and upsells included.`}
       />
     </>

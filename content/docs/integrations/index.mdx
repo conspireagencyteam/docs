@@ -1,0 +1,31 @@
+---
+title: "Integrations overview"
+description: "Connect Bonde to the tools your team already uses: Gorgias for support, Klaviyo for email, Recharge for the cart sidebar."
+---
+
+Bonde connects to a few tools your team already runs. Each one is connected from **Settings** in Bonde and can be disconnected there at any time.
+
+## Gorgias
+
+Gorgias is Bonde's helpdesk integration. When a shopper writes in, your support agents see every subscription that shopper has in the ticket sidebar, with buttons to skip, pause, resume, cancel, reschedule, discount or send a payment update link without leaving Gorgias. If you use Gorgias AI Agent, it can do the same work on its own, within the permissions you set. Gorgias is included in Bonde Pro ($15 a month flat, no transaction fees).
+
+<Columns cols={2}>
+  <Card title="Set up Gorgias" icon="window" href="/docs/integrations/gorgias">
+    Connect your Gorgias account, see what agents get, set permissions.
+  </Card>
+  <Card title="Gorgias AI Agent" icon="shield-check" href="/docs/integrations/gorgias-ai-agent">
+    Add Bonde actions to AI Agent with the recipes in Bonde.
+  </Card>
+</Columns>
+
+## Klaviyo
+
+Connect Klaviyo so Bonde can read your email performance alongside your Shopify data. Go to **Settings > Klaviyo**.
+
+## Recharge
+
+Connect Recharge so the cart sidebar can offer Subscribe and save using your existing Recharge plans. Go to **Settings > Recharge**.
+
+## Other helpdesks and custom tools
+
+The Gorgias integration is built on the Bonde Connect API, a small HTTP interface that looks up a shopper's subscriptions by email and runs the same actions your agents have in Gorgias. Any helpdesk or internal tool that can send an HTTP request with a header can use it, with the same permissions and the same timeline entries in Bonde. See the [Connect API reference](/docs/integrations/connect-api).

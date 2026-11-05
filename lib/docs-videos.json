@@ -1,0 +1,44 @@
+{
+  "https://getbonde.com/docs/getting-started/sidebar-cart": {
+    "id": "JYDCt2U1VSs",
+    "title": "How to turn on the Bonde sidebar cart on a Shopify theme | Bonde Subscriptions & Bundles",
+    "description": "Learn how to turn on the Bonde sidebar cart on a Shopify theme with Bonde Subscriptions & Bundles. Set up Bonde's sidebar cart for a better cart experience with upsells and bundle display.",
+    "uploadDate": "2026-10-21T18:27:28.610Z",
+    "durationSeconds": 60
+  },
+  "https://getbonde.com/docs/loyalty/widgets": {
+    "id": "y1BCo2hEogc",
+    "title": "How to show store credit in Shopify customer accounts | Bonde Subscriptions & Bundles",
+    "description": "Learn how to show store credit in Shopify customer accounts with Bonde Subscriptions & Bundles. Add the store credit balance block to the customer account Profile page so each customer sees their current store credit balance right on their profile.",
+    "uploadDate": "2026-10-15T18:22:09.372Z",
+    "durationSeconds": 59
+  },
+  "https://getbonde.com/docs/subscriptions/customer-portal": {
+    "id": "L7U6_QEBPww",
+    "title": "How to add a subscriptions page to Shopify customer accounts | Bonde Subscriptions & Bundles",
+    "description": "Learn how to add a subscriptions page to Shopify customer accounts with Bonde Subscriptions & Bundles. Install the customer accounts extension so customers can manage their subscriptions: view active subscriptions, skip deliveries, and pause or cancel.",
+    "uploadDate": "2026-10-15T18:19:53.145Z",
+    "durationSeconds": 54
+  },
+  "https://getbonde.com/docs/subscriptions/free-shipping": {
+    "id": "ny8iafm0yI8",
+    "title": "How to keep free subscription shipping on mixed Shopify carts | Bonde Subscriptions & Bundles",
+    "description": "Learn how to keep free subscription shipping on mixed Shopify carts with Bonde Subscriptions & Bundles. Offer free shipping as a subscription perk, on the first order and every renewal.",
+    "uploadDate": "2026-11-05T18:12:40.773Z",
+    "durationSeconds": 60
+  },
+  "https://getbonde.com/docs/subscriptions/product-widget": {
+    "id": "_8_5msuk6v8",
+    "title": "How to add the subscription box to Shopify product pages | Bonde Subscriptions & Bundles",
+    "description": "Install the subscription widget on your product pages. Read the step by step guide: https://getbonde.com/docs/subscriptions/product-widget Bonde Subscriptions & Bundles on the Shopify App Store: https://apps.shopify.com/bonde-subscription-upsells",
+    "uploadDate": "2026-10-15T16:20:02.895Z",
+    "durationSeconds": 63
+  },
+  "https://getbonde.com/docs/subscriptions/retention": {
+    "id": "kG1Ecg6_Kc4",
+    "title": "How to add save offers when Shopify subscribers cancel | Bonde Subscriptions & Bundles",
+    "description": "Learn how to add save offers when Shopify subscribers cancel with Bonde Subscriptions & Bundles. The cancel flow with save offers, pausing with an end date, what happens when a renewal payment fails, and the emails around each renewal.",
+    "uploadDate": "2026-11-03T17:09:00.910Z",
+    "durationSeconds": 60
+  }
+}

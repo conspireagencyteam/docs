@@ -8,17 +8,17 @@ Rewards programs automatically issue store credit to customers when they take sp
 ## Creating a reward program
 
 <Steps>
-  <Step title="Navigate to programs">
-    Go to **Rewards > Programs** in the Bonde app.
+  <Step title="Open Loyalty">
+    Open **Loyalty** in the Bonde app.
   </Step>
   <Step title="Create program">
-    Click **Create Program**.
+    Click **Create program**.
   </Step>
   <Step title="Configure">
-    Enter a name for the program (e.g., "5% Back on Orders") and configure the trigger, reward amount, and options.
+    Under **Program Name**, enter a name for the program (e.g., "5% Back on Orders"), then choose the **Trigger Event**, the **Credit Type** and **Credit Value**, and the options below them.
   </Step>
   <Step title="Save">
-    Click **Save**. New programs are created in **Draft** status. When you're ready, change the status to **Active** to start issuing rewards.
+    Click **Save**. New programs are created in **Draft** status. When you're ready, click **Activate** next to the program on the Loyalty page (or set **Status** to **Active**) to start issuing rewards.
   </Step>
 </Steps>
 
@@ -30,13 +30,13 @@ Choose what action triggers the reward:
 
 | Trigger | Description |
 |---------|-------------|
-| **Order processed** | Reward customers when they complete any order |
-| **Order contains product** | Reward when they purchase specific products |
-| **Order contains collection** | Reward when they purchase from specific collections |
-| **Subscription order processed** | Reward each time their subscription renews |
-| **Subscription created** | Reward when they start a new subscription |
-| **Subscription milestone** | Reward at subscription anniversaries (e.g., 6 months, 1 year) |
-| **Customer reactivated** | Reward customers who return after inactivity |
+| **Any Order Processed** | Reward customers when they complete any order |
+| **Order Contains Specific Product** | Reward when they purchase a specific product |
+| **Order Contains Product from Collection** | Reward when they purchase from a specific collection |
+| **Subscription Renewal Order** | Reward each time their subscription renews |
+| **New Subscription Created** | Reward when they start a new subscription |
+| **Subscription Milestone** | Reward on a chosen renewal (for example the 3rd), optionally repeating every N renewals |
+| **Customer Reactivated** | Reward a customer whose subscriptions had all ended when they start a new one (fixed amount only) |
 
 ---
 
@@ -46,8 +46,8 @@ Configure how much store credit to issue:
 
 | Type | Description |
 |------|-------------|
-| **Fixed amount** | Issue a specific dollar amount (e.g., $5.00 credit per order) |
-| **Percentage** | Issue a percentage of the order value (e.g., 5% back on every order) |
+| **Fixed Amount** | Issue a specific dollar amount (e.g., $5.00 credit per order) |
+| **Percentage of Order** | Issue a percentage of the order value (e.g., 5% back on every order) |
 
 ---
 
@@ -57,9 +57,9 @@ Control how long customers have to use their rewards:
 
 | Option | Description |
 |--------|-------------|
-| **Store default** | Uses your default expiration setting from Rewards > Settings |
-| **Custom period** | Set a specific number of days until expiration (e.g., 90 days) |
-| **Never expire** | Store credit never expires |
+| **Use Store Default** | Uses your default expiration from the reward settings (the **Settings** button on the Loyalty page) |
+| **Custom Period** | Set a specific number of days until expiration (e.g., 90 days) |
+| **Never Expire** | Store credit never expires |
 
 <Tip>
 Setting an expiration encourages customers to return and use their credit.
@@ -88,7 +88,7 @@ Caps are partial, not all-or-nothing. If a customer has $3 left of a $10 monthly
 
 When more than one program applies to the same order, the **This rule stacks** option in each program's setup decides how they combine:
 
-- **Off (exclusive)**: The default. If several exclusive programs apply to one order, the customer earns only the single program worth the most to them. Use this for tiered rates—with "10% over $100" and "15% over $200" both off, a $200 order earns 15%, not both.
+- **Off (exclusive)**: The default. If several exclusive programs apply to one order, the customer earns only the single program worth the most to them. Use this for tiered rates: with "10% over $100" and "15% over $200" both off, a $200 order earns 15%, not both.
 - **On (stacks)**: The program's credit is always added on top of whatever else the customer earns. Use this for independent add-ons, like a product-specific bonus.
 
 <Tip>
@@ -112,28 +112,28 @@ Leave tiered programs unstacked so customers get your best single rate. Turn on 
 
 ### Basic loyalty: 5% back on orders
 
-- **Trigger**: Order Processed
-- **Reward**: Percentage - 5%
+- **Trigger**: Any Order Processed
+- **Reward**: Percentage of Order - 5%
 - **Expiration**: 90 days
 - **Cap**: $50 per month
 
 ### New subscriber bonus
 
-- **Trigger**: Subscription Created
+- **Trigger**: New Subscription Created
 - **Reward**: Fixed Amount - $10.00
 - **Expiration**: 60 days
 - **Cap**: Lifetime cap of $10 (one-time reward)
 
 ### Collection promotion
 
-- **Trigger**: Order Contains Collection (select "New Arrivals")
+- **Trigger**: Order Contains Product from Collection (select "New Arrivals")
 - **Reward**: Fixed Amount - $5.00
 - **Expiration**: 30 days
 - **Cap**: $20 per month
 
 ### Subscription loyalty
 
-- **Trigger**: Subscription Milestone
+- **Trigger**: Subscription Milestone (Renewal number 6, repeating)
 - **Reward**: Fixed Amount - $20.00
 - **Expiration**: Never Expire
 - **Cap**: None
@@ -142,7 +142,7 @@ Leave tiered programs unstacked so customers get your best single rate. Turn on 
 
 ## Global settings
 
-Configure shop-wide reward settings in **Rewards > Settings**:
+Configure shop-wide reward settings with the **Settings** button on the **Loyalty** page:
 
-- **Default expiration**: How long rewards last if a program uses "Store Default"
+- **Default expiration**: How long rewards last if a program uses "Use Store Default"
 - **Expiration reminders**: Email customers before their credit expires

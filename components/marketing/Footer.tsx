@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookieSettingsLink } from "@/components/MetaPixelConsent";
 import { FEATURES } from "@/lib/features";
 import { site } from "@/lib/site";
 import NewsletterForm from "./NewsletterForm";
@@ -58,18 +59,20 @@ export default function Footer() {
             <p className="bonde-footer__nav-title">Company</p>
             <a href={site.agencyUrl} className="bonde-footer__nav-link" target="_blank" rel="noopener">Conspire</a>
             <Link href="/privacy" className="bonde-footer__nav-link">Privacy policy</Link>
+            <Link href="/terms" className="bonde-footer__nav-link">Terms of service</Link>
+            <CookieSettingsLink className="bonde-footer__nav-link" />
             <Link href="/accessibility" className="bonde-footer__nav-link">Accessibility</Link>
           </div>
         </nav>
 
         <div className="bonde-footer__divider" aria-hidden="true" />
         <p className="bonde-footer__disclaimer">
-          Results are not guaranteed. Statistics shown reflect publicly available case studies and internal Bonde data; individual outcomes vary based on store, catalog, traffic, and execution.
+          Results vary by store, catalog, traffic and execution. Pro is $15 per 30 days, billed through Shopify; no transaction fees, no revenue caps.
         </p>
         <div className="bonde-footer__bottom">
           <p>© {new Date().getFullYear()} Bonde™</p>
           <p>
-            <Link href="/privacy">Terms &amp; Policies</Link>
+            <Link href="/terms">Terms</Link> &middot; <Link href="/privacy">Privacy</Link>
           </p>
         </div>
       </footer>

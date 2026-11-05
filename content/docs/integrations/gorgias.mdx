@@ -1,0 +1,137 @@
+---
+title: "Gorgias"
+description: "Give your support team every shopper's subscriptions inside the Gorgias ticket, with buttons to skip, pause, resume, cancel, reschedule, discount or send a payment update link."
+---
+
+When a shopper writes to you in Gorgias, Bonde shows their subscriptions in the ticket sidebar. Your agents can act on them from there, and every action lands on the subscription's timeline in Bonde with the ticket number. If you use Gorgias AI Agent, it can run the same actions on its own within the permissions you set; see [Gorgias AI Agent](/docs/integrations/gorgias-ai-agent).
+
+Gorgias is included in Bonde Pro ($15 a month flat, no transaction fees).
+
+## Requirements
+
+- Bonde Pro
+- A Gorgias account, and a Gorgias user with admin access to connect it
+- Your Shopify store connected in Gorgias, so tickets carry the shopper's email
+
+The sidebar and its buttons work with the Gorgias Helpdesk. AI Agent actions also need the Gorgias Automate subscription.
+
+## Connect Gorgias
+
+<Steps>
+  <Step title="Open the Gorgias page in Bonde">
+    Go to **Settings > Gorgias**.
+  </Step>
+  <Step title="Enter your Gorgias account">
+    Type your Gorgias subdomain, the part before `.gorgias.com` in your helpdesk address.
+  </Step>
+  <Step title="Connect">
+    Click **Connect Gorgias**. Gorgias asks you to sign in and approve Bonde. You come back to Bonde when it is done.
+  </Step>
+  <Step title="Let Bonde set up your helpdesk">
+    Bonde creates three things in your Gorgias account: an HTTP integration named **Bonde Subscriptions**, a ticket sidebar widget, and four macros. The status on the Gorgias page turns to **Connected** when it is done, usually within a minute.
+  </Step>
+  <Step title="Add the action buttons">
+    The buttons live on the widget and are added once, in Gorgias. In Bonde, open the **Sidebar buttons** card and click **Rotate** on the **Bonde Connect secret** card first so you have a secret to paste. Then in Gorgias open **Settings > Integrations**, find the **Bonde Subscriptions** widget, choose **Add button** on the subscription card, and copy each button's method, URL, headers and fields from Bonde. Seven buttons, a few minutes.
+  </Step>
+  <Step title="Keep your secret">
+    The **Bonde Connect secret** is shown once, when you click **Rotate**. Keep it somewhere safe; the buttons, AI Agent actions and any custom integration use it. The sidebar data itself does not need it; Bonde placed a secret in the integration it created.
+  </Step>
+</Steps>
+
+<Note>
+Gorgias finds the shopper by the email on the ticket. The sidebar shows subscriptions only when that email matches the customer's email in Shopify.
+</Note>
+
+## What agents see
+
+The sidebar shows one card per subscription the shopper has. Each card carries:
+
+- Status (Active, Paused, Cancelled)
+- The products, with quantities
+- Frequency, and the price per order
+- The next order date, or the resume date when paused
+- The payment method, and whether the last payment failed
+- An **Open in Bonde** link that opens the subscription in Bonde inside your Shopify admin
+
+A shopper with no subscriptions gets no card, so the sidebar stays out of the way on ordinary tickets.
+
+## The buttons
+
+Every button runs inside Gorgias and reports its result on the ticket. Where a button needs a value, Gorgias asks the agent for it before anything happens. The buttons are added in the Gorgias widget editor from the definitions on the **Sidebar buttons** card in Bonde (see [Connect Gorgias](#connect-gorgias)).
+
+| Button | What it does | Asks for |
+|---|---|---|
+| **Skip next order** | Moves the next order forward by one billing interval. The shopper gets the skip confirmation email. | Nothing |
+| **Pause** | Pauses the subscription. Nothing bills while it is paused. | A resume date, optional |
+| **Resume** | Resumes a paused subscription. A past due date is advanced before billing restarts. | Nothing |
+| **Cancel** | Cancels the subscription permanently and records the reason. | A reason, required |
+| **Reschedule** | Moves the next order to a chosen date, between tomorrow and a year ahead. | The date |
+| **Apply discount** | Adds a percentage or fixed discount to the next order, or to a number of orders. | The type, the value, and how many orders |
+| **Send payment update link** | Gives the shopper a secure link, or an email, to update their payment method. | Nothing |
+
+A button that is turned off for support agents in [Permissions](#permissions) returns a short message on the ticket and changes nothing.
+
+Each action appears on the subscription's timeline in Bonde (**Subscriptions > Contracts**, then the contract) as taken by support, with the Gorgias ticket number, so you can always see who did what and why.
+
+## Macros
+
+Bonde adds four macros to Gorgias, one for each of the most common replies:
+
+- Next order skipped
+- Subscription paused
+- Subscription cancelled
+- Payment update link sent
+
+They fill in the shopper's subscription details from the sidebar data. Edit the wording in Gorgias under **Settings > Macros**, like any other macro.
+
+## Permissions
+
+The permissions table on **Settings > Gorgias** decides, for each action, whether support agents may run it and whether AI Agent may run it. Reading subscriptions is always allowed. Defaults:
+
+| Action | Support agents | AI Agent |
+|---|---|---|
+| Skip the next order | Allowed | Allowed |
+| Pause | Allowed | Allowed |
+| Resume | Allowed | Allowed |
+| Cancel | Allowed | Off |
+| Change the next order date | Allowed | Allowed |
+| Change the frequency | Allowed | Allowed |
+| Swap a product | Allowed | Off |
+| Update the shipping address | Allowed | Allowed |
+| Apply a discount | Allowed | Off |
+| Retry a failed payment | Allowed | Off |
+| Send a payment update link | Allowed | Allowed |
+
+Cancelling, swapping, discounting and charging a card again are off for AI Agent until you switch them on. Changes apply immediately.
+
+<Note>
+These permissions are separate from the customer portal settings. You can let support reschedule orders without letting shoppers do it in the portal, or the reverse.
+</Note>
+
+## The Bonde Connect secret
+
+The secret is what proves to Bonde that a request comes from your Gorgias account. It is shown once, when you connect, and Bonde keeps only a fingerprint of it afterwards.
+
+Click **Rotate** on the **Bonde Connect secret** card to issue a new one. The old secret stops working at once, and the new one is shown once. Bonde updates the sidebar integration it manages. The buttons you added in the Gorgias widget editor, any AI Agent action and any custom integration built with the old secret keep failing until you paste the new one into them; see [after rotating the secret](/docs/integrations/gorgias-ai-agent#after-rotating-the-secret).
+
+<Warning>
+Treat the secret like a password. Anyone who has it can read and change subscriptions on your store, within the permissions you set.
+</Warning>
+
+## Testing
+
+Use the **Test** card on **Settings > Gorgias** to look up an email address the way Gorgias would. It shows exactly what the sidebar will render for that shopper, including the actions allowed, without opening a ticket. Try it with a subscriber's email after connecting, and again after changing permissions.
+
+## Troubleshooting
+
+**No widget in the sidebar.** Either the email on the ticket does not match the customer's email in Shopify, or the shopper has no subscriptions. Check the email in Shopify under **Customers**, then run the same email through the **Test** card in Bonde.
+
+**"Needs attention" on the Gorgias page.** Something Bonde created in Gorgias is missing or has changed, usually because it was edited or deleted in Gorgias. Click **Repair**. Bonde recreates the integration, widget and macros it manages and leaves everything else alone. If the widget had to be recreated, add the buttons again from the **Sidebar buttons** card.
+
+**"Reconnect required".** Gorgias no longer accepts Bonde's access, for example after the connecting user was removed or the app was uninstalled on the Gorgias side. Click **Connect Gorgias** again and approve Bonde. Your permissions are kept.
+
+**A button returns an error.** The message on the ticket says why: the action is off for support agents, the subscription is not in a state that allows it (a cancelled subscription cannot be paused), or your store is no longer on Bonde Pro.
+
+## Disconnecting
+
+Click **Disconnect** on **Settings > Gorgias**. Bonde removes the integration, widget and macros it created in Gorgias and revokes the secret. Subscriptions, their timelines and your permission settings stay in Bonde. Uninstalling Bonde from Shopify does the same.

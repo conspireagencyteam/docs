@@ -3,14 +3,14 @@
  *
  * Every price here is copied from the competitor's Shopify App Store listing
  * on PRICES_CHECKED and must be re-checked monthly (and whenever an ad
- * points at these pages). Say plainly where Bonde is not the cheapest —
+ * points at these pages). Say plainly where Bonde is not the cheapest:
  * the pages are for merchants deciding to switch, and a wrong number costs
  * a refund and a review. Migration claims must match what the Bonde
- * importer actually does (see /docs/subscriptions/migrations).
+ * importer actually does (see /docs/subscriptions/migrating).
  */
 
-export const PRICES_CHECKED = "2026-09-25";
-export const PRICES_CHECKED_LABEL = "25 September 2026";
+export const PRICES_CHECKED = "2026-11-05";
+export const PRICES_CHECKED_LABEL = "5 November 2026";
 
 export interface PlanRow {
   name: string;
@@ -54,21 +54,19 @@ export const COMPETITORS: Competitor[] = [
     source: "https://apps.shopify.com/subscription-payments",
     tagline: "Recharge takes a cut of every renewal. Bonde charges $15 a month, however many subscribers you have.",
     plans: [
-      { name: "25-50", price: "$25 / month", fees: "None for your first 50 subscribers", note: "60-day free trial" },
-      { name: "Starter", price: "$99 / month", fees: "1.49% + 19¢ per transaction", note: "60-day free trial" },
+      { name: "Starter", price: "$149 / month", fees: "1.50% + 20¢ per transaction", note: "60-day free trial" },
       {
-        name: "Plus",
+        name: "Scale",
         price: "$499 / month",
-        fees: "1.34% + 19¢ per transaction",
-        note: "Adds loyalty, referrals, customizable bundles and a JavaScript SDK",
+        fees: "1.25% + 20¢ per transaction",
+        note: "Adds hands-on implementation, customizable bundles and a JavaScript SDK",
       },
     ],
     monthlyCost: (subs, aov) => {
-      if (subs <= 50) return { plan: "25-50", cost: 25 };
       const gmv = subs * aov;
-      const starter = 99 + gmv * 0.0149 + subs * 0.19;
-      const plus = 499 + gmv * 0.0134 + subs * 0.19;
-      return starter <= plus ? { plan: "Starter", cost: round(starter) } : { plan: "Plus", cost: round(plus) };
+      const starter = 149 + gmv * 0.015 + subs * 0.2;
+      const scale = 499 + gmv * 0.0125 + subs * 0.2;
+      return starter <= scale ? { plan: "Starter", cost: round(starter) } : { plan: "Scale", cost: round(scale) };
     },
     migration: [
       "Create an Admin API token in Recharge (Tools & apps → API tokens), or reuse the Recharge connection you already have in Bonde.",
@@ -77,17 +75,17 @@ export const COMPETITORS: Competitor[] = [
       "Cancel your Recharge account before Bonde's first renewal date. Uninstalling alone doesn't stop Recharge charges.",
     ],
     honest: [
-      "Under 50 subscribers, Recharge's $25 plan has no transaction fees. Bonde is still $10 a month cheaper, but the gap is small.",
-      "Recharge has a larger integration marketplace, hands-on implementation, and a JavaScript SDK and Storefront API on Plus. If your store depends on those, weigh that before switching.",
+      "Recharge has a larger integration marketplace, and its Scale plan adds hands-on implementation, a JavaScript SDK and a Storefront API. If your store depends on those, weigh that before switching.",
+      "Recharge's Starter plan has a 60-day free trial. Bonde's trial is 14 days.",
     ],
     faqs: [
       {
-        q: "Does Recharge still charge 1.25%?",
-        a: "No. As of 25 September 2026, Recharge's Starter plan is $99 a month plus 1.49% + 19¢ per transaction, and Plus is $499 a month plus 1.34% + 19¢. The 1.25% figure you'll see quoted around the web is out of date.",
+        q: "What does Recharge charge now?",
+        a: "As of 5 November 2026, Recharge's Shopify App Store listing shows Starter at $149 a month plus 1.50% + 20¢ per transaction, and Scale at $499 a month plus 1.25% + 20¢ per transaction. Older figures you'll see quoted around the web are out of date.",
       },
       {
         q: "Will my subscribers need to sign up again?",
-        a: "No. Bonde recreates each subscription with the same products, price, schedule and next charge date. On Recharge's Shopify Checkout, subscribers keep their saved card, so most won't notice the switch.",
+        a: "No. Bonde recreates each subscription with the same products, price, schedule and next charge date. On Recharge's Shopify Checkout, subscribers keep their saved card.",
       },
       {
         q: "Can I run both apps while I test Bonde?",
@@ -99,20 +97,20 @@ export const COMPETITORS: Competitor[] = [
     slug: "skio",
     name: "Skio",
     source: "https://apps.shopify.com/skio",
-    tagline: "Skio starts at $599 a month plus 1% + 20¢ per order. Bonde is $15 a month with no transaction fees.",
+    tagline: "Skio starts at $599 a month plus 1.25% + 20¢ per transaction. Bonde is $15 a month with no transaction fees.",
     plans: [
       {
         name: "Scale",
         price: "$599 / month",
-        fees: "1% + 20¢ per transaction",
-        note: "Or $5,988 a year. Skio is now part of Recharge.",
+        fees: "1.25% + 20¢ per transaction",
+        note: "Or $5,988 a year. The listing is named \"Skio, a Recharge Company\".",
       },
     ],
-    monthlyCost: (subs, aov) => ({ plan: "Scale", cost: round(599 + subs * aov * 0.01 + subs * 0.2) }),
+    monthlyCost: (subs, aov) => ({ plan: "Scale", cost: round(599 + subs * aov * 0.0125 + subs * 0.2) }),
     migration: [
       "Generate an API key in Skio (API & Integrations → API) and paste it into Bonde.",
       "Bonde reads your active and paused subscriptions: products, schedule, next charge date, shipping address and shipping price.",
-      "Skio stores cards in Shopify, so every subscriber keeps the card they already use.",
+      "Skio stores cards in Shopify, so a subscriber with a valid saved card keeps it. Anyone without one can be sent an email asking for a card.",
       "Skio's API reports prices before your subscribe-and-save discount. Enter your discount when you connect, then check prices on the review screen.",
       "Cancel or pause billing in Skio, or uninstall it, before Bonde's first renewal date.",
     ],
@@ -122,11 +120,11 @@ export const COMPETITORS: Competitor[] = [
     faqs: [
       {
         q: "Skio is part of Recharge now. Does that change anything?",
-        a: "Skio still has its own app and pricing: $599 a month (or $5,988 a year) plus 1% + 20¢ per transaction on its Shopify App Store listing as of 25 September 2026.",
+        a: "Skio still has its own app and pricing: $599 a month (or $5,988 a year) plus 1.25% + 20¢ per transaction on its Shopify App Store listing as of 5 November 2026.",
       },
       {
         q: "Will subscribers have to re-enter their card?",
-        a: "No. Skio saves cards in Shopify, and Bonde attaches each subscriber's existing card to their new subscription.",
+        a: "No, as long as their card is still valid. Skio saves cards in Shopify, and Bonde attaches each subscriber's existing card to their new subscription.",
       },
     ],
   },
@@ -140,7 +138,7 @@ export const COMPETITORS: Competitor[] = [
       { name: "Starter", price: "$10 / month", fees: "None", note: "Up to $5,000 a month" },
       { name: "Business", price: "$30 / month", fees: "None", note: "Up to $15,000 a month" },
       { name: "Business Premium", price: "$100 / month", fees: "None", note: "Up to $100,000 a month" },
-      { name: "Enterprise", price: "Custom", fees: "—", note: "Above $100,000 a month, and for API access" },
+      { name: "Enterprise", price: "By request", fees: "By request", note: "Above $100,000 a month. The listing says to contact Appstle for enterprise pricing, APIs and webhooks" },
     ],
     monthlyCost: (subs, aov) => {
       const gmv = subs * aov;
@@ -151,14 +149,14 @@ export const COMPETITORS: Competitor[] = [
       return null;
     },
     migration: [
-      "Create an API key in Appstle (Settings → API Key Management) and paste it into Bonde. Appstle only gives API access on plans that include it.",
+      "Create an API key in Appstle (Settings → API Key Management) and paste it into Bonde. Appstle gives API access on request, so ask their support if you don't see the option.",
       "Bonde reads your active and paused subscriptions: products, prices, schedule, next charge date, shipping address and shipping price.",
-      "Appstle stores cards in Shopify, so every subscriber keeps the card they already use.",
+      "Appstle stores cards in Shopify, so a subscriber with a valid saved card keeps it. Anyone without one can be sent an email asking for a card.",
       "Cancel or pause billing in Appstle, or uninstall it, before Bonde's first renewal date.",
     ],
     honest: [
       "If your subscription revenue is under $5,000 a month, Appstle's Free and $10 plans cost less than Bonde.",
-      "Bonde pulls ahead once you pass $5,000 a month and never raises your price as you grow. Loyalty, bundles and upsells are included.",
+      "Above $5,000 a month Bonde costs less, and its price does not change with your subscription revenue. Loyalty, bundles and upsells are included.",
     ],
     faqs: [
       {
@@ -167,7 +165,7 @@ export const COMPETITORS: Competitor[] = [
       },
       {
         q: "Will subscribers have to re-enter their card?",
-        a: "No. Appstle saves cards in Shopify, and Bonde attaches each subscriber's existing card to their new subscription.",
+        a: "No, as long as their card is still valid. Appstle saves cards in Shopify, and Bonde attaches each subscriber's existing card to their new subscription.",
       },
     ],
   },

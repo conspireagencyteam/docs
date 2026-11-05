@@ -26,8 +26,17 @@ Each plan includes:
 | Option | Description |
 |--------|-------------|
 | **Delivery interval** | How often the subscription renews (e.g., every 15 days, 30 days) |
-| **Discount** | Percentage or fixed amount discount for subscribers |
+| **Discount** | Percentage or fixed amount discount for subscribers, on every order |
+| **Introductory offer** | A different discount for the first order or first few orders, then the ongoing discount. See below |
 | **Free shipping** | Ship orders on this plan free, including renewals. See [Free shipping for subscriptions](/docs/subscriptions/free-shipping) |
+
+## Introductory offer
+
+Check **Introductory offer** on a plan to give new subscribers a bigger discount, a fixed amount off or a set price on their first order, and choose how many orders it covers (1 is the checkout order; 3 covers checkout plus the next two renewals). The ongoing discount above applies from the order after that.
+
+The subscribe box shows the first-order price with "first order, then $X", the cart's frequency picker reads "Every month · 30% off first order, then save 15%", and the customer account and emails say when the price changes. Bonde moves the subscription to the ongoing price automatically before the first order at the ongoing price is charged. Changing frequency or swapping a product keeps the introductory price while the offer lasts.
+
+Plans with an introductory offer pair well with a [subscription journey](/docs/subscriptions/journeys): the journey editor shows the offer on order 1 of its timeline.
 
 ## Advanced settings
 

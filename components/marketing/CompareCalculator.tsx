@@ -4,8 +4,17 @@ import { useState } from "react";
 import { COMPETITORS, PRICES_CHECKED_LABEL } from "@/lib/compare";
 import { site } from "@/lib/site";
 
-const money = (n: number) =>
-  n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: n < 100 ? 2 : 0 });
+// Whole dollars unless the amount is under $100 and has cents, so the Bonde
+// row reads $15 beside $389 rather than $15.00.
+const money = (n: number) => {
+  const digits = n < 100 && !Number.isInteger(n) ? 2 : 0;
+  return n.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  });
+};
 
 /**
  * Monthly cost of each app for a store's subscriber count and order value,

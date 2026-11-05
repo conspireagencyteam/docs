@@ -1,0 +1,60 @@
+---
+title: "Subscription journeys"
+description: "Front-load the first orders: an introductory price, a free gift at checkout, then perks on the renewals you choose. One timeline, shown to the customer in advance."
+---
+
+Most subscribers who cancel do it around the second or third order. A journey gives them a reason to get past that point and tells them it is coming. You set it up once, Bonde applies each perk to the right order, and the customer sees the timeline in the subscribe box, in their account and in the upcoming-order email.
+
+## How orders are counted
+
+**Order 1** is the checkout order. **Order 2** is the first renewal, **order 3** the second, and so on. Skipped orders do not count.
+
+Order 1 is priced by the plan (its introductory offer, if any) and can carry a free gift claimed in the cart. Orders 2 and later can carry a discount, free shipping or a free product, applied to that one order right before it is charged.
+
+## Set up a journey
+
+<Steps>
+  <Step title="Open Journeys">
+    In the Bonde app go to **Subscriptions > Subscription journeys** and click **Create journey**.
+  </Step>
+  <Step title="Name it and pick the plans">
+    The name is internal. Apply the journey to all subscription plans or to specific plans. Each plan can be in one journey; a journey for specific plans takes precedence over an all-plans journey.
+  </Step>
+  <Step title="Add perks to orders">
+    Click **Add perk**, pick the order number and what that order gets:
+
+    - **Order 1**: a free gift. Pick the product. The cart offers it as soon as a subscription from these plans is added, and it stays free at checkout only while that subscription is in the cart. (Under the hood this is a gift campaign with the *Subscription in cart* trigger; it appears under Gifts marked as managed by the journey.)
+    - **Orders 2 and later**: a discount (percentage or fixed amount), free shipping, or a free product added to that order. One of each per order.
+
+    Optionally give the perk a customer-facing label ("Free travel tin").
+  </Step>
+  <Step title="Save">
+    Click **Create journey**. The right-hand side shows how many active subscribers are on the covered plans and how many get a perk on their next order.
+  </Step>
+</Steps>
+
+<Note>
+Perks are applied right before an order is charged, so a journey you create today affects renewals from the next charge on. A perk that was placed on an order that is then skipped moves to the new next order.
+</Note>
+
+## What else shows on the timeline
+
+The journey editor shows two things that are set up elsewhere, read-only, so you see the whole customer experience in one place:
+
+- **Introductory pricing** on the covered plans (order 1, and later orders while the offer lasts). Set it on the plan: **Subscriptions > Manage products**, open the plan, **Introductory offer**. See [Subscription configuration](/docs/subscriptions/configuration#introductory-offer).
+- **Store credit** from Bonde Loyalty: a milestone program that pays credit after N renewals shows on order N+1; win-back and repeating programs are listed under *Ongoing*. Set these up under **Rewards**. Store credit is never a journey step; it is part of your loyalty program, which you turn on deliberately.
+
+## What the customer sees
+
+- **Subscribe box** (Optimized layout): a "What you get" list under the benefits, one line per order, built from the selected plan's introductory offer, the journey's perks and your milestone rewards. Hide it with the block setting *Show the journey timeline*.
+- **Cart**: the plan label reads "Every month · 30% off first order, then save 15%", and the free gift appears in the cart's gift tracker as soon as the subscription is added.
+- **Customer account**: *Your next order* lists what is included in the coming order and what the order after that unlocks. Free products in the next order show as "Free".
+- **Upcoming-order email**: the `subscription.next_order_perks_line` and `subscription.next_perk_line` variables ("Included in this order: free shipping." / "Order 3 unlocks 15% off."). They are in the default template; add them to a customised one under **Email templates**.
+
+## Measuring it
+
+**Subscriptions > Analytics > Retention by order** shows the share of subscriptions that reached order 2, 3, 4 and so on, overall, by plan, and for plans with a journey versus without one. A subscription only counts toward an order once it has had time to reach it.
+
+## Pausing or removing a journey
+
+**Pause** stops new perks from being applied and hides the timeline; perks already placed on an upcoming order stay on it. **Delete** also removes the managed gift campaign. Introductory pricing and Rewards programs are not affected either way.

@@ -6,10 +6,13 @@
     "configuration",
     "free-shipping",
     "product-widget",
+    "prepaid-plans",
     "customer-portal",
+    "journeys",
+    "retention",
     "managing-contracts",
     "bundle-subscriptions",
     "order-consolidation",
-    "migrations"
+    "migrating"
   ]
 }
