@@ -19,53 +19,60 @@ A referral program turns your customers into advocates by rewarding them for bri
 
 ## Configuration
 
-Go to **Rewards > Referrals** to configure your program.
+In the Bonde app, go to **Loyalty** and click **Referral Program**. Change the settings below, then click **Save** at the top of the page.
 
-### Referrer (advocate) rewards
+### Advocate Reward
 
 Configure what the referring customer earns:
 
 | Option | Description |
 |--------|-------------|
-| **Reward type** | Fixed amount per referral or percentage of the friend's order |
-| **Expiration** | Store default, custom period, or never expire |
-| **Cap** | Maximum credit per period (daily, weekly, monthly, yearly, or lifetime) |
+| **Credit Type** | **Fixed Amount** per referral (default, $10) or **Percentage of Order** of the friend's order |
+| **Credit Value** | The amount or percentage of store credit the advocate earns |
+| **Credit Expiration** | **Use Store Default**, **Custom Period** (a number of days), or **Never Expire** |
+| **Send email notification to advocate** | Notify the referrer when they earn credit from a successful referral (on by default) |
 
-### Friend (referee) rewards
+### Friend Discount (Optional)
 
 Optionally give the friend an incentive to complete their purchase:
 
 | Option | Description |
 |--------|-------------|
-| **Enable friend reward** | Toggle on to give friends a discount on their first order |
-| **Discount type** | Fixed amount off (e.g., $5 off) or percentage (e.g., 10% off) |
+| **Enable friend discount** | Check to give friends a discount on their first order |
+| **Discount Type** | **Fixed Amount** (e.g., $5 off) or **Percentage** (e.g., 10% off) |
+| **Discount Value** | The amount or percentage off |
 
 <Note>
 Friend discounts may require additional setup with Shopify discount codes or automatic discounts.
 </Note>
 
+### Advocate Earning Cap
+
+Check **Enable earning cap** to limit how much credit an advocate can earn from referrals: set a **Maximum Credit** and a **Cap Period** (Daily, Weekly, Monthly, Yearly or Lifetime).
+
 ---
 
 ## Fraud prevention
 
-The referral system includes protections against fraud:
+The **Fraud Prevention** card protects the program against abuse:
 
 | Option | Description |
 |--------|-------------|
-| **Processing delay** | Wait time before referral rewards are issued (default: 60 minutes) |
-| **Require new customer** | Only first-time customers count as valid referrals |
-| **Minimum order value** | Minimum order amount for the referral to count |
+| **Reward Delay** | Minutes to wait after the friend's order before issuing the reward, to allow for cancellations or refunds (default: 60) |
+| **Require new customer** | Only issue rewards when the referred friend is a first-time customer (on by default) |
+| **Minimum Order Value** | Optional: only orders above this amount trigger a reward |
 
 ---
 
 ## Program status
 
+A new program starts in **Draft**. Use the button beside **Save** to change its status:
+
 | Status | Description |
 |--------|-------------|
-| **Draft** | Program is being configured. Referral tracking is disabled |
-| **Active** | Program is live. Customers can share and earn rewards |
-| **Paused** | Program is temporarily stopped. Existing referrals are honored |
-| **Archived** | Program is retired |
+| **Draft** | Program is being configured. Referral tracking is disabled. **Activate Program** makes it live |
+| **Active** | Program is live. Customers can share and earn rewards. **Pause Program** stops it |
+| **Paused** | Program is temporarily stopped. Existing referrals are honored. **Resume Program** makes it live again; **Deactivate** returns it to Draft |
 
 ---
 
