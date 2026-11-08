@@ -51,13 +51,13 @@ The sidebar shows one card per subscription the shopper has. Each card carries:
 - Frequency, and the price per order
 - The next order date, or the resume date when paused
 - The payment method, and whether the last payment failed
-- An **Open in Bonde** link that opens the subscription in Bonde inside your Shopify admin
+- The subscription's title opens it in Bonde inside your Shopify admin, and a **Customer in Shopify** link at the top of the card opens the customer
 
 A shopper with no subscriptions gets no card, so the sidebar stays out of the way on ordinary tickets.
 
 ## The buttons
 
-Every button runs inside Gorgias and reports its result on the ticket. Where a button needs a value, Gorgias asks the agent for it before anything happens. The buttons are added in the Gorgias widget editor from the definitions on the **Sidebar buttons** card in Bonde (see [Connect Gorgias](#connect-gorgias)).
+Bonde adds the buttons to the widget when it connects, so they are on every subscription card from the first ticket. Every button runs inside Gorgias and reports its result on the ticket: a confirmation when it worked, the reason when it did not. Where a button needs a value, Gorgias opens a small form and asks the agent for it before anything happens. The **Sidebar buttons** card in Bonde lists the same definitions, in case one is ever removed in the Gorgias widget editor and needs adding back.
 
 | Button | What it does | Asks for |
 |---|---|---|
@@ -112,7 +112,7 @@ These permissions are separate from the customer portal settings. You can let su
 
 The secret is what proves to Bonde that a request comes from your Gorgias account. It is shown once, when you connect, and Bonde keeps only a fingerprint of it afterwards.
 
-Click **Rotate** on the **Bonde Connect secret** card to issue a new one. The old secret stops working at once, and the new one is shown once. Bonde updates the sidebar integration it manages. The buttons you added in the Gorgias widget editor, any AI Agent action and any custom integration built with the old secret keep failing until you paste the new one into them; see [after rotating the secret](/docs/integrations/gorgias-ai-agent#after-rotating-the-secret).
+Click **Rotate** on the **Bonde Connect secret** card to issue a new one. The old secret stops working at once, and the new one is shown once. Bonde updates the sidebar integration and its buttons itself. Any AI Agent action and any custom integration built with the old secret keep failing until you paste the new one into them; see [after rotating the secret](/docs/integrations/gorgias-ai-agent#after-rotating-the-secret).
 
 <Warning>
 Treat the secret like a password. Anyone who has it can read and change subscriptions on your store, within the permissions you set.
@@ -126,7 +126,9 @@ Use the **Test** card on **Settings > Gorgias** to look up an email address the 
 
 **No widget in the sidebar.** Either the email on the ticket does not match the customer's email in Shopify, or the shopper has no subscriptions. Check the email in Shopify under **Customers**, then run the same email through the **Test** card in Bonde.
 
-**"Needs attention" on the Gorgias page.** Something Bonde created in Gorgias is missing or has changed, usually because it was edited or deleted in Gorgias. Click **Repair**. Bonde recreates the integration, widget and macros it manages and leaves everything else alone. If the widget had to be recreated, add the buttons again from the **Sidebar buttons** card.
+**"Needs attention" on the Gorgias page.** Something Bonde created in Gorgias is missing or has changed, usually because it was edited or deleted in Gorgias. Click **Repair**. Bonde recreates the integration, the widget with its buttons and the macros it manages, and leaves everything else alone.
+
+**The card shows old details.** Gorgias refreshes the sidebar when something happens on the ticket (a new message, a tag, an action). After a change made elsewhere, reopen the ticket or add a tag to refresh it.
 
 **"Reconnect required".** Gorgias no longer accepts Bonde's access, for example after the connecting user was removed or the app was uninstalled on the Gorgias side. Click **Connect Gorgias** again and approve Bonde. Your permissions are kept.
 

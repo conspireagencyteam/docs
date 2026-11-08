@@ -88,7 +88,7 @@ If the AI cannot find the subscriptions, run the same email through the **Test**
 
 ## After rotating the secret
 
-Rotating the Bonde Connect secret revokes the old one immediately. Bonde updates the sidebar integration it manages, but it cannot reach into the widget buttons or the actions you built by hand. Update the buttons in the Gorgias widget editor, then open each Bonde action in **Settings > AI Agent > Actions** and replace the value of the `Authorization` header with `Bearer` and the new secret. Until you do, those actions fail and the AI hands the ticket over.
+Rotating the Bonde Connect secret revokes the old one immediately. Bonde updates the sidebar integration and its buttons itself, but it cannot reach into the actions you built by hand. Open each Bonde action in **Settings > AI Agent > Actions** and replace the value of the `Authorization` header with `Bearer` and the new secret. Until you do, those actions fail and the AI hands the ticket over.
 
 ## What the AI can and cannot do
 
