@@ -61,7 +61,7 @@ Build this one first. It is what lets the AI handle a shopper with several subsc
 
 Each remaining recipe follows the same shape: the variables the AI needs (for example the subscription id from the list, a resume date, a cancellation reason), a POST request to the subscription's action URL with the same two headers, the outputs, and the confirmation setting. Build the ones you want AI Agent to handle. You do not need all of them.
 
-Add the recipe's variables under **Collect information** first, with their descriptions. They then appear in the `{+}` picker under **Inputs**, and that is where you insert them into the URL and the body. The AI takes the subscription id from the List subscriptions result on its own; the shopper is not asked for it. When you set the method to POST, Gorgias adds a JSON request body; paste the body from the recipe, or leave it as `{}` when the recipe has none.
+Add the recipe's variables under **Collect information** first, with their descriptions. They then appear in the `{+}` picker under **Inputs**, and that is where you insert them into the URL and the body. The AI takes the subscription id from the List subscriptions result on its own; the shopper is not asked for it. When you set the method to POST, Gorgias adds a JSON request body; paste the body from the recipe, or leave it as `{}` when the recipe has none. In the body, keep the quotation marks from the recipe and insert each variable between them with the body's own `{+}` picker. Gorgias marks the body as invalid until the JSON is complete.
 
 | Action | Keep customer confirmation on | Allowed for AI by default |
 |---|---|---|
@@ -98,6 +98,8 @@ If the AI cannot find the subscriptions, run the same email through the **Test**
 ## After rotating the secret
 
 Rotating the Bonde Connect secret revokes the old one immediately. Bonde updates the sidebar integration and its buttons itself, but it cannot reach into the actions you built by hand. Open each Bonde action in **AI Agent > Actions**, edit its HTTP request step and replace the value of the `Authorization` header with `Bearer` and the new secret. Until you do, those actions fail and the AI hands the ticket over.
+
+Gorgias shows header values in full to anyone who can edit an action, so the secret is visible there. Give action editing rights in Gorgias only to people you would give the secret to.
 
 ## What the AI can and cannot do
 
