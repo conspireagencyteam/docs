@@ -8,8 +8,8 @@ Gorgias AI Agent can resolve subscription tickets without an agent: find the sho
 ## Before you start
 
 - Gorgias connected in Bonde ([set up Gorgias](/docs/integrations/gorgias))
-- The Gorgias Automate subscription. AI Agent custom actions are an Automate feature; the sidebar and buttons do not need it
-- Your **Bonde Connect secret**. Click **Rotate** on **Settings > Gorgias** and copy it; it is shown once
+- Gorgias AI Agent on your Gorgias account, with your Shopify store connected in Gorgias. AI Agent only appears for a connected store; the sidebar and buttons do not need it
+- Your **Bonde Connect secret**. On **Settings > Gorgias** in Bonde, click **Rotate secret** on the **Bonde Connect secret** card and copy it; it is shown once
 
 <Note>
 Bonde cannot create AI Agent actions for you. Gorgias has no way for an app to install them, so each action is built once, by you, in the Gorgias action editor. Each takes a few minutes with the recipe open beside it.
@@ -20,9 +20,9 @@ Bonde cannot create AI Agent actions for you. Gorgias has no way for an app to i
 Go to **Settings > Gorgias** in Bonde and open the **AI Agent** card. There is one recipe per action, starting with **List subscriptions**. Each recipe gives you exactly what the Gorgias action editor asks for:
 
 - The **Collect information** variables, with the descriptions the AI reads to fill them from the conversation
-- The **HTTP request**: method, URL, headers and body
-- The **outputs**, as JSONPath, with a results explanation that tells the AI how to read them
-- Whether to keep **Require customer confirmation** on
+- The **HTTP request**: method, URL, headers and body, and where to find each variable in the Gorgias variable picker
+- The **outputs**: name, JSONPath and type, with a results explanation that tells the AI how to read them
+- Whether to keep **Customer confirmation** on
 
 Each recipe has a **Copy** button for every block.
 
@@ -32,31 +32,36 @@ Build this one first. It is what lets the AI handle a shopper with several subsc
 
 <Steps>
   <Step title="Open the action editor in Gorgias">
-    In Gorgias, go to **Settings > AI Agent > Actions** and create a new action using the advanced editor.
+    In Gorgias, open the menu at the top left and choose **AI Agent**, then **Actions**. Click **Create action**, then **Add step** and **Build advanced action**. Gorgias switches the action to its visual editor.
   </Step>
-  <Step title="Name and describe it">
-    Use the name and description from the recipe. The description is what the AI reads to decide when to use the action, so keep it as written.
-  </Step>
-  <Step title="Add the Collect information step">
-    Add the variables listed in the recipe. For List subscriptions that is the shopper's email, which the AI takes from the ticket.
+  <Step title="Skip Collect information">
+    List subscriptions collects nothing. Gorgias already knows the shopper's email.
   </Step>
   <Step title="Add the HTTP request step">
-    Copy the method and URL from the recipe. Add the two headers: `Authorization` with the value `Bearer` followed by your Bonde Connect secret, and `X-Bonde-Actor` with the value `ai`. Leave the body empty for a lookup.
+    Click **+** under **Start** and choose **HTTP request**. Give it a name, set the method to GET and paste the URL from the recipe up to `email=`. Then click `{+}` at the end of the URL field and choose **Existing customer > Customer email**. Variables only work when inserted this way; a variable typed as text is sent as text.
+  </Step>
+  <Step title="Add the two headers">
+    `Authorization` with the value `Bearer` followed by a space and your Bonde Connect secret, and `X-Bonde-Actor` with the value `ai`.
   </Step>
   <Step title="Add the outputs">
-    Add each JSONPath output from the recipe and paste the results explanation. For List subscriptions the explanation tells the AI that `summary` is one line per subscription, and that when there is more than one it must ask the shopper which one they mean before doing anything else.
+    Under **Output variables**, add each output from the recipe with its JSONPath and type. Lists use the type JSON. Then, under **Request results explanation for AI Agent**, add each output again and paste its explanation. The explanation for `subscriptions` is what tells the AI to ask which subscription the shopper means when there is more than one.
+  </Step>
+  <Step title="Name and describe it">
+    Click **Continue and save**, then fill in the action name and description from the recipe. The description is what the AI reads to decide when to use the action, so keep it as written.
   </Step>
   <Step title="Customer confirmation">
-    Listing is a read, so **Require customer confirmation** can stay off for this action.
+    Listing is a read, so **Customer confirmation** can stay off for this action.
   </Step>
   <Step title="Save and enable">
-    Save the action and make it available to AI Agent.
+    Click **Save and enable**.
   </Step>
 </Steps>
 
 ## Repeat for the other actions
 
 Each remaining recipe follows the same shape: the variables the AI needs (for example the subscription id from the list, a resume date, a cancellation reason), a POST request to the subscription's action URL with the same two headers, the outputs, and the confirmation setting. Build the ones you want AI Agent to handle. You do not need all of them.
+
+Add the recipe's variables under **Collect information** first, with their descriptions. They then appear in the `{+}` picker under **Inputs**, and that is where you insert them into the URL and the body. The AI takes the subscription id from the List subscriptions result on its own; the shopper is not asked for it. When you set the method to POST, Gorgias adds a JSON request body; paste the body from the recipe, or leave it as `{}` when the recipe has none.
 
 | Action | Keep customer confirmation on | Allowed for AI by default |
 |---|---|---|
@@ -72,13 +77,17 @@ Each remaining recipe follows the same shape: the variables the AI needs (for ex
 | Retry a failed payment | Yes | No |
 | Send a payment update link | Optional | Yes |
 
-**Keep Require customer confirmation on** for cancel, skip, update the shipping address, apply a discount and change the next order date. The AI then tells the shopper what it is about to do and waits for a yes.
+**Keep Customer confirmation on** for cancel, skip, update the shipping address, apply a discount and change the next order date. The AI then tells the shopper what it is about to do and waits for a yes.
 
 An action that is off for AI Agent in the [permissions table](/docs/integrations/gorgias#permissions) still works as a recipe, but Bonde answers it with a message telling the AI to hand the ticket to a person. Switch the permission on in Bonde when you are ready; no change is needed in Gorgias.
 
+## Tell AI Agent when to use the actions
+
+In Gorgias, go to **AI Agent > Knowledge** and create a **Guidance** entry for subscriptions. Write, in plain words, that subscriptions are managed by Bonde and that the AI should list the shopper's subscriptions first, then insert the actions you built from the **Actions** menu of the editor. Publish it and switch it on for AI Agent.
+
 ## Test in Gorgias
 
-Use AI Agent's test mode in Gorgias with the email of a real subscriber and ask, as that shopper would, to see their subscriptions or skip an order.
+Open the **Playground** in AI Agent. In its settings, set **Target** to **Existing customer**, pick the email of a real subscriber and switch **Actions** on. Then ask, as that shopper would, when their next order is or to skip it. The Playground needs at least one knowledge entry before it runs; the guidance above is enough.
 
 <Warning>
 Test mode uses your live store. An action you confirm in a test really skips, pauses or cancels that subscription. Test with your own subscription or a staff account, not a customer's.
@@ -88,7 +97,7 @@ If the AI cannot find the subscriptions, run the same email through the **Test**
 
 ## After rotating the secret
 
-Rotating the Bonde Connect secret revokes the old one immediately. Bonde updates the sidebar integration and its buttons itself, but it cannot reach into the actions you built by hand. Open each Bonde action in **Settings > AI Agent > Actions** and replace the value of the `Authorization` header with `Bearer` and the new secret. Until you do, those actions fail and the AI hands the ticket over.
+Rotating the Bonde Connect secret revokes the old one immediately. Bonde updates the sidebar integration and its buttons itself, but it cannot reach into the actions you built by hand. Open each Bonde action in **AI Agent > Actions**, edit its HTTP request step and replace the value of the `Authorization` header with `Bearer` and the new secret. Until you do, those actions fail and the AI hands the ticket over.
 
 ## What the AI can and cannot do
 
@@ -105,4 +114,4 @@ Rotating the Bonde Connect secret revokes the old one immediately. Bonde updates
 - Act on a shopper whose ticket email does not match their Shopify customer email
 - Run an action you have turned off for AI Agent; it hands the ticket to a person instead
 - Change prices, plans or products outside what the subscription's plan allows
-- Hide what it did. Every action shows on the subscription timeline in Bonde as taken by support, with the ticket number
+- Hide what it did. Every action shows on the subscription timeline in Bonde as taken through Gorgias
