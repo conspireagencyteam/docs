@@ -13,7 +13,7 @@ Gorgias is included in Bonde Pro ($15 a month flat, no transaction fees).
 - A Gorgias account, and a Gorgias user with admin access to connect it
 - Your Shopify store connected in Gorgias, so tickets carry the shopper's email
 
-The sidebar and its buttons work with the Gorgias Helpdesk. AI Agent actions also need the Gorgias Automate subscription.
+The sidebar and its buttons work with the Gorgias Helpdesk. AI Agent actions also need Gorgias AI Agent on your account.
 
 ## Connect Gorgias
 
@@ -30,11 +30,11 @@ The sidebar and its buttons work with the Gorgias Helpdesk. AI Agent actions als
   <Step title="Let Bonde set up your helpdesk">
     Bonde creates three things in your Gorgias account: an HTTP integration named **Bonde Subscriptions**, a ticket sidebar widget, and four macros. The status on the Gorgias page turns to **Connected** when it is done, usually within a minute.
   </Step>
-  <Step title="Add the action buttons">
-    The buttons live on the widget and are added once, in Gorgias. In Bonde, open the **Sidebar buttons** card and click **Rotate** on the **Bonde Connect secret** card first so you have a secret to paste. Then in Gorgias open **Settings > Integrations**, find the **Bonde Subscriptions** widget, choose **Add button** on the subscription card, and copy each button's method, URL, headers and fields from Bonde. Seven buttons, a few minutes.
+  <Step title="Check the action buttons">
+    Bonde adds seven action buttons to every subscription in the sidebar when it sets up the widget, with the secret already in place. Open a ticket from a subscriber to see them. Nothing is added by hand.
   </Step>
-  <Step title="Keep your secret">
-    The **Bonde Connect secret** is shown once, when you click **Rotate**. Keep it somewhere safe; the buttons, AI Agent actions and any custom integration use it. The sidebar data itself does not need it; Bonde placed a secret in the integration it created.
+  <Step title="Keep your secret for AI Agent">
+    The sidebar and its buttons need nothing from you. If you build AI Agent actions or a custom integration, click **Rotate secret** on the **Bonde Connect secret** card; the secret is shown once, so keep it somewhere safe.
   </Step>
 </Steps>
 
@@ -112,7 +112,7 @@ These permissions are separate from the customer portal settings. You can let su
 
 The secret is what proves to Bonde that a request comes from your Gorgias account. It is shown once, when you connect, and Bonde keeps only a fingerprint of it afterwards.
 
-Click **Rotate** on the **Bonde Connect secret** card to issue a new one. The old secret stops working at once, and the new one is shown once. Bonde updates the sidebar integration and its buttons itself. Any AI Agent action and any custom integration built with the old secret keep failing until you paste the new one into them; see [after rotating the secret](/docs/integrations/gorgias-ai-agent#after-rotating-the-secret).
+Click **Rotate secret** on the **Bonde Connect secret** card to issue a new one. The old secret stops working at once, and the new one is shown once. Bonde updates the sidebar integration and its buttons itself. Any AI Agent action and any custom integration built with the old secret keep failing until you paste the new one into them; see [after rotating the secret](/docs/integrations/gorgias-ai-agent#after-rotating-the-secret).
 
 <Warning>
 Treat the secret like a password. Anyone who has it can read and change subscriptions on your store, within the permissions you set.
