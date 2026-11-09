@@ -61,14 +61,18 @@ Build this one first. It is what lets the AI handle a shopper with several subsc
 
 Each remaining recipe follows the same shape: the variables the AI needs (for example the subscription id from the list, a resume date, a cancellation reason), a POST request to the subscription's action URL with the same two headers, the outputs, and the confirmation setting. Build the ones you want AI Agent to handle. You do not need all of them.
 
+AI Agent asks the shopper for every variable an action collects, so each recipe collects only what its action needs. That is why some actions come in two recipes: **Skip the next order** and **Delay the next order** (skip by a number of days), **Pause** and **Pause until a date**. Build both when you want both behaviours. Where a value can genuinely be blank, such as an apartment line, the recipe tells the AI to write "none" and Bonde leaves that field unchanged.
+
 Add the recipe's variables under **Collect information** first, with their descriptions. They then appear in the `{+}` picker under **Inputs**, and that is where you insert them into the URL and the body. The AI takes the subscription id from the List subscriptions result on its own; the shopper is not asked for it. When you set the method to POST, Gorgias adds a JSON request body; paste the body from the recipe, or leave it as `{}` when the recipe has none. In the body, keep the quotation marks from the recipe and insert each variable between them with the body's own `{+}` picker. Gorgias marks the body as invalid until the JSON is complete.
 
 | Action | Keep customer confirmation on | Allowed for AI by default |
 |---|---|---|
 | Skip the next order | Yes | Yes |
+| Delay the next order (by a number of days) | Yes | Yes |
 | Pause | Recommended | Yes |
+| Pause until a date | Recommended | Yes |
 | Resume | Optional | Yes |
-| Cancel | Yes | No |
+| Cancel | Yes | Yes |
 | Change the next order date | Yes | Yes |
 | Change the frequency | Recommended | Yes |
 | Swap a product | Yes | No |
@@ -107,7 +111,9 @@ Gorgias shows header values in full to anyone who can edit an action, so the sec
 
 - See a shopper's subscriptions, with status, products, frequency, price and next order date
 - Skip, pause, resume, reschedule, change the frequency, update the address and send a payment update link, where you allow it
-- Cancel, swap, discount or retry a payment, once you switch those on
+- Push the next order back by an exact number of days when the shopper asks ("a week" is 7); Bonde works out the date from the real next order date
+- Cancel, where you allow it, after offering a pause or a skip and confirming with the shopper
+- Swap, discount or retry a payment, once you switch those on
 - Ask which subscription the shopper means when there are several
 - Confirm with the shopper before any action you mark for confirmation
 
