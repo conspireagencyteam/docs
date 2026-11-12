@@ -1,5 +1,8 @@
 {
   "title": "Sidebar cart",
   "defaultOpen": true,
-  "pages": ["index"]
+  "pages": [
+    "index",
+    "rewards-bar"
+  ]
 }

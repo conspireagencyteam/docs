@@ -1,0 +1,118 @@
+---
+title: Rewards bar
+description: Show free shipping, free gifts, and order discounts as milestones on one progress bar at the top of the sidebar cart.
+---
+
+The rewards bar is one progress bar at the top of the sidebar cart for everything a shopper can earn by adding more: free shipping, free gifts, and money off the order. It replaces the separate free shipping bar and gift progress bar.
+
+The bar is off until you turn it on. Until then, your cart keeps the [free shipping bar](/docs/sidebar-cart#free-shipping-bar) and the gift progress bar.
+
+## Turn on the rewards bar
+
+<Steps>
+  <Step title="Open the rewards bar">
+    Go to **Upsells** and click **Open rewards bar**.
+  </Step>
+  <Step title="Choose a style and your rewards">
+    Pick a style, then check the rewards listed under **Rewards on the bar**. The preview on the right shows your cart's bar with these settings. Move the **Cart value in this preview** slider to see the bar fill.
+  </Step>
+  <Step title="Turn it on">
+    Select **Show the rewards bar in my cart** and click **Save**.
+  </Step>
+</Steps>
+
+<Note>
+  The bar shows in the sidebar cart, so the sidebar cart needs to be on as well. See [Sidebar cart](/docs/sidebar-cart).
+</Note>
+
+## Styles
+
+| Style | What shoppers see | Suits |
+|---|---|---|
+| **Track** | One bar with a marker for each reward, placed by amount | Two or three rewards that are well spaced |
+| **Steps** | One even segment per reward | Rewards that sit close together |
+| **Next reward** | Only the reward the shopper is closest to, with earned rewards listed under it | Stores that want the simplest message |
+
+The cart adapts when your rewards don't suit the style you picked, and the preview tells you when it has:
+
+- One reward shows as a plain progress bar under every style.
+- Rewards too close together for their labels show as even steps.
+- More than four rewards show the four around the shopper, as even steps.
+- A gift counted in items, not cart value, gets a row of its own.
+
+## Rewards on the bar
+
+The bar brings together rewards from four places.
+
+### Free shipping
+
+Enter a **Free shipping threshold** to put free shipping on the bar. Leave it empty to keep free shipping off the bar.
+
+<Warning>
+  The threshold is what the bar shows. It doesn't create a shipping rate. Set up the free shipping rate itself in **Settings > Shipping and delivery** in your Shopify admin, at the same amount.
+</Warning>
+
+### Free gifts
+
+Each tier of your active gift campaigns appears on the bar at its threshold, and Bonde adds the gift to the cart when a shopper reaches it. Create and edit campaigns in **Gift Incentives**.
+
+Gift tiers only appear on the bar while **Show gift progress tracker** is on in **Upsells > Settings > Cart sidebar**.
+
+### Discounts Bonde applies
+
+Take money off the whole order once the cart reaches an amount. Bonde shows the discount on the bar and applies it in the cart and at checkout.
+
+<Steps>
+  <Step title="Add a discount">
+    Under **Discounts Bonde applies**, click **Add a discount**.
+  </Step>
+  <Step title="Set the discount">
+    Choose **Percent off the order** or **Amount off the order**, then enter the **Value** and the **Cart value** where it starts.
+  </Step>
+  <Step title="Save">
+    Click **Save**. Bonde creates an automatic discount named **Rewards bar discount** in your Shopify admin and keeps it up to date.
+  </Step>
+</Steps>
+
+How these discounts behave:
+
+- With more than one discount, a shopper gets the highest one their cart has reached. They don't add up.
+- The discount combines with free gifts, bundle and upsell discounts, and shipping discounts.
+- It doesn't combine with other order discounts or discount codes unless you select **Combine with other order discounts and discount codes**.
+- Free gifts don't count toward the cart value and aren't discounted.
+
+<Warning>
+  Don't edit or delete the **Rewards bar discount** in your Shopify admin. Change your discounts in Bonde, and Bonde updates it for you.
+</Warning>
+
+### Rewards you apply outside Bonde
+
+If you run a gift or discount as a Shopify discount or through another app, you can still show it on the bar. Under **Rewards you apply outside Bonde**, click **Add a reward**, describe it the way shoppers should read it (for example `a free bottle of serum`), and enter the cart value where it starts.
+
+Bonde shows these rewards on the bar and doesn't apply them. Make sure the discount or offer itself starts at the same amount.
+
+Rewards at the same amount share one milestone and one message. For example, free shipping and a free gift that both start at $99 read as "free shipping + a free gift".
+
+## Wording
+
+The **Track** and **Steps** styles let you write your own messages:
+
+- **Message while a reward is ahead**: Type `{amount}` for what the shopper has left to spend and `{reward}` for the next reward. For example, `You're {amount} away from {reward}`.
+- **Message once every reward is unlocked**: Type `{rewards}` for what was unlocked.
+
+Leave a field empty to use the default wording. The **Next reward** style has its own short wording, such as "$24.00 to go for Travel serum".
+
+## How the cart value is measured
+
+- Gifts, discounts, and rewards you apply outside Bonde are measured on the cart before any discount on the whole order, so a discount stays unlocked after it's applied.
+- Free shipping is measured on what the shopper pays after discounts, because that's what your shipping rate uses.
+
+For example, with 10% off from $100 and free shipping from $95, a $100 cart gets the discount and pays $90. The bar shows the discount as unlocked and free shipping as $5.00 away.
+
+## Other currencies
+
+The amounts on the bar are in your store's currency. A cart in another currency keeps the free shipping bar and gift progress bar, and discounts from the rewards bar aren't applied to it.
+
+## Turn off the rewards bar
+
+Clear **Show the rewards bar in my cart** and click **Save**. Your cart goes back to the free shipping bar and gift progress bar, and Bonde stops applying the discounts from the bar. Your settings are kept for when you turn it on again.
