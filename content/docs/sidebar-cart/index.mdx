@@ -58,6 +58,28 @@ In **Upsells > Settings > Cart sidebar**, you can configure:
 - **Upsell display**: Whether to show upsells in the cart and how many
 - **Bundle display**: How bundle items are grouped and displayed
 
+## Free shipping bar
+
+Set a **Free shipping threshold** in **Upsells > Settings > Cart sidebar** to show a progress bar at the top of the sidebar cart. Leave the threshold empty to hide the bar.
+
+By default the bar reads "$24.00 away from free shipping" while the cart is below the threshold, and "You've qualified for free shipping!" once the cart reaches it. You can replace either line:
+
+- **Message before the threshold is reached**: Type `{amount}` where the amount left to spend should appear
+- **Message once free shipping is unlocked**: Shown when the cart reaches the threshold
+
+Leave a field empty to keep the default wording. A preview under the fields shows both lines as shoppers read them.
+
+For example, during a gift with purchase offer that starts at the same threshold:
+
+| When | Message |
+|------|---------|
+| Below the threshold | `You're {amount} away from free shipping + a free gift` |
+| At the threshold or above | `You've unlocked free shipping + a free gift` |
+
+<Note>
+  The bar shows progress and wording only. It doesn't apply free shipping or add a gift. Set up the free shipping rate in **Settings > Shipping and delivery** in your Shopify admin, and make sure any gift or discount you mention is applied by its own discount or offer.
+</Note>
+
 ## Cart upsells
 
 When you create cart upsells in Bonde, they automatically appear in the sidebar cart. The upsells are triggered based on cart contents and can include discounts.
