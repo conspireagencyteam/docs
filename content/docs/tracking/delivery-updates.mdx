@@ -1,13 +1,13 @@
 ---
-title: "Delivery update emails"
-description: "Branded transactional emails that auto-send when a shipment transitions status — in transit, out for delivery, delivered, exception, or returned."
+title: "Send shipping status emails to customers"
+description: "Branded emails that send when a shipment changes status (in transit, out for delivery, delivered, exception or returned)."
 ---
 
 Bonde can send branded delivery-update emails to customers when their shipment transitions status. Customers opt in from the tracking page, and emails match your tracking page's branding automatically.
 
 ## How it works
 
-When enabled, emails send automatically as the carrier reports each status change. Customers only receive emails for the specific order they opted in to — there's no marketing list.
+When enabled, emails send automatically as the carrier reports each status change. Customers only receive emails for the specific order they opted in to. There's no marketing list.
 
 | Email | When it sends |
 |-------|----------------|
@@ -23,7 +23,7 @@ Delivery update emails depend on three setup steps. The Bonde app shows warnings
 
 <Steps>
   <Step title="Verify a sending domain">
-    Go to **Emails > Settings** and [verify your sending domain](/docs/emails/domain-setup). If you've already set this up for subscription emails, you're done — the same domain is used for delivery update emails.
+    Go to **Emails > Settings** and [verify your sending domain](/docs/emails/domain-setup). If you've already set this up for subscription emails, you're done: the same domain is used for delivery update emails.
   </Step>
   <Step title="Configure a default sender">
     In **Emails > Settings**, set a **From name** (e.g., "Acme Store") and **From email** (must use your verified domain).
@@ -39,7 +39,7 @@ Delivery update emails depend on three setup steps. The Bonde app shows warnings
   <Step title="Open the builder">
     In the Bonde app, go to **Tracking** and click **Email updates** in the top-right.
 
-    You'll see five tabs — one per delivery status. Each tab has its own template, so you can tailor the copy for "in transit" versus "delivered" separately.
+    You'll see five tabs, one per delivery status. Each tab has its own template, so you can tailor the copy for "in transit" versus "delivered" separately.
   </Step>
   <Step title="Edit a template">
     Click a status tab (e.g., **Out for delivery**). Edit the **Subject line** and **Preheader**, then use the **Add block...** menu to add blocks, or edit the existing blocks. Use the up/down arrows to reorder, or **Remove** to delete.
@@ -81,7 +81,7 @@ Delivery update emails depend on three setup steps. The Bonde app shows warnings
   </Card>
 </Columns>
 
-The email footer (your business address + unsubscribe link) is added automatically — you don't need to add a block for it.
+The email footer (your business address + unsubscribe link) is added automatically, so you don't need to add a block for it.
 
 ## Variables
 
@@ -102,7 +102,7 @@ Use these in the subject line, preheader, or any text field. Wrap each variable 
 | `tracking.eta` | Estimated delivery date |
 | `shop.name` | Your store name |
 
-Missing variables render as empty strings — they never show as `undefined` or break the email.
+Missing variables render as empty strings. They never show as `undefined` or break the email.
 
 ## Branding
 
@@ -139,7 +139,7 @@ Customers opt in from the tracking page using the **Subscribe to updates** block
   </Step>
 </Steps>
 
-The email input pre-fills with the order's customer email so most customers only need to click **Sign up**. Each opt-in is scoped to one fulfillment — a customer signing up on Order #1042 won't get emails about their next order unless they opt in there too.
+The email input pre-fills with the order's customer email so most customers only need to click **Sign up**. Each opt-in is scoped to one fulfillment: a customer signing up on Order #1042 won't get emails about their next order unless they opt in there too.
 
 ## Unsubscribing
 
@@ -159,7 +159,7 @@ Every email includes an unsubscribe link in the footer. Clicking it immediately 
 
 **Variables aren't replacing**
 
-- Variable names are case-sensitive — check spelling
+- Variable names are case-sensitive, so check spelling
 - Make sure you're using double curly braces: `{{ variable }}`
 
 **The email doesn't match my tracking page branding**
