@@ -10,6 +10,20 @@ export const H = 482;
 export const STOP = Symbol("stop");
 export const IMG = "/site/demo";
 
+/** Alt text for each demo image, so no <img> in a demo ever has an empty alt. */
+const IMG_ALT: Record<string, string> = {
+  "kept-jar.png": "Kept Hydrate Face Cream jar",
+  "kept-oil.png": "Kept face oil dropper bottle",
+  "tcs-logo.png": "Tillamook Country Smoker logo",
+  "tcs-sea-salt-pepper.jpg": "Bag of Sea Salt and Pepper beef jerky",
+  "tcs-honey-glazed.jpg": "Bag of Honey Glazed beef jerky",
+  "tcs-old-fashioned.jpg": "Bag of Old Fashioned beef jerky",
+  "tcs-taj-n-chili-lime.png": "Bag of Tajin Chili Lime beef jerky",
+  "tcs-spicy-sweet.jpg": "Bag of Spicy and Sweet beef jerky",
+  "tcs-teriyaki.jpg": "Bag of Teriyaki beef jerky",
+};
+export const altFor = (img: string) => IMG_ALT[img] ?? "Product photo";
+
 export const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 export const money = (n: number) => `$${n.toFixed(2)}`;
 
@@ -123,7 +137,7 @@ export const keptHeader = `
 
 export const keptImage = `
   <div class="kp-media">
-    <img src="${IMG}/kept-jar.png" alt="" width="334" height="306">
+    <img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}" width="334" height="306">
     <span class="kp-dots">1 / 4</span>
   </div>`;
 

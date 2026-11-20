@@ -59,7 +59,7 @@ export function YouTube({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={poster}
-              alt=""
+              alt={`Video thumbnail: ${title}`}
               loading={eager ? "eager" : "lazy"}
               // maxresdefault only exists for HD uploads; fall back to the
               // always-present 480p poster (object-cover trims its bars).

@@ -11,7 +11,7 @@
  * with prefers-reduced-motion it shows one still frame of the finished state.
  */
 import {
-  W, H, STOP, IMG, money, CHECK, CURSOR, CHEVRON, STAR, Runner, q, qa, keptHeader, keptImage, icon, fly,
+  W, H, STOP, IMG, money, CHECK, CURSOR, CHEVRON, STAR, Runner, q, qa, keptHeader, keptImage, icon, fly, altFor,
   type Demo,
 } from "./demo-kit";
 import { SUB_DEMOS } from "./demos-subs";
@@ -64,7 +64,7 @@ const cart: Demo = {
       </div>
       <div class="kc-items">
         <div class="kc-item">
-          <span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span>
+          <span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"></span>
           <div class="kc-main">
             <p class="kc-name">Hydrate Face Cream</p>
             <p class="kc-meta"><span class="kc-meta-a">One-time purchase</span><span class="kc-meta-b">Subscribe &amp; save · every month</span></p>
@@ -78,7 +78,7 @@ const cart: Demo = {
           <button type="button" class="kc-mini" data-switch>Switch</button>
         </div>
         <div class="kc-item kc-item--new" data-item2>
-          <span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span>
+          <span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span>
           <div class="kc-main">
             <p class="kc-name">Renew Skin Serum</p>
             <p class="kc-meta"><span class="kc-meta-a">Bundle discount 5%</span></p>
@@ -90,12 +90,12 @@ const cart: Demo = {
       <div class="kc-recs">
         <p class="kc-label">Customers also bought</p>
         <div class="kc-rec" data-rec1>
-          <span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span>
+          <span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span>
           <div class="kc-main"><p class="kc-name">Renew Skin Serum</p><p class="kc-deal"><b>$20.89</b> <s>$21.99</s></p><p class="kc-note">Save 5% when you bundle</p></div>
           <button type="button" class="kc-add" data-add1><span class="a">Add</span><span class="b">${CHECK}</span></button>
         </div>
         <div class="kc-rec">
-          <span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span>
+          <span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span>
           <div class="kc-main"><p class="kc-name">Purify Face Oil</p><p class="kc-deal"><b>$21.84</b> <s>$22.99</s></p><p class="kc-note">Save 5% with Hydrate</p></div>
           <button type="button" class="kc-add"><span class="a">Add</span></button>
         </div>
@@ -288,13 +288,13 @@ const bundle: Demo = {
   html: `
   <div class="tc">
     <div class="tc-bar">20% off orders $75+ | Free shipping on orders over $50</div>
-    <div class="tc-nav"><span>Shop</span><span>New products</span><span>Bundles</span><img src="${IMG}/tcs-logo.png" alt=""><span>Rewards</span><span>Flash sale</span><span>Gifts</span></div>
+    <div class="tc-nav"><span>Shop</span><span>New products</span><span>Bundles</span><img src="${IMG}/tcs-logo.png" alt="${altFor("tcs-logo.png")}"><span>Rewards</span><span>Flash sale</span><span>Gifts</span></div>
     <div class="tc-body">
       <div class="tc-grid">
         ${JERKY.map(
           (p, i) => `
           <div class="tc-card" data-card="${i}">
-            <div class="tc-img"><img src="${IMG}/${p.img}" alt="" data-img><img src="${IMG}/tcs-teriyaki.jpg" alt="" class="tc-img-alt"></div>
+            <div class="tc-img"><img src="${IMG}/${p.img}" alt="${altFor(p.img)}" data-img><img src="${IMG}/tcs-teriyaki.jpg" alt="${altFor("tcs-teriyaki.jpg")}" class="tc-img-alt"></div>
             <p class="tc-name">${p.name}</p>
             <p class="tc-price">$6.49</p>
             <div class="tc-select" data-select><span data-variant>${p.variant}</span>${CHEVRON}
@@ -408,7 +408,7 @@ function renderBox(root: HTMLElement, box: { i: number; qty: number }[], run?: R
         const p = JERKY[b.i];
         const img = b.i === 0 ? "tcs-teriyaki.jpg" : p.img;
         const name = b.i === 0 ? "Original Beef Jerky · Teriyaki" : p.name;
-        return `<div class="tc-line" data-line="${b.i}"><img src="${IMG}/${img}" alt=""><span>${name}</span><b>×${b.qty}</b></div>`;
+        return `<div class="tc-line" data-line="${b.i}"><img src="${IMG}/${img}" alt="${altFor(img)}"><span>${name}</span><b>×${b.qty}</b></div>`;
       })
       .join("");
   }
@@ -500,7 +500,7 @@ const loyalty: Demo = {
     <div class="lc" data-checkout>
       <div class="lc-head"><span class="kp-logo">kept</span><span>Checkout</span></div>
       <div class="lc-items">
-        ${CHECKOUT.map((c) => `<div class="lc-item"><span class="kc-thumb"><img src="${IMG}/${c.img}" alt=""></span><span>${c.name}</span><b>${money(c.price)}</b></div>`).join("")}
+        ${CHECKOUT.map((c) => `<div class="lc-item"><span class="kc-thumb"><img src="${IMG}/${c.img}" alt="${altFor(c.img)}"></span><span>${c.name}</span><b>${money(c.price)}</b></div>`).join("")}
       </div>
       <div class="lc-credit">
         <span class="lc-credit-ic">${icon("gift")}</span>
@@ -622,13 +622,13 @@ const tracking: Demo = {
       <div class="tk-right">
         <div class="tk-card">
           <p class="tk-k">In this shipment</p>
-          <div class="tk-item"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><div><p>Hydrate Face Cream</p><small>Subscribe &amp; save · Qty 1</small></div></div>
+          <div class="tk-item"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"></span><div><p>Hydrate Face Cream</p><small>Subscribe &amp; save · Qty 1</small></div></div>
         </div>
         <div class="tk-card">
           <p class="tk-k">Complete your routine</p>
           <div class="tk-code"><span>15% off with <b>THANKS15</b></span><span class="tk-clock" data-clock>23:59:41</span></div>
-          <div class="tk-rec"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><div><p>Purify Face Oil</p><small><s>$22.99</s> <b>$19.54</b></small></div><button type="button" class="kc-add" data-rec-add><span class="a">Add</span><span class="b">${CHECK}</span></button></div>
-          <div class="tk-rec"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><div><p>Renew Skin Serum</p><small><s>$21.99</s> <b>$18.69</b></small></div><button type="button" class="kc-add"><span class="a">Add</span></button></div>
+          <div class="tk-rec"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span><div><p>Purify Face Oil</p><small><s>$22.99</s> <b>$19.54</b></small></div><button type="button" class="kc-add" data-rec-add><span class="a">Add</span><span class="b">${CHECK}</span></button></div>
+          <div class="tk-rec"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span><div><p>Renew Skin Serum</p><small><s>$21.99</s> <b>$18.69</b></small></div><button type="button" class="kc-add"><span class="a">Add</span></button></div>
         </div>
       </div>
     </div>
@@ -729,7 +729,7 @@ const FUNNEL = [
 const BASE_ORDER = 15;
 
 const offerRow = (img: string, name: string, price: string, note: string, attr: string) => `
-  <div class="up-offer"><span class="kc-thumb"><img src="${IMG}/${img}" alt=""></span>
+  <div class="up-offer"><span class="kc-thumb"><img src="${IMG}/${img}" alt="${altFor(img)}"></span>
     <div class="kc-main"><p class="kc-name">${name}</p><p class="kc-deal">${price}</p><p class="kc-note">${note}</p></div>
     <button type="button" class="kc-add" ${attr}><span class="a">Add</span><span class="b">${CHECK}</span></button></div>`;
 
@@ -737,7 +737,7 @@ const offerRow = (img: string, name: string, price: string, note: string, attr: 
 const SCREENS = [
   // 0 product page: "Pairs well with" widget under the buy button
   `<div class="us-pdp">
-     <div class="us-media"><img src="${IMG}/kept-jar.png" alt=""></div>
+     <div class="us-media"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"></div>
      <div class="us-info">
        <h3 class="us-title">Hydrate Face Cream</h3>
        <p class="us-price">$15.00</p>
@@ -749,9 +749,9 @@ const SCREENS = [
   // 1 sidebar cart
   `<div class="us-cart">
      <p class="us-h">Your cart <span class="us-count"></span></p>
-     <div class="us-line"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><span>Hydrate Face Cream</span><b>$15.00</b></div>
-     <div class="us-line"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span>Renew Skin Serum</span><b>$20.89</b></div>
-     <div class="us-line us-line--new"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span>Purify Face Oil</span><b>$21.84</b></div>
+     <div class="us-line"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"></span><span>Hydrate Face Cream</span><b>$15.00</b></div>
+     <div class="us-line"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span><span>Renew Skin Serum</span><b>$20.89</b></div>
+     <div class="us-line us-line--new"><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span><span>Purify Face Oil</span><b>$21.84</b></div>
      <div class="us-recs"><p class="kc-label">Customers also bought</p>
        ${offerRow("kept-oil.png", "Purify Face Oil", "<b>$21.84</b> <s>$22.99</s>", "Save 5% with Hydrate", "data-u1")}
      </div>
@@ -779,7 +779,7 @@ const SCREENS = [
      <p class="us-pp-k">${CHECK} Order confirmed</p>
      <h3 class="us-pp-h">Add this to your order with one click</h3>
      <div class="us-pp-card">
-       <span class="us-pp-img"><img src="${IMG}/kept-oil.png" alt=""></span>
+       <span class="us-pp-img"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span>
        <div>
          <p class="us-pp-name">Restore Eye Gel</p>
          <p class="us-pp-price"><s>$18.00</s> <b>$14.40</b> <span>20% off, today only</span></p>
@@ -792,7 +792,7 @@ const SCREENS = [
   `<div class="us-tk">
      <div class="us-tk-top"><div><p class="tk-eta-k">Estimated delivery</p><p class="tk-eta-v">Today, by 8 PM</p></div><span class="tk-pill">Out for delivery</span></div>
      <p class="us-label">In this shipment</p>
-     <div class="us-tk-items"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt=""></span><small>5 items · $81.13</small></div>
+     <div class="us-tk-items"><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span><span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"></span><span class="kc-thumb"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}"></span><small>5 items · $81.13</small></div>
      <p class="us-label">Shop again</p>
      <div class="tk-code"><span>15% off with <b>THANKS15</b></span><span class="tk-clock">23:59:12</span></div>
      ${offerRow("kept-oil.png", "Renew Skin Serum", "<b>$18.69</b> <s>$21.99</s>", "Code applied at checkout", "data-u4")}

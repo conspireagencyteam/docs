@@ -3,12 +3,13 @@
  * sitemap, and robots; override with NEXT_PUBLIC_SITE_URL if needed.
  *
  * This project serves BOTH getbonde.com (marketing pages at the root) and the
- * merchant docs (mounted at /docs). docs.getbonde.com is rewritten onto /docs
- * until the apex domain moves here, then redirected — see next.config.mjs.
+ * merchant docs (mounted at /docs). www.getbonde.com is the serving host: the
+ * apex and docs.getbonde.com both 308 to it (see next.config.mjs), so every
+ * canonical, sitemap and robots URL uses www.
  */
 export const site = {
   name: "Bonde",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://getbonde.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.getbonde.com",
   description:
     "Subscriptions for Shopify with no transaction fees, $15 a month flat, plus free bundles, upsells, loyalty and branded order tracking in the same app.",
   // SEO title for the marketing home page.
