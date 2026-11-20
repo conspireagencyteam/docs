@@ -82,5 +82,12 @@
     "description": "Learn how to add save offers when Shopify subscribers cancel with Bonde Subscriptions & Bundles. The cancel flow with save offers, pausing with an end date, what happens when a renewal payment fails, and the emails around each renewal.",
     "uploadDate": "2026-11-03T17:09:00.910Z",
     "durationSeconds": 60
+  },
+  "https://getbonde.com/docs/upsells/cart": {
+    "id": "kcdvZis7MGE",
+    "title": "How to show cart upsells as stacked cards on Shopify | Bonde Subscriptions & Bundles",
+    "description": "Learn how to show cart upsells as stacked cards on Shopify with Bonde Subscriptions & Bundles. Display upsell offers in your sidebar cart or cart page.",
+    "uploadDate": "2026-11-20T16:56:14.260Z",
+    "durationSeconds": 59
   }
 }
