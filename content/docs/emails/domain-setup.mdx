@@ -1,9 +1,9 @@
 ---
-title: "Domain verification"
-description: "Set up and verify your sending domain for reliable email delivery."
+title: "Verify your email sending domain"
+description: "Add Bonde's DKIM and SPF records at your DNS provider so subscription emails send from your own domain."
 ---
 
-Verifying your sending domain ensures emails are delivered reliably and appear as coming from your brand — not a generic address. Without domain verification, emails are more likely to land in spam or be rejected entirely.
+Verifying your sending domain ensures emails are delivered reliably and appear as coming from your brand, not a generic address. Without domain verification, emails are more likely to land in spam or be rejected entirely.
 
 ## Why verify your domain?
 
@@ -23,7 +23,7 @@ Verifying your sending domain ensures emails are delivered reliably and appear a
   <Step title="Add your domain">
     Click **Add Domain** and enter your root domain (e.g., `yourdomain.com`).
 
-    Don't include `www` or a subdomain — use the root domain that matches your sending email address.
+    Don't include `www` or a subdomain. Use the root domain that matches your sending email address.
   </Step>
   <Step title="View DNS records">
     After adding the domain, click **View DNS Records** to see the records you need to add. Bonde provides three types of records, each with a specific purpose.
@@ -66,7 +66,7 @@ If shown, the MX record enables receiving replies to your sending address. This 
 
 - **Name**: Usually a subdomain like `send` or `bounces`
 - **Value**: A mail server address
-- **Priority**: A number (usually 10) — enter this in the priority field if your DNS provider has one
+- **Priority**: A number (usually 10). Enter this in the priority field if your DNS provider has one
 
 ## Adding records to your DNS provider
 
@@ -74,7 +74,7 @@ The exact steps depend on your DNS provider. Here are tips for common providers:
 
 | Provider | Where to add records |
 |----------|---------------------|
-| **Cloudflare** | DNS > Records > Add record. For CNAME records, turn **off** the proxy (orange cloud) — it must be DNS only (gray cloud). |
+| **Cloudflare** | DNS > Records > Add record. For CNAME records, turn **off** the proxy (orange cloud): it must be DNS only (gray cloud). |
 | **GoDaddy** | My Products > DNS > DNS Records > Add |
 | **Namecheap** | Domain List > Manage > Advanced DNS > Add new record |
 | **Shopify Domains** | Settings > Domains > your domain > DNS settings |
@@ -98,12 +98,12 @@ The exact steps depend on your DNS provider. Here are tips for common providers:
     Return to **Emails > Settings** in Bonde and click **Verify** next to your domain.
 
     Each record will show its own status:
-    - **Verified** — Record is correct and detected
-    - **Pending** — Record not yet detected (may still be propagating)
-    - **Failed** — Record is incorrect or missing
+    - **Verified**: Record is correct and detected
+    - **Pending**: Record not yet detected (may still be propagating)
+    - **Failed**: Record is incorrect or missing
   </Step>
   <Step title="Check individual record status">
-    If some records verify but others don't, click **View DNS Records** to see which specific record needs attention. Fix only the failing records — you don't need to redo records that already passed.
+    If some records verify but others don't, click **View DNS Records** to see which specific record needs attention. Fix only the failing records. You don't need to redo records that already passed.
   </Step>
 </Steps>
 
@@ -128,12 +128,12 @@ Start with `p=none` (monitor only) to see reports without affecting delivery. On
 **Verification stuck on "Pending"?**
 - Double-check the record name and value for typos
 - Confirm you're adding records to the correct domain
-- Wait at least 1 hour — some DNS providers are slower
+- Wait at least 1 hour, as some DNS providers are slower
 - Use a DNS lookup tool (like `dig` or [dnschecker.org](https://dnschecker.org)) to confirm your records are visible
 
 **DKIM verification failing?**
 - Make sure the CNAME record is not proxied (Cloudflare users: gray cloud, not orange)
-- Check that the full value was copied — DKIM values are long and easy to truncate
+- Check that the full value was copied. DKIM values are long and easy to truncate
 
 **SPF verification failing?**
 - Check if you already have an SPF record. If so, merge the `include:` value rather than adding a second TXT record
