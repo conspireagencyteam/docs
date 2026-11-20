@@ -7,12 +7,12 @@
  * Every demo shows a feature the app ships today (see bonde-app
  * docs/SUBSCRIPTIONS_GAPS.md for what doesn't exist yet, and keep it out).
  */
-import { IMG, money, CHECK, CHEVRON, STAR, q, qa, keptHeader, icon, fly, type Demo } from "./demo-kit";
+import { IMG, money, CHECK, CHEVRON, STAR, q, qa, keptHeader, icon, fly, altFor, type Demo } from "./demo-kit";
 
 const noBar = keptHeader.replace(/<div class="kp-bar">.*?<\/div>/, "");
 const acctTabs = (on: string) =>
   `<div class="lp-sub">${["Orders", "Subscriptions", "Rewards", "Profile"].map((t) => `<span${t === on ? ' class="is-on"' : ""}>${t}</span>`).join("")}</div>`;
-const thumb = (img: string) => `<span class="kc-thumb"><img src="${IMG}/${img}" alt=""></span>`;
+const thumb = (img: string) => `<span class="kc-thumb"><img src="${IMG}/${img}" alt="${altFor(img)}"></span>`;
 /** A button whose label swaps to a green "done" state when its parent flag is set. */
 const flip = (a: string, b: string) => `<span class="a">${a}</span><span class="b">${CHECK} ${b}</span>`;
 
@@ -36,7 +36,7 @@ const subcart: Demo = {
   <div class="kp sc">
     ${noBar}
     <div class="kp-pdp">
-      <div class="kp-media"><img src="${IMG}/kept-jar.png" alt="" width="334" height="306"></div>
+      <div class="kp-media"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}" width="334" height="306"></div>
       <div class="kp-info">
         <h3 class="kp-title">Hydrate Face Cream</h3>
         <p class="kp-price">$15.00</p>
@@ -172,7 +172,7 @@ const freeship: Demo = {
       </div>
       <div class="fs-r">
         <div class="fs-item">
-          <span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt=""><i>1</i></span>
+          <span class="kc-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"><i>1</i></span>
           <div><p>Hydrate Face Cream</p><small>Subscribe &amp; save · Every month</small></div>
           <b>$12.75</b>
         </div>
@@ -264,20 +264,20 @@ const BOX = [
 const BOX_ONE = 29.21;
 const BOX_SUB = 26.29;
 const boxLines = BOX.filter((b) => b.qty)
-  .map((b) => `<div class="tc-line"><img src="${IMG}/${b.img}" alt=""><span>${b.name.replace("&", "&amp;")}</span><b>×${b.qty}</b></div>`)
+  .map((b) => `<div class="tc-line"><img src="${IMG}/${b.img}" alt="${altFor(b.img)}"><span>${b.name.replace("&", "&amp;")}</span><b>×${b.qty}</b></div>`)
   .join("");
 
 const boxsub: Demo = {
   html: `
   <div class="tc bs">
     <div class="tc-bar">20% off orders $75+ | Free shipping on orders over $50</div>
-    <div class="tc-nav"><span>Shop</span><span>New products</span><span>Bundles</span><img src="${IMG}/tcs-logo.png" alt=""><span>Rewards</span><span>Flash sale</span><span>Gifts</span></div>
+    <div class="tc-nav"><span>Shop</span><span>New products</span><span>Bundles</span><img src="${IMG}/tcs-logo.png" alt="${altFor("tcs-logo.png")}"><span>Rewards</span><span>Flash sale</span><span>Gifts</span></div>
     <div class="tc-body">
       <div class="tc-grid">
         ${BOX.map(
           (b) => `
         <div class="tc-card${b.qty ? " is-in" : ""}">
-          <div class="tc-img"><img src="${IMG}/${b.img}" alt=""></div>
+          <div class="tc-img"><img src="${IMG}/${b.img}" alt="${altFor(b.img)}"></div>
           <p class="tc-name">${b.name.replace("&", "&amp;")}</p>
           <p class="tc-price">$6.49</p>
           <div class="tc-step"><span>−</span><b>${b.qty}</b><span>+</span></div>
@@ -308,7 +308,7 @@ const boxsub: Demo = {
       <div class="kc-head"><b>Your cart (1)</b><span class="kc-x">×</span></div>
       <div class="bs-group" data-bs-group>
         <div class="bs-gh">
-          <span class="bs-stack">${BOX.filter((b) => b.qty).map((b) => `<img src="${IMG}/${b.img}" alt="">`).join("")}</span>
+          <span class="bs-stack">${BOX.filter((b) => b.qty).map((b) => `<img src="${IMG}/${b.img}" alt="${altFor(b.img)}">`).join("")}</span>
           <div><b>Build your box</b><small>${icon("repeat")} Delivers <span data-bs-cart-f>every 2 weeks</span></small></div>
           <b>${money(BOX_SUB)}</b>
           <span class="bs-chev">${CHEVRON}</span>
@@ -378,7 +378,7 @@ const portal: Demo = {
     <div class="pt-body">
       <div class="pt-card">
         <div class="pt-head">
-          <span class="kc-thumb pt-thumb"><img src="${IMG}/kept-jar.png" alt="" class="pt-img-a"><img src="${IMG}/kept-oil.png" alt="" class="pt-img-b"></span>
+          <span class="kc-thumb pt-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}" class="pt-img-a"><img src="${IMG}/kept-oil.png" alt="${altFor("kept-oil.png")}" class="pt-img-b"></span>
           <div class="pt-who">
             <p class="pt-name"><span class="pt-n-a">Hydrate Face Cream</span><span class="pt-n-b">Purify Face Oil</span></p>
             <p class="pt-meta">Qty 1 · <span data-pt-freq>Every month</span> · Subscribe &amp; save</p>
@@ -966,7 +966,7 @@ const cancelflow: Demo = {
     <div class="pt-body">
       <div class="pt-card">
         <div class="pt-head">
-          <span class="kc-thumb pt-thumb"><img src="${IMG}/kept-jar.png" alt="" class="pt-img-a"></span>
+          <span class="kc-thumb pt-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}" class="pt-img-a"></span>
           <div class="pt-who">
             <p class="pt-name"><span class="pt-n-a">Hydrate Face Cream</span></p>
             <p class="pt-meta">Qty 1 · Every month · Subscribe &amp; save</p>
@@ -1225,7 +1225,7 @@ const journey: Demo = {
     <div class="jy-body">
       <div class="jy-pdp">
         <div class="jy-prod">
-          <span class="kc-thumb jy-thumb"><img src="${IMG}/kept-jar.png" alt=""></span>
+          <span class="kc-thumb jy-thumb"><img src="${IMG}/kept-jar.png" alt="${altFor("kept-jar.png")}"></span>
           <div><p class="jy-name">Hydrate Face Cream</p><p class="jy-meta">50 ml · 4.9 ${STAR}</p></div>
         </div>
         <div class="jy-box">

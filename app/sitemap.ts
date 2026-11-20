@@ -26,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const docs: MetadataRoute.Sitemap = source.getPages().map((page) => ({
     url: `${site.url}${page.url}`,
+    // Last commit to the page's file (source.config.ts); left out when unknown.
+    ...(page.data.lastModified ? { lastModified: page.data.lastModified } : {}),
     changeFrequency: "monthly" as const,
     priority: page.url === site.docsPath ? 0.8 : 0.6,
   }));

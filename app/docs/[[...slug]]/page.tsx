@@ -10,6 +10,8 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { Metadata } from "next";
 import { mdxComponents } from "@/components/mdx";
 import { site } from "@/lib/site";
+import { markdownPath } from "@/lib/llm";
+import { PageActions } from "@/components/PageActions";
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -23,7 +25,8 @@ export default async function Page(props: {
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
+      <PageActions markdownUrl={markdownPath(page.url)} />
       <DocsBody>
         <MDX components={{ ...defaultMdxComponents, ...mdxComponents }} />
       </DocsBody>
@@ -46,5 +49,9 @@ export async function generateMetadata(props: {
   return {
     title: isDocsHome ? { absolute: site.docsTitle } : page.data.title,
     description: page.data.description,
+    alternates: {
+      canonical: page.url,
+      types: { "text/markdown": markdownPath(page.url) },
+    },
   };
 }

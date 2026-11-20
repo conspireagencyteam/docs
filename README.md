@@ -26,11 +26,18 @@ marketing site moved off Shopify in September 2026 so the store could close.
   on a domain verified in Resend) and optionally `CONTACT_TO` (defaults to the
   support inbox). Without them the route returns 503 and the forms show a
   mailto fallback.
-- `next.config.mjs` — host handling and redirects. `DOCS_HOST_MODE=rewrite`
-  (default) serves the docs at their old root URLs on docs.getbonde.com;
-  switch to `redirect` after getbonde.com points at this project so those
-  URLs 308 to `getbonde.com/docs/…`. Also maps every old Shopify storefront
-  path (`/products/*`, `/pages/*`, `/policies/*`, `/blogs/*`) onto the new pages.
+- `next.config.mjs`: host handling and redirects. www.getbonde.com is the
+  serving and canonical host. Every docs.getbonde.com path 308s in one hop to
+  the matching `www.getbonde.com/docs/...` page (or `/docs` when there is no
+  match). Also maps every old Shopify storefront path (`/products/*`,
+  `/pages/*`, `/policies/*`, `/blogs/*`) onto the new pages, and rewrites
+  `/docs/<slug>.md` (and docs URLs requested with `Accept: text/markdown`) to
+  the Markdown route.
+- Markdown for agents: `app/llms.mdx/` (each docs page as Markdown, built
+  from `includeProcessedMarkdown` in `source.config.ts`, which also renders
+  the MDX components as Markdown), `app/llms.txt/` and `app/llms-full.txt/`;
+  shared code in `lib/llm.ts`. Docs pages show "Copy page" and "View as
+  Markdown" (`components/PageActions.tsx`).
 - `content/docs/` — all doc pages (MDX with `title`/`description` frontmatter).
 - `content/docs/**/meta.json` — sidebar order and section titles.
 - `components/mdx.tsx` — Mintlify-compatible MDX components (`Note`, `Warning`,
@@ -51,16 +58,16 @@ npm run type-check
 
 ## Deployment
 
-Vercel project `bonde-docs` (team `goat-apps`), git-connected to this repo —
+Vercel project `bonde-docs` (team `conspire`), git-connected to this repo:
 pushes to `main` deploy to production. DNS lives in the getbonde.com
-Cloudflare zone (DNS-only records). Domains on the project: docs.getbonde.com
-(CNAME → `cname.vercel-dns.com`) and, once the Shopify store is retired,
-getbonde.com (A → `76.76.21.21`) + www (CNAME → `cname.vercel-dns.com`).
-Cutover checklist: add both apex domains to the Vercel project → flip the
-Cloudflare records → set `DOCS_HOST_MODE=redirect` in Vercel and redeploy →
-close the getbonde.myshopify.com store. Old Mintlify URLs of the form
-`/<section>/index` and the old root-mounted docs URLs are 308-redirected in
-`next.config.mjs`.
+Cloudflare zone (DNS-only records). Domains on the project: www.getbonde.com
+(serves), getbonde.com (Vercel domain redirect, 308 to www) and
+docs.getbonde.com (no domain redirect: `next.config.mjs` sends each old docs
+path to its page on www, which a domain redirect cannot do). Old Mintlify URLs
+of the form `/<section>/index` and the old root-mounted docs URLs are
+308-redirected in `next.config.mjs`. `VERCEL_DEEP_CLONE=true` is set on the
+project so the sitemap's per-page `lastmod` comes from full git history; on a
+shallow clone the dates are left out rather than guessed.
 
 Cutover from Mintlify happened 2026-08-12; Mintlify is fully disconnected
 (GitHub app removed via their admin; the plan was free, so nothing to cancel).
