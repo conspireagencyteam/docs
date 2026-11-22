@@ -6,6 +6,13 @@
     "uploadDate": "2026-11-07T17:00:09.904Z",
     "durationSeconds": 68
   },
+  "https://getbonde.com/docs/emails/templates": {
+    "id": "NLxEfGll8WU",
+    "title": "How to change a Shopify subscription email subject line | Bonde Subscriptions & Bundles",
+    "description": "Learn how to change a Shopify subscription email subject line with Bonde Subscriptions & Bundles. Edit the subject line and body of each subscription email, use variables such as the customer's first name, and send a test.",
+    "uploadDate": "2026-11-22T17:00:16.564Z",
+    "durationSeconds": 62
+  },
   "https://getbonde.com/docs/getting-started/sidebar-cart": {
     "id": "JYDCt2U1VSs",
     "title": "How to turn on the Bonde sidebar cart on a Shopify theme | Bonde Subscriptions & Bundles",
