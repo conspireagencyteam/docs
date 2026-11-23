@@ -90,6 +90,13 @@
     "uploadDate": "2026-11-03T17:09:00.910Z",
     "durationSeconds": 60
   },
+  "https://getbonde.com/docs/tracking/delivery-updates": {
+    "id": "2YEoU082q-4",
+    "title": "How to send shipping status emails to Shopify customers | Bonde Subscriptions & Bundles",
+    "description": "Learn how to send shipping status emails to Shopify customers with Bonde Subscriptions & Bundles. Branded emails that send when a shipment changes status (in transit, out for delivery, delivered, exception or returned).",
+    "uploadDate": "2026-11-23T16:59:19.100Z",
+    "durationSeconds": 56
+  },
   "https://getbonde.com/docs/upsells/cart": {
     "id": "kcdvZis7MGE",
     "title": "How to show cart upsells as stacked cards on Shopify | Bonde Subscriptions & Bundles",
