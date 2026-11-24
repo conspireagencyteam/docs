@@ -23,6 +23,7 @@ export default function Footer() {
           <div className="bonde-footer__brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/site/bonde-white.png" alt="Bonde" width={480} height={190} loading="lazy" className="bonde-footer__brand-img" />
+            <sup className="bonde-reg" aria-hidden="true">®</sup>
           </div>
           <a href={site.appStoreUrl} className="bonde-footer__install" target="_blank" rel="noopener">
             <span>INSTALL ON SHOPIFY</span>
@@ -70,7 +71,7 @@ export default function Footer() {
           Results vary by store, catalog, traffic and execution. Pro is $15 per 30 days, billed through Shopify; no transaction fees, no revenue caps.
         </p>
         <div className="bonde-footer__bottom">
-          <p>© {new Date().getFullYear()} Bonde™</p>
+          <p>© {new Date().getFullYear()} Bonde®. BONDE is a registered trademark of Conspire LLC.</p>
           <p>
             <Link href="/terms">Terms</Link> &middot; <Link href="/privacy">Privacy</Link>
           </p>
