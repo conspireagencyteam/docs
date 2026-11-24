@@ -122,6 +122,7 @@ export default function Header() {
             <Link href="/" className="bonde-header__logo" aria-label="Bonde home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/site/bonde-black-512.png" alt="Bonde" width={480} height={190} loading="eager" className="bonde-header__logo-img" />
+              <sup className="bonde-reg" aria-hidden="true">®</sup>
             </Link>
 
             <button

@@ -106,3 +106,7 @@
   .bx-compare__cols, .bx-compare__cards { grid-template-columns: 1fr; gap: 32px; }
   .bx-compare { padding-block: 48px 24px; }
 }
+
+/* Registered mark (BONDE, US Reg. No. 8558406) beside the header and footer wordmarks. */
+.bonde-reg { align-self: flex-start; margin-left: 3px; font-family: var(--bonde-heading-font, sans-serif); font-size: 13px; font-weight: 600; line-height: 1; vertical-align: super; }
+.bonde-footer__brand .bonde-reg { font-size: 14px; }
