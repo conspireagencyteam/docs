@@ -1,4 +1,11 @@
 {
+  "https://getbonde.com/docs/emails/domain-setup": {
+    "id": "xxsvt5hVDO0",
+    "title": "How to send Shopify subscription emails from your own domain | Bonde Subscriptions & Bundles",
+    "description": "Learn how to send Shopify subscription emails from your own domain with Bonde Subscriptions & Bundles. Add Bonde's DKIM and SPF records at your DNS provider so subscription emails send from your own domain.",
+    "uploadDate": "2026-11-25T16:53:48.902Z",
+    "durationSeconds": 63
+  },
   "https://getbonde.com/docs/emails/notifications": {
     "id": "mvTnJ-35dMw",
     "title": "How to get a copy of every Shopify subscription email | Bonde Subscriptions & Bundles",
