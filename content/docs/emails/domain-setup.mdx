@@ -18,15 +18,17 @@ Verifying your sending domain ensures emails are delivered reliably and appear a
 
 <Steps>
   <Step title="Go to email settings">
-    In the Bonde app, navigate to **Emails > Settings**.
+    In the Bonde app, open **Subscriptions** and click **Email settings** under Email notifications.
   </Step>
   <Step title="Add your domain">
-    Click **Add Domain** and enter your root domain (e.g., `yourdomain.com`).
+    Under **Domain authentication**, click **Add domain**, enter your root domain in **Domain name** (e.g., `yourdomain.com`), then click **Add domain**.
 
     Don't include `www` or a subdomain. Use the root domain that matches your sending email address.
+
+    The domain is listed as **Not authenticated** until its records are verified.
   </Step>
   <Step title="View DNS records">
-    After adding the domain, click **View DNS Records** to see the records you need to add. Bonde provides three types of records, each with a specific purpose.
+    Click **View DNS** next to the domain to see the records you need to add. Bonde provides three types of records, each with a specific purpose.
   </Step>
 </Steps>
 
@@ -95,7 +97,7 @@ The exact steps depend on your DNS provider. Here are tips for common providers:
     After adding all records, wait at least 15-30 minutes. Most records propagate within an hour, but some providers can take up to 48 hours.
   </Step>
   <Step title="Click Verify">
-    Return to **Emails > Settings** in Bonde and click **Verify** next to your domain.
+    Return to **Email settings** in Bonde and click **Verify** next to your domain.
 
     Each record will show its own status:
     - **Verified**: Record is correct and detected
@@ -103,7 +105,7 @@ The exact steps depend on your DNS provider. Here are tips for common providers:
     - **Failed**: Record is incorrect or missing
   </Step>
   <Step title="Check individual record status">
-    If some records verify but others don't, click **View DNS Records** to see which specific record needs attention. Fix only the failing records. You don't need to redo records that already passed.
+    If some records verify but others don't, click **View DNS** to see which specific record needs attention. Fix only the failing records. You don't need to redo records that already passed.
   </Step>
 </Steps>
 
