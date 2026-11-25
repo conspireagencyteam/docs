@@ -1,6 +1,6 @@
 ---
-title: "Add one-click upsells after checkout"
-description: "Show an offer after payment and before the thank you page, which customers add to their order in one click."
+title: "Post-purchase upsells"
+description: "Configure one-click upsells that appear right after checkout."
 ---
 
 Post-purchase upsells appear immediately after a customer completes checkout, before the order confirmation page. Customers can add products to their order with a single click without re-entering payment information.
@@ -16,10 +16,10 @@ Post-purchase upsells appear immediately after a customer completes checkout, be
 ## Installation
 
 <Steps>
-  <Step title="Enable the post-purchase extension">
-    Navigate to **Settings > Checkout > Customize** in your Shopify admin.
+  <Step title="Select Bonde for the post-purchase page">
+    In your Shopify admin, go to **Settings > Checkout** and scroll to **Post-purchase page**.
 
-    In the checkout customizer, look for post-purchase extensions and enable the **Bonde: Post-Purchase Upsell** extension.
+    Select **Bonde Subscriptions & Bundles**, then click **Save**. Shopify shows one app on the post-purchase page at a time.
   </Step>
   <Step title="Create a post-purchase upsell">
     In the Bonde app, go to **Upsells** and click **Create Upsell**.
@@ -28,15 +28,14 @@ Post-purchase upsells appear immediately after a customer completes checkout, be
   </Step>
   <Step title="Configure trigger conditions">
     Set when this upsell should appear:
-    - **Product in cart**: Show when specific products were purchased
-    - **Cart value minimum**: Show for orders over a certain amount
-    - **Cart value maximum**: Show for orders under a certain amount
-    - **Collection**: Show when products from a specific collection were purchased
+    - **Product in Order**: Show when specific products were purchased
+    - **Order Value (Minimum)**: Show for orders over a certain amount
+    - **Order Value (Maximum)**: Show for orders under a certain amount
 
-    Multiple conditions use AND logic: all must be met for the upsell to show.
+    Multiple conditions use AND logic: all must be met for the upsell to show. An upsell with no conditions shows after every order.
   </Step>
-  <Step title="Select the upsell product">
-    Choose the product you want to offer as an upsell.
+  <Step title="Add the products to offer">
+    Click **Add Products** and choose one product or several.
   </Step>
   <Step title="Set a discount (optional)">
     Configure a discount for the upsell:
@@ -44,16 +43,38 @@ Post-purchase upsells appear immediately after a customer completes checkout, be
     - **Fixed amount off**: e.g., $10 off
   </Step>
   <Step title="Set priority">
-    If you have multiple post-purchase upsells, set the priority to determine which one shows. Higher priority upsells are shown first.
+    The page shows one upsell per order. If several match, the one with the highest priority shows. To offer two products on the same page, add both to one upsell.
   </Step>
 </Steps>
+
+## What the page looks like
+
+The page follows your checkout's branding (colors, fonts and logo), and its layout depends on how many products the upsell offers:
+
+- **One product**: a large product image beside the title, price, order totals and the **Pay now** button.
+- **Two or more products**: a grid of products, up to three per row. The customer clicks **Add** on each product they want, then pays for the selection in one charge.
+
+On a phone, both layouts stack into a single column.
+
+## Page settings
+
+These settings are on the upsell's edit page:
+
+- **Offer expires after (minutes)**: shows a countdown and closes the page when it runs out. Leave blank for no time limit.
+- **Shipping fee**: charged once for everything the customer adds. Leave blank for free shipping.
+- **Page headline**: the line at the top of the page. Leave blank to use "Add these to your order", or "Add the (product name) to your order" for a single product.
+- **Line under the headline**: leave blank to use "Ships with your order. One click, no need to re-enter payment." Write your own if your products do not ship, for example digital downloads.
+- **Let shoppers choose a quantity**: shows a quantity picker (1 to 5) on each product. Turn it off to add each product once.
+
+Change a setting, then click **Save**.
 
 ## Troubleshooting
 
 **Upsell not showing?**
-- Verify the post-purchase extension is enabled in checkout settings
+- Verify Bonde is selected under **Settings > Checkout > Post-purchase page**
 - Check that trigger conditions match the test order
 - Ensure the upsell is set to "Active"
+- If another post-purchase upsell also matches, the one with the higher priority shows instead
 - Test on a real checkout (not preview mode)
 
 **Customer can't accept upsell?**
